@@ -1,0 +1,13 @@
+eclipse.preferences.version=1
+encoding//src/main/java=UTF-8
+encoding//src/main/java/org/slazyframework/constants/SysConstant.java=UTF-8
+encoding//src/main/java/org/slazyframework/model/MessageResultVO.java=UTF-8
+encoding//src/main/java/org/slazyframework/secret/RSAEncryptor.java=UTF-8
+encoding//src/main/java/org/slazyframework/utils/BeanUtils.java=UTF-8
+encoding//src/main/java/org/slazyframework/utils/DateUtils.java=UTF-8
+encoding//src/main/java/org/slazyframework/utils/FastJsonUtils.java=UTF-8
+encoding//src/main/java/org/slazyframework/utils/RegexUtils.java=UTF-8
+encoding//src/main/java/org/slazyframework/utils/SMSUtils.java=UTF-8
+encoding//src/main/resources=UTF-8
+encoding//src/test/java=UTF-8
+encoding/<project>=UTF-8

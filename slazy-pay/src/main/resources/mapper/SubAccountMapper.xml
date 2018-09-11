@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.slazy.bss.slazypay.dao.SubAccountMapper" >
+  <resultMap id="BaseResultMap" type="com.slazy.bss.slazypay.model.SubAccount" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="MODIFY_TIME" property="modifyTime" jdbcType="TIMESTAMP" />
+    <result column="sortIdx" property="sortidx" jdbcType="BIGINT" />
+    <result column="VERSION" property="version" jdbcType="INTEGER" />
+    <result column="operator" property="operator" jdbcType="VARCHAR" />
+    <result column="biz_system" property="bizSystem" jdbcType="VARCHAR" />
+    <result column="unit" property="unit" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="sub_type" property="subType" jdbcType="VARCHAR" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="lend_Id" property="lendId" jdbcType="VARCHAR" />
+    <result column="account_No" property="accountNo" jdbcType="VARCHAR" />
+    <result column="value1" property="value1" jdbcType="VARCHAR" />
+  </resultMap>
+  
+   <resultMap id="BalanceResultMap" type="com.slazy.bss.slazypay.vo.res.QueryBalanceResVo" >
+    <result column="sub_type" property="subType" jdbcType="VARCHAR" />
+    <result column="amount" property="amount" jdbcType="VARCHAR" />
+  </resultMap>
+  
+   <resultMap id="AllSubAccResultMap" type="com.slazy.bss.slazypay.vo.req.SubAccountReqVo" >
+    <result column="sub_type" property="subType" jdbcType="VARCHAR" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="account_No" property="accountNo" jdbcType="VARCHAR" />
+  </resultMap>
+  
+   <resultMap id="SubAccResultMap" type="com.slazy.bss.slazypay.vo.req.SubAccountReqVo" >
+    <result column="sub_type" property="subType" jdbcType="VARCHAR" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="lend_Id" property="lendId" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+     <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+     <result column="account_No" property="accountNo" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <resultMap id="BalanceDetailResultMap" type="com.slazy.bss.slazypay.vo.res.BalanceDetailResVo" >
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="lend_Id" property="lendId" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <resultMap id="AccountBalanceResultMap" type="com.slazy.bss.slazypay.vo.res.QueryAccountBalanceVo" >
+    <result column="accountNo" property="accountNo" jdbcType="VARCHAR" />
+    <result column="userName" property="userName" jdbcType="VARCHAR" />
+    <result column="customerIdType" property="customerIdType" jdbcType="VARCHAR" />
+    <result column="balance" property="balance" jdbcType="DECIMAL" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    id, CREATE_TIME, MODIFY_TIME, sortIdx, VERSION, operator, biz_system, unit, status, 
+    remark, sub_type, amount, lend_Id, account_No,value1
+  </sql>
+  
+   <sql id="Sub_Column_List" >
+    CREATE_TIME,status,sub_type, amount, lend_Id
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from acc_sub_account
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectSubAccount" resultMap="BaseResultMap" parameterType="com.slazy.bss.slazypay.model.SubAccount">
+  	select 
+    <include refid="Base_Column_List" />
+    from acc_sub_account
+    where account_No = #{accountNo,jdbcType=VARCHAR}
+    <if test="lendId != null and lendId != ''">
+    and lend_Id = #{lendId,jdbcType=VARCHAR}
+    </if>
+    
+    and sub_type = #{subType,jdbcType=VARCHAR}
+
+    <!-- and biz_system = #{bizSystem,jdbcType=VARCHAR} -->
+  </select>
+  
+  <select id="selectBalanceByAccountNo" resultMap="BalanceResultMap" parameterType="Map" >
+    select 
+    sub_type as subType,
+    sum(amount) as amount
+    FROM
+	acc_sub_account
+	WHERE
+	account_No = #{accountNo,jdbcType=VARCHAR}
+	<if test="lendId != null and lendId != ''">
+    and lend_Id = #{lendId,jdbcType=VARCHAR}
+    </if>
+    <if test="subType != null and subType != ''">
+    and sub_type = #{subType,jdbcType=VARCHAR}
+	</if>
+	and sub_type <![CDATA[ <> ]]> 5
+	AND biz_system = #{bizSystem,jdbcType=VARCHAR}
+	GROUP BY  sub_type
+  </select>
+  
+  <select id="selectSubAccountBalance" resultMap="BalanceDetailResultMap" parameterType="Map">
+  	select 
+    <include refid="Base_Column_List" />
+    from acc_sub_account
+    where account_No = #{accountNo,jdbcType=VARCHAR}
+    <if test="lendId != null and lendId != ''">
+    and lend_Id = #{lendId,jdbcType=VARCHAR}
+    </if>
+    <if test="subType != null and subType != ''">
+    and sub_type = #{subType,jdbcType=VARCHAR}
+	</if>
+	and sub_type <![CDATA[ <> ]]> 5
+    and biz_system = #{bizSystem,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectAllSubAccount" resultMap="AllSubAccResultMap" parameterType="String" >
+    select 
+    s.sub_type as subType,
+    sum(s.amount) as amount,
+    s.account_No as accountNo
+    FROM acc_main_account m INNER JOIN acc_sub_account s ON m.account_No=s.account_No
+	WHERE
+	m.id=#{id}
+	GROUP BY s.sub_type 
+  </select>
+  
+  <select id="selectAllSubAccountCount" resultType="java.lang.Integer" parameterType="String" >
+    select 
+		COUNT(*)
+	FROM 
+		(select 
+	   	s.sub_type as sub_type
+	    FROM acc_main_account m INNER JOIN acc_sub_account s ON m.account_No=s.account_No
+		WHERE
+		m.id=#{id}
+		GROUP BY s.sub_type) temp 
+  </select>
+  
+  <select id="selectMainAccountSub" resultMap="SubAccResultMap" parameterType="Map" >
+    select 
+   	 s.biz_System as bizSystem,
+	 s.CREATE_TIME as createTime,
+	 s.status as status,
+	 s.sub_type as subType,
+	 s.amount as amount, 
+	 s.lend_Id as lendId,
+	 s.account_No as accountNo
+    FROM acc_main_account m INNER JOIN acc_sub_account s ON m.account_No=s.account_No
+	WHERE
+		m.id = #{id}
+	AND
+		s.sub_type = #{subType}
+	<if test="lendId != null and lendId != ''">
+		AND lend_Id = #{lendId}
+	</if>
+	ORDER BY s.id DESC
+  </select>
+  
+  <select id="selectMainAccountSubCount" resultType="java.lang.Integer" parameterType="Map" >
+    select 
+    count(*)
+    FROM acc_main_account m INNER JOIN acc_sub_account s ON m.account_No=s.account_No
+	WHERE
+		m.id = #{id}
+	AND
+		s.sub_type = #{subType}
+	<if test="lendId != null and lendId != ''">
+		AND lend_Id = #{lendId}
+	</if>
+  </select>
+  
+  <select id="selectSubAccounts" resultMap="BaseResultMap" parameterType="com.slazy.bss.slazypay.model.SubAccount">
+  	select 
+    <include refid="Base_Column_List" />
+    from acc_sub_account
+    where account_No = #{accountNo,jdbcType=VARCHAR}
+    
+    <if test="lendId != null and lendId != ''">
+    and lend_Id = #{lendId,jdbcType=VARCHAR}
+    </if>
+    
+    <if test="subType != null and subType != ''">
+    and sub_type = #{subType,jdbcType=VARCHAR}
+    </if>
+    
+    <if test="bizSystem != null and bizSystem != ''">
+    and biz_system = #{bizSystem,jdbcType=VARCHAR}
+    </if>
+    
+  </select>
+  <select id="selectSubAccountInfo" resultMap="BaseResultMap" parameterType="com.slazy.bss.slazypay.model.SubAccount">
+  	select 
+    <include refid="Base_Column_List" />
+    from acc_sub_account
+    where account_No = #{accountNo,jdbcType=VARCHAR}
+    <if test="lendId != null and lendId != ''">
+    	and lend_Id = #{lendId,jdbcType=VARCHAR}
+    </if>
+    
+     <if test="subType != null and subType != ''">
+    	and sub_type = #{subType,jdbcType=VARCHAR}
+    </if>
+    
+    <if test="bizSystem != null and bizSystem != ''">
+    	and biz_system = #{bizSystem,jdbcType=VARCHAR}
+    </if>
+    
+    <if test="status != null and status != ''">
+    	and status = #{status,jdbcType=VARCHAR}
+    </if>
+    
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from acc_sub_account
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  
+  <insert id="insert" parameterType="com.slazy.bss.slazypay.model.SubAccount" useGeneratedKeys="true" keyProperty="id" >
+    insert into acc_sub_account (CREATE_TIME, MODIFY_TIME, sortIdx, 
+      VERSION, operator, biz_system, 
+      unit, status, remark, 
+      sub_type, amount, lend_Id, 
+      account_No,value1)
+    values (#{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP}, #{sortidx,jdbcType=BIGINT}, 
+      #{version,jdbcType=INTEGER}, #{operator,jdbcType=VARCHAR}, #{bizSystem,jdbcType=VARCHAR}, 
+      #{unit,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{subType,jdbcType=VARCHAR}, #{amount,jdbcType=DECIMAL}, #{lendId,jdbcType=VARCHAR}, 
+      #{accountNo,jdbcType=VARCHAR},#{value1,jdbcType=VARCHAR})
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.slazy.bss.slazypay.model.SubAccount" >
+    update acc_sub_account
+    set CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      MODIFY_TIME = #{modifyTime,jdbcType=TIMESTAMP},
+      sortIdx = #{sortidx,jdbcType=BIGINT},
+      VERSION = #{version,jdbcType=INTEGER},
+      operator = #{operator,jdbcType=VARCHAR},
+      biz_system = #{bizSystem,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      sub_type = #{subType,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=DECIMAL},
+      lend_Id = #{lendId,jdbcType=VARCHAR},
+      account_No = #{accountNo,jdbcType=VARCHAR},
+      value1 = #{value1,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <update id="updateByPrimaryKeyToVersion" parameterType="com.slazy.bss.slazypay.model.SubAccount" >
+    update acc_sub_account
+    set CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      MODIFY_TIME = #{modifyTime,jdbcType=TIMESTAMP},
+      sortIdx = #{sortidx,jdbcType=BIGINT},
+      VERSION = #{version,jdbcType=INTEGER}+1,
+      operator = #{operator,jdbcType=VARCHAR},
+      biz_system = #{bizSystem,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      sub_type = #{subType,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=DECIMAL},
+      lend_Id = #{lendId,jdbcType=VARCHAR},
+      account_No = #{accountNo,jdbcType=VARCHAR},
+      value1 = #{value1,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+    and version = #{version,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectByPrimaryKeyForUpdate" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from acc_sub_account
+    where id = #{id,jdbcType=BIGINT}   
+    FOR UPDATE
+  </select>
+   <select id="findByMainAccount" resultMap="BaseResultMap" parameterType="String" >
+    select 
+     account_No,sub_type,lend_Id,biz_system,status,id,amount
+    from acc_sub_account
+    where account_No=#{accountNo} 
+  </select>
+  
+  <insert id="batchInsert" parameterType="java.util.List">
+ 	<selectKey resultType ="java.math.BigInteger" keyProperty= "id" order= "AFTER">  
+        SELECT LAST_INSERT_ID()  
+    </selectKey >  
+    insert into acc_sub_account(
+        CREATE_TIME, MODIFY_TIME, sortIdx, 
+      VERSION, operator, biz_system, 
+      unit, status, remark, 
+      sub_type, amount, lend_Id, 
+      account_No,value1
+    )
+    values
+    <foreach collection="list" item="itm" index="index" separator=",">
+        (
+        #{itm.createTime,jdbcType=TIMESTAMP}, #{itm.modifyTime,jdbcType=TIMESTAMP}, #{itm.sortidx,jdbcType=BIGINT}, 
+      #{itm.version,jdbcType=INTEGER}, #{itm.operator,jdbcType=VARCHAR}, #{itm.bizSystem,jdbcType=VARCHAR}, 
+      #{itm.unit,jdbcType=VARCHAR}, #{itm.status,jdbcType=VARCHAR}, #{itm.remark,jdbcType=VARCHAR}, 
+      #{itm.subType,jdbcType=VARCHAR}, #{itm.amount,jdbcType=DECIMAL}, #{itm.lendId,jdbcType=VARCHAR}, 
+      #{itm.accountNo,jdbcType=VARCHAR},#{itm.value1,jdbcType=VARCHAR}
+        )
+    </foreach>
+</insert>
+	<select id="findAllCashAmount" resultMap="AccountBalanceResultMap" parameterType="Map">
+	  SELECT main.account_No as accountNo,SUM(sub.amount) as balance 
+		FROM acc_sub_account sub,acc_main_account main
+		WHERE sub.account_No = main.account_No 
+	  		  AND sub.sub_type = '0'
+	  		  <if test="bizSystem!=null and bizSystem!=''">	
+				AND main.biz_system = #{bizSystem,jdbcType=VARCHAR} 
+			  </if>
+			  <if test="endTime!=null and endTime!=''">
+    		    <![CDATA[  AND DATE_FORMAT(main.CREATE_TIME, '%Y-%m-%d %H:%i:%s') <= DATE_FORMAT(#{endTime}, '%Y-%m-%d %H:%i:%s')    ]]>
+			  </if>
+	   		  GROUP BY main.account_No
+	</select>
+	
+	<select id="findAllFreezeAmount" resultMap="AccountBalanceResultMap" parameterType="Map">
+	SELECT main.account_No as accountNo,SUM(sub.amount) as balance 
+		FROM acc_sub_account sub,acc_main_account main
+		WHERE sub.account_No = main.account_No
+	  		  AND sub.sub_type != '5' AND sub.sub_type != '0'
+	  		  <if test="bizSystem!=null and bizSystem!=''">	
+				AND main.biz_system = #{bizSystem,jdbcType=VARCHAR} 
+			  </if>
+			  <if test="endTime!=null and endTime!=''">
+    		    <![CDATA[  AND DATE_FORMAT(main.CREATE_TIME, '%Y-%m-%d %H:%i:%s') <= DATE_FORMAT(#{endTime}, '%Y-%m-%d %H:%i:%s')    ]]>
+			  </if>
+	   		  GROUP BY main.account_No
+	</select>
+	<!-- 查询公司账户余额-->
+	<select id="findCompanyAccBalance" resultMap="BaseResultMap" parameterType="String">
+  		select 
+    		sub.amount as amount
+    	FROM acc_main_account main INNER JOIN acc_sub_account sub ON main.account_No=sub.account_No
+		WHERE main.account_No = #{accountNo}
+	  		  AND main.customer_type ='1' and sub.sub_type='0'
+	</select>
+	<select id="selectAll" resultMap="BaseResultMap" parameterType="Map" >
+	  select 
+	  	sub_type, account_No, lend_Id
+	  from acc_sub_account
+	</select>
+	
+	<select id="selectSubAccountsOne" resultMap="BaseResultMap" parameterType="com.slazy.bss.slazypay.model.SubAccount">
+  	select 
+    <include refid="Base_Column_List" />
+    from acc_sub_account
+    where account_No = #{accountNo,jdbcType=VARCHAR}
+    <if test="lendId != null and lendId != ''">
+    and lend_Id = #{lendId,jdbcType=VARCHAR}
+    </if>
+    
+    and sub_type = #{subType,jdbcType=VARCHAR}
+
+    and biz_system = #{bizSystem,jdbcType=VARCHAR}
+  </select>
+    <select id="selectAllLoanFrozenAccount" resultMap="BaseResultMap" parameterType="Map" >
+	  select 
+	  <include refid="Base_Column_List" />
+	  from acc_sub_account where sub_type = '13'
+	</select>
+</mapper>

@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.slazy.bss.slazypay.dao.MainAccountMapper" >
+  <resultMap id="BaseResultMap" type="com.slazy.bss.slazypay.model.MainAccount" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="MODIFY_TIME" property="modifyTime" jdbcType="TIMESTAMP" />
+    <result column="sortIdx" property="sortidx" jdbcType="BIGINT" />
+    <result column="VERSION" property="version" jdbcType="INTEGER" />
+    <result column="operator" property="operator" jdbcType="VARCHAR" />
+    <result column="biz_system" property="bizSystem" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="biz_Id" property="bizId" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="cerificate_Type" property="cerificateType" jdbcType="VARCHAR" />
+    <result column="certificate_No" property="certificateNo" jdbcType="VARCHAR" />
+    <result column="customer_Type" property="customerType" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="customer_Id_Type" property="customerIdType" jdbcType="VARCHAR" />
+    <result column="account_No" property="accountNo" jdbcType="VARCHAR" />
+    <result column="p_id" property="pId" jdbcType="VARCHAR" />
+    <result column="open_Account_Time" property="openAccountTime" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="activation_Type" property="activationType" jdbcType="VARCHAR" />
+    <result column="reserved_Mobile" property="reservedMobile" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <resultMap id="CompanyResultMap" type="com.slazy.bss.slazypay.vo.req.CompanyAccountReqVo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="MODIFY_TIME" property="modifyTime" jdbcType="TIMESTAMP" />
+    <result column="operator" property="operator" jdbcType="VARCHAR" />
+    <result column="biz_system" property="bizSystem" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="account_No" property="accountNo" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <resultMap id="AccInfoResultMap" type="com.slazy.bss.slazypay.vo.req.MainAccountReqVo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="MODIFY_TIME" property="modifyTime" jdbcType="TIMESTAMP" />
+    <result column="sortIdx" property="sortidx" jdbcType="BIGINT" />
+    <result column="VERSION" property="version" jdbcType="INTEGER" />
+    <result column="operator" property="operator" jdbcType="VARCHAR" />
+    <result column="biz_system" property="bizSystem" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="biz_Id" property="bizId" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="cerificate_Type" property="cerificateType" jdbcType="VARCHAR" />
+    <result column="certificate_No" property="certificateNo" jdbcType="VARCHAR" />
+    <result column="customer_Type" property="customerType" jdbcType="VARCHAR" />
+    <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+    <result column="customer_Id_Type" property="customerIdType" jdbcType="VARCHAR" />
+    <result column="account_No" property="accountNo" jdbcType="VARCHAR" />
+    <result column="p_id" property="pId" jdbcType="VARCHAR" />
+    <result column="open_Account_Time" property="openAccountTime" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="activation_Type" property="activationType" jdbcType="VARCHAR" />
+    <result column="reserved_Mobile" property="reservedMobile" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  
+  <sql id="Base_Column_List" >
+    id, CREATE_TIME, MODIFY_TIME, sortIdx, VERSION, operator, biz_system, status, biz_Id, 
+    name, cerificate_Type, certificate_No, customer_Type, mobile, customer_Id_Type, account_No, 
+    p_id, open_Account_Time,remark,activation_Type,reserved_Mobile
+  </sql>
+  
+  <sql id="Company_Column_List" >
+    id, CREATE_TIME, MODIFY_TIME, operator, biz_system, status,name, account_No,remark
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from acc_main_account
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAccByAccountNo" resultMap="BaseResultMap" parameterType="Map" >
+    select 
+    <include refid="Base_Column_List" />
+    from acc_main_account
+    where account_No = #{accountNo}
+    <if test="bizSystem!=null and bizSystem!=''"> 
+    and biz_system = #{bizSystem}
+    </if>
+  </select>
+  
+  <select id="selectAccByAccountNoAndIdNo" resultMap="BaseResultMap" parameterType="Map" >
+    select 
+    <include refid="Base_Column_List" />
+    from acc_main_account
+    where 1=1
+    <if test="accountNo!=null and accountNo!=''"> 
+    	AND account_No = #{accountNo}
+    </if>
+  
+    <if test="certificateNo!=null and certificateNo!='' and cerificateType!=null and cerificateType!=''">
+    	AND certificate_No = #{certificateNo}
+		AND cerificate_Type = #{cerificateType}
+	</if>
+	
+	  <!-- AND biz_system = #{bizSystem} -->
+	
+  </select>
+  
+   <select id="selectAccByIdNoAndCusIdType" resultMap="BaseResultMap" parameterType="Map" >
+    select 
+    <include refid="Base_Column_List" />
+    from acc_main_account
+    where 1=1
+    <if test="certificateNo!=null and certificateNo!=''">
+    	AND certificate_No = #{certificateNo}
+    </if>
+    <if test="cerificateType!=null and cerificateType!=''">
+		AND cerificate_Type = #{cerificateType}
+	</if>
+    <if test="customerIdType!=null and customerIdType!=''"> 
+    	AND customer_Id_Type = #{customerIdType}
+    </if>
+	  	AND biz_system = #{bizSystem}
+  </select>
+  
+  <select id="selectCompanyAccount" parameterType="Map" resultMap="CompanyResultMap" >
+    select 
+  		m.id as id,
+		m.CREATE_TIME as create_Time,
+		m.MODIFY_TIME as modify_Time,
+		m.operator as operator,
+		m.biz_system as biz_System,
+		m.status as status,
+		m.name as name,
+		m.account_No as account_No,
+		m.remark as remark,
+        s.amount as amount
+	FROM
+	acc_main_account m LEFT JOIN
+      (SELECT
+      SUM(ss.amount) amount,mm.p_id pId
+      FROM
+      acc_main_account mm
+      INNER JOIN acc_sub_account ss ON mm.account_No = ss.account_No
+      WHERE
+      ss.sub_type  <![CDATA[ <> ]]> 5 and mm.p_id is not null and mm.p_id <![CDATA[ <> ]]> '0' group by mm.p_id) s on m.id = s.pId
+      WHERE
+      m.customer_Type = 1
+	<choose>
+       <when test="pId!=null and pId!=''">
+             AND m.p_id = #{pId}
+       </when>
+       <otherwise>
+             AND m.p_id ='0'
+       </otherwise>
+    </choose>
+	
+	
+	ORDER BY id DESC
+	limit  #{page.first}, #{page.pageSize}
+  </select>
+  
+  
+  <select id="selectCompanyCountAccount" parameterType="Map" resultType="java.lang.Integer" >
+    select 
+    count(1)
+	FROM
+	acc_main_account
+	WHERE
+	customer_Type = 1
+	
+	<choose>
+       <when test="pId!=null and pId!=''">
+             AND p_id = #{pId}
+       </when>
+       <otherwise>
+             AND p_id ='0'
+       </otherwise>
+    </choose>
+
+  </select>
+  
+  <select id="selectMainAccountList" resultMap="AccInfoResultMap" parameterType="Map" >
+    select 
+    <include refid="Base_Column_List" />
+    from acc_main_account
+    where 1=1
+    <if test="mAcc.accountNo!=null and mAcc.accountNo!=''"> 
+    	AND account_No = #{mAcc.accountNo}
+    </if>
+  
+  	<if test="mAcc.name!=null and mAcc.name!=''"> 
+    	AND name = #{mAcc.name}
+    </if>
+
+      <if test="mAcc.mobile!=null and mAcc.mobile!=''">
+          AND mobile = #{mAcc.mobile}
+      </if>
+    
+    <if test="mAcc.bizSystem!=null and mAcc.bizSystem!=''"> 
+    	AND biz_system = #{mAcc.bizSystem}
+    </if>
+  
+    <if test="mAcc.cerificateType!=null and mAcc.cerificateType!=''">
+    	AND cerificate_Type = #{mAcc.cerificateType}
+	</if>
+	
+    <if test="mAcc.certificateNo!=null and mAcc.certificateNo!=''">
+    	AND certificate_No = #{mAcc.certificateNo}
+	</if>
+	
+	 <if test="mAcc.status!=null and mAcc.status!=''"> 
+    	AND status = #{mAcc.status}
+    </if>
+    
+     <if test="mAcc.customerType!=null and mAcc.customerType!=''"> 
+    	AND customer_Type = #{mAcc.customerType}
+    </if>
+     <if test="mAcc.customerIdType!=null and mAcc.customerIdType!=''"> 
+    	AND customer_Id_Type = #{mAcc.customerIdType}
+    </if>
+    
+    <if test="mAcc.beginTime!=null and mAcc.beginTime!=''">
+   	 	<![CDATA[   and DATE_FORMAT(CREATE_TIME, '%Y-%m-%d')>=  DATE_FORMAT(#{mAcc.beginTime}, '%Y-%m-%d')   ]]>
+	</if>
+	
+	<if test="mAcc.endTime!=null and mAcc.endTime!=''">
+    	<![CDATA[  and DATE_FORMAT(CREATE_TIME, '%Y-%m-%d') <= DATE_FORMAT(#{mAcc.endTime}, '%Y-%m-%d')    ]]>
+	</if>
+
+	 ORDER BY id DESC
+	<if test="page!=null and page!=''">	
+	limit  #{page.first}, #{page.pageSize}
+	</if>
+  </select>
+  
+  <select id="selectMainAccountCount" resultType="java.lang.Integer" parameterType="Map" >
+    select 
+   	 	count(*)
+    from acc_main_account
+    where 1=1
+     <if test="mAcc.accountNo!=null and mAcc.accountNo!=''"> 
+    	AND account_No = #{mAcc.accountNo}
+    </if>
+  
+  	<if test="mAcc.name!=null and mAcc.name!=''"> 
+    	AND name = #{mAcc.name}
+    </if>
+    
+    <if test="mAcc.bizSystem!=null and mAcc.bizSystem!=''"> 
+    	AND biz_system = #{mAcc.bizSystem}
+    </if>
+    
+  	<if test="mAcc.cerificateType!=null and mAcc.cerificateType!=''">
+    	AND cerificate_Type = #{mAcc.cerificateType}
+	</if>
+	
+    <if test="mAcc.certificateNo!=null and mAcc.certificateNo!=''">
+    	AND certificate_No = #{mAcc.certificateNo}
+	</if>
+	
+	 <if test="mAcc.status!=null and mAcc.status!=''"> 
+    	AND status = #{mAcc.status}
+    </if>
+    
+     <if test="mAcc.customerType!=null and mAcc.customerType!=''"> 
+    	AND customer_Type = #{mAcc.customerType}
+    </if>
+     <if test="mAcc.customerIdType!=null and mAcc.customerIdType!=''"> 
+    	AND customer_Id_Type = #{mAcc.customerIdType}
+    </if>
+    
+    <if test="mAcc.beginTime!=null and mAcc.beginTime!=''">
+   	 	<![CDATA[   and DATE_FORMAT(CREATE_TIME, '%Y-%m-%d')>=  DATE_FORMAT(#{mAcc.beginTime}, '%Y-%m-%d')   ]]>
+	</if>
+	
+	<if test="mAcc.endTime!=null and mAcc.endTime!=''">
+    	<![CDATA[  and DATE_FORMAT(CREATE_TIME, '%Y-%m-%d') <= DATE_FORMAT(#{mAcc.endTime}, '%Y-%m-%d')    ]]>
+	</if>
+	
+  </select>
+  
+  <select id="selectMainDetailByIds" resultMap="AccInfoResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from acc_main_account
+    where
+    id in 
+    	<foreach item="id" collection="array" open="(" separator="," close=")">  
+			#{id}   
+		</foreach>
+	
+	ORDER BY id desc
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from acc_main_account
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.slazy.bss.slazypay.model.MainAccount" useGeneratedKeys="true" keyProperty="id" >
+    insert into acc_main_account (CREATE_TIME, MODIFY_TIME, sortIdx, 
+      VERSION, operator, biz_system, 
+      status, biz_Id, name, 
+      cerificate_Type, certificate_No, customer_Type, 
+      mobile, customer_Id_Type, account_No, 
+      p_id, open_Account_Time,remark,activation_Type,reserved_Mobile)
+    values (#{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP}, #{sortidx,jdbcType=BIGINT}, 
+      #{version,jdbcType=INTEGER}, #{operator,jdbcType=VARCHAR}, #{bizSystem,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{bizId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{cerificateType,jdbcType=VARCHAR}, #{certificateNo,jdbcType=VARCHAR}, #{customerType,jdbcType=VARCHAR}, 
+      #{mobile,jdbcType=VARCHAR}, #{customerIdType,jdbcType=VARCHAR}, #{accountNo,jdbcType=VARCHAR}, 
+      #{pId,jdbcType=VARCHAR}, #{openAccountTime,jdbcType=TIMESTAMP},#{remark,jdbcType=VARCHAR},
+      #{activationType,jdbcType=VARCHAR},#{reservedMobile,jdbcType=VARCHAR})
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.slazy.bss.slazypay.model.MainAccount" >
+    update acc_main_account
+    set CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      MODIFY_TIME = #{modifyTime,jdbcType=TIMESTAMP},
+      sortIdx = #{sortidx,jdbcType=BIGINT},
+      VERSION = #{version,jdbcType=INTEGER},
+      operator = #{operator,jdbcType=VARCHAR},
+      biz_system = #{bizSystem,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      biz_Id = #{bizId,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      cerificate_Type = #{cerificateType,jdbcType=VARCHAR},
+      certificate_No = #{certificateNo,jdbcType=VARCHAR},
+      customer_Type = #{customerType,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      customer_Id_Type = #{customerIdType,jdbcType=VARCHAR},
+      account_No = #{accountNo,jdbcType=VARCHAR},
+      p_id = #{pId,jdbcType=VARCHAR},
+      open_Account_Time = #{openAccountTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      activation_Type = #{activationType,jdbcType=VARCHAR},
+      reserved_Mobile = #{reservedMobile,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+   <select id="selectCompanySubAccount" parameterType="Map" resultMap="CompanyResultMap" >
+	select 
+		m.id as id,
+		m.name as name,
+		m.account_No as account_No,
+		m.biz_system as biz_System,
+		m.status as status,
+		m.remark as remark,
+		m.operator as operator,
+		sum(s.amount) as amount
+	FROM
+	acc_main_account m left  JOIN acc_sub_account s ON m.account_No=s.account_No
+	WHERE	
+		m.customer_Type = 1
+		 AND
+			s.sub_type <![CDATA[ <> ]]> 5
+	     AND 
+	     	m.p_id = #{pId}
+	    GROUP BY s.account_No
+		ORDER BY m.id DESC
+		limit  #{page.first}, #{page.pageSize}
+  </select>
+  
+  
+  <select id="selectCompanyCountSubAccount" parameterType="Map" resultType="java.lang.Integer" >
+    select 
+	count(*)
+	from 
+	(
+    select 
+   	 	m.id
+	FROM
+		acc_main_account m left  JOIN acc_sub_account s ON m.account_No=s.account_No
+	WHERE	
+		m.customer_Type = 1
+		 AND
+			s.sub_type <![CDATA[ <> ]]> 5
+	     AND 
+	     	m.p_id = #{pId}
+	    
+		GROUP BY s.account_No) temp
+
+  </select>
+  
+  <insert id="batchInsert" parameterType="java.util.List" >
+  <selectKey resultType ="java.math.BigInteger" keyProperty= "id" order= "AFTER">  
+        SELECT LAST_INSERT_ID()  
+    </selectKey >  
+    insert into acc_main_account(
+      CREATE_TIME, MODIFY_TIME, sortIdx, 
+      VERSION, operator, biz_system, 
+      status, biz_Id, name, 
+      cerificate_Type, certificate_No, customer_Type, 
+      mobile, customer_Id_Type, account_No, 
+      p_id, open_Account_Time,remark,activation_Type,reserved_Mobile
+    )
+    values
+    <foreach collection="list" item="itm" index="index" separator=",">
+        (
+       #{itm.createTime,jdbcType=TIMESTAMP}, #{itm.modifyTime,jdbcType=TIMESTAMP}, #{itm.sortidx,jdbcType=BIGINT}, 
+      #{itm.version,jdbcType=INTEGER}, #{itm.operator,jdbcType=VARCHAR}, #{itm.bizSystem,jdbcType=VARCHAR}, 
+      #{itm.status,jdbcType=VARCHAR}, #{itm.bizId,jdbcType=VARCHAR}, #{itm.name,jdbcType=VARCHAR}, 
+      #{itm.cerificateType,jdbcType=VARCHAR}, #{itm.certificateNo,jdbcType=VARCHAR}, #{itm.customerType,jdbcType=VARCHAR}, 
+      #{itm.mobile,jdbcType=VARCHAR}, #{itm.customerIdType,jdbcType=VARCHAR}, #{itm.accountNo,jdbcType=VARCHAR}, 
+      #{itm.pId,jdbcType=VARCHAR}, #{itm.openAccountTime,jdbcType=TIMESTAMP},#{itm.remark,jdbcType=VARCHAR},
+      #{itm.activationType,jdbcType=VARCHAR},#{itm.reservedMobile,jdbcType=VARCHAR}
+        )
+    </foreach>
+</insert>
+
+  <select id="queryUsers" resultMap="BaseResultMap" parameterType="Map" >
+    select 
+    	id,
+    	biz_system,
+    	account_No,
+    	CREATE_TIME,
+    	customer_Type,
+    	customer_Id_Type,
+    	status,
+    	cerificate_Type,
+    	certificate_No,
+    	mobile,
+    	name
+    from acc_main_account
+    where 1=1  and customer_Type in('0','2')
+    <if test="mAcc.bizSystem!=null and mAcc.bizSystem!=''"> 
+    	AND biz_system = #{mAcc.bizSystem}
+    </if>
+  
+    <if test="mAcc.beginTime!=null and mAcc.beginTime!=''">
+   	 	<![CDATA[  and DATE_FORMAT(CREATE_TIME, '%Y-%m-%d %H:%i:%s') >=  DATE_FORMAT(#{mAcc.beginTime}, '%Y-%m-%d %H:%i:%s')   ]]>
+	</if>
+	
+	<if test="mAcc.endTime!=null and mAcc.endTime!=''">
+    	<![CDATA[  and DATE_FORMAT(CREATE_TIME, '%Y-%m-%d %H:%i:%s') <= DATE_FORMAT(#{mAcc.endTime}, '%Y-%m-%d %H:%i:%s')    ]]>
+	</if>
+	 ORDER BY id DESC
+  </select>
+  <select id="selectTheMainAccount" resultMap="BaseResultMap" parameterType="Map" >
+    select 
+    	id,biz_system,account_No,certificate_No,cerificate_Type,customer_Id_Type
+    from acc_main_account
+    where 1=1
+    <if test="bizSystem!=null and bizSystem!=''"> 
+	  	AND biz_system = #{bizSystem}
+	</if>
+    <if test="certificateNo!=null and certificateNo!=''">
+    	AND certificate_No = #{certificateNo}
+		AND cerificate_Type = #{cerificateType}
+	</if>
+  </select>
+  
+  <select id="getVariableAccount"  resultMap="BaseResultMap" parameterType="Map" >
+   	SELECT DISTINCT main.account_No as accountNo, main.id as id , main.customer_id_type as customerIdType 
+		FROM acc_sub_account_detail dtl, acc_main_account main 
+		WHERE  dtl.payee_Acc_No = main.account_No AND main.customer_type in('0','2')
+	<if test="bizType!=null and bizType!=''"> 
+    	 AND dtl.biz_type NOT IN
+	    <foreach item="item" collection="bizType" separator="," open="(" close=")" index="">  
+	             #{item}
+	    </foreach> 
+    </if>
+	<if test="bizSystem!=null and bizSystem!=''">	
+		AND dtl.biz_system = #{bizSystem,jdbcType=VARCHAR} 
+	</if>
+	<if test="beginTime!=null and beginTime!=''">
+   	 	<![CDATA[  and DATE_FORMAT(dtl.CREATE_TIME, '%Y-%m-%d %H:%i:%s') >=  DATE_FORMAT(#{beginTime}, '%Y-%m-%d %H:%i:%s')   ]]>
+	</if>
+	
+	<if test="endTime!=null and endTime!=''">
+    	<![CDATA[  and DATE_FORMAT(dtl.CREATE_TIME, '%Y-%m-%d %H:%i:%s') <= DATE_FORMAT(#{endTime}, '%Y-%m-%d %H:%i:%s')    ]]>
+	</if>
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" parameterType="Map" >
+    select 
+    	id,
+    	biz_system,
+    	account_No,
+    	customer_Type,
+    	customer_Id_Type,
+    	status,
+    	cerificate_Type,
+    	certificate_No,
+    	name
+    from acc_main_account
+  </select>
+</mapper>

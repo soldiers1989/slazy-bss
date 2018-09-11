@@ -1,0 +1,315 @@
+2018-04-02 16:03:46  [ main:0 ] - [ INFO ]  Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@527e5409: startup date [Mon Apr 02 16:03:46 CST 2018]; root of context hierarchy
+2018-04-02 16:03:47  [ background-preinit:210 ] - [ INFO ]  HV000001: Hibernate Validator 5.3.5.Final
+2018-04-02 16:03:47  [ main:255 ] - [ INFO ]  JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2018-04-02 16:03:47  [ main:319 ] - [ INFO ]  Bean 'configurationPropertiesRebinderAutoConfiguration' of type [org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$2f86ccd7] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-04-02 16:03:47  [ main:629 ] - [ INFO ]  No active profile set, falling back to default profiles: default
+2018-04-02 16:03:47  [ main:646 ] - [ INFO ]  Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@291f18: startup date [Mon Apr 02 16:03:47 CST 2018]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@527e5409
+2018-04-02 16:03:48  [ main:1670 ] - [ INFO ]  BeanFactory id=b6f752f1-0c8e-3f87-adaa-ad8ad8bf4e54
+2018-04-02 16:03:48  [ main:1713 ] - [ INFO ]  JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2018-04-02 16:03:48  [ main:1819 ] - [ INFO ]  Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$136cc9da] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-04-02 16:03:48  [ main:1852 ] - [ INFO ]  Bean 'org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration' of type [org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$2f86ccd7] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-04-02 16:03:49  [ main:2224 ] - [ INFO ]  Tomcat initialized with port(s): 8080 (https)
+2018-04-02 16:03:49  [ localhost-startStop-1:2392 ] - [ INFO ]  Root WebApplicationContext: initialization completed in 1746 ms
+2018-04-02 16:03:49  [ localhost-startStop-1:2995 ] - [ INFO ]  Mapping servlet: 'dispatcherServlet' to [/]
+2018-04-02 16:03:49  [ localhost-startStop-1:2998 ] - [ INFO ]  Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-04-02 16:03:49  [ localhost-startStop-1:2999 ] - [ INFO ]  Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-04-02 16:03:49  [ localhost-startStop-1:2999 ] - [ INFO ]  Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-04-02 16:03:49  [ localhost-startStop-1:3000 ] - [ INFO ]  Mapping filter: 'requestContextFilter' to: [/*]
+2018-04-02 16:03:49  [ localhost-startStop-1:3000 ] - [ INFO ]  Mapping filter: 'tokenFilter' to urls: [/activity/*, /user/*, /sms/*]
+2018-04-02 16:03:50  [ main:3470 ] - [ INFO ]  Mapped "{[/activity/queryActivity],methods=[POST]}" onto public java.lang.String com.slazy.bss.user.controller.ActivityController.queryActivity(java.lang.String) throws java.lang.Exception
+2018-04-02 16:03:50  [ main:3471 ] - [ INFO ]  Mapped "{[/activity/addActivity],methods=[POST]}" onto public java.lang.String com.slazy.bss.user.controller.ActivityController.addActivity(java.lang.String) throws java.lang.Exception
+2018-04-02 16:03:50  [ main:3472 ] - [ INFO ]  Mapped "{[/sms/SMSCodeGenerator],methods=[POST]}" onto public java.lang.String com.slazy.bss.user.controller.SmsController.SMSCodeGenerator(java.lang.String) throws java.lang.Exception
+2018-04-02 16:03:50  [ main:3473 ] - [ INFO ]  Mapped "{[/sms/SMSIdentifyingCode],methods=[POST]}" onto public java.lang.String com.slazy.bss.user.controller.SmsController.SMSIdentifyingCode(java.lang.String) throws java.lang.Exception
+2018-04-02 16:03:50  [ main:3473 ] - [ INFO ]  Mapped "{[/api/{id}],methods=[GET]}" onto public java.lang.String com.slazy.bss.user.controller.SwaggerDemoController.getStudent(int)
+2018-04-02 16:03:50  [ main:3611 ] - [ INFO ]  Mapped "{[/user/queryUserInfoByMobile],methods=[POST]}" onto public java.lang.String com.slazy.bss.user.controller.UserController.queryUserInfo(java.lang.String) throws java.lang.Exception
+2018-04-02 16:03:50  [ main:3612 ] - [ INFO ]  Mapped "{[/user/queryUserInfoById],methods=[POST]}" onto public java.lang.String com.slazy.bss.user.controller.UserController.getAllUserInfo(java.lang.String) throws java.lang.Exception
+2018-04-02 16:03:50  [ main:3612 ] - [ INFO ]  Mapped "{[/user/queryUI],methods=[GET]}" onto public java.lang.String com.slazy.bss.user.controller.UserController.queryUI(java.lang.String) throws java.lang.Exception
+2018-04-02 16:03:50  [ main:3612 ] - [ INFO ]  Mapped "{[/user/registerUser],methods=[POST]}" onto public java.lang.String com.slazy.bss.user.controller.UserController.registerUser(java.lang.String) throws java.lang.Exception
+2018-04-02 16:03:50  [ main:3613 ] - [ INFO ]  Mapped "{[/user/alterPassword],methods=[POST]}" onto public java.lang.String com.slazy.bss.user.controller.UserController.alterPassword(java.lang.String) throws java.lang.Exception
+2018-04-02 16:03:50  [ main:3613 ] - [ INFO ]  Mapped "{[/user/loginVerify],methods=[POST]}" onto public java.lang.String com.slazy.bss.user.controller.UserController.loginVerify(java.lang.String) throws java.lang.Exception
+2018-04-02 16:03:50  [ main:3613 ] - [ INFO ]  Mapped "{[/user/uploadUserImage],methods=[POST]}" onto public java.lang.String com.slazy.bss.user.controller.UserController.uploadUserImage(java.lang.String,java.lang.String,org.springframework.web.multipart.MultipartFile,java.lang.String) throws java.lang.Exception
+2018-04-02 16:03:50  [ main:3613 ] - [ INFO ]  Mapped "{[/user/perfectionUserInfo],methods=[POST]}" onto public java.lang.String com.slazy.bss.user.controller.UserController.perfectionUserInfo(java.lang.String) throws java.lang.Exception
+2018-04-02 16:03:50  [ main:3614 ] - [ INFO ]  Mapped "{[/user/queryUserAddressInfo],methods=[POST]}" onto public java.lang.String com.slazy.bss.user.controller.UserController.queryUserAddressInfo(java.lang.String) throws java.lang.Exception
+2018-04-02 16:03:50  [ main:3614 ] - [ INFO ]  Mapped "{[/user/updateUserAddressInfo],methods=[POST]}" onto public java.lang.String com.slazy.bss.user.controller.UserController.updateUserAddressInfo(java.lang.String) throws java.lang.Exception
+2018-04-02 16:03:50  [ main:3614 ] - [ INFO ]  Mapped "{[/user/insertUserAddressInfo],methods=[POST]}" onto public java.lang.String com.slazy.bss.user.controller.UserController.insertUserAddressInfo(java.lang.String) throws java.lang.Exception
+2018-04-02 16:03:50  [ main:3614 ] - [ INFO ]  Mapped "{[/user/deleteUserAddressInfo],methods=[POST]}" onto public java.lang.String com.slazy.bss.user.controller.UserController.deleteUserAddressInfo(java.lang.String) throws java.lang.Exception
+2018-04-02 16:03:50  [ main:3615 ] - [ INFO ]  Mapped "{[/v2/api-docs],methods=[GET],produces=[application/json || application/hal+json]}" onto public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)
+2018-04-02 16:03:50  [ main:3617 ] - [ INFO ]  Mapped "{[/configuration/security]}" onto org.springframework.http.ResponseEntity<springfox.documentation.swagger.web.SecurityConfiguration> springfox.documentation.swagger.web.ApiResourceController.securityConfiguration()
+2018-04-02 16:03:50  [ main:3618 ] - [ INFO ]  Mapped "{[/configuration/ui]}" onto org.springframework.http.ResponseEntity<springfox.documentation.swagger.web.UiConfiguration> springfox.documentation.swagger.web.ApiResourceController.uiConfiguration()
+2018-04-02 16:03:50  [ main:3619 ] - [ INFO ]  Mapped "{[/swagger-resources]}" onto org.springframework.http.ResponseEntity<java.util.List<springfox.documentation.swagger.web.SwaggerResource>> springfox.documentation.swagger.web.ApiResourceController.swaggerResources()
+2018-04-02 16:03:50  [ main:3621 ] - [ INFO ]  Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-04-02 16:03:50  [ main:3621 ] - [ INFO ]  Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-04-02 16:03:51  [ main:4078 ] - [ INFO ]  Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@291f18: startup date [Mon Apr 02 16:03:47 CST 2018]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@527e5409
+2018-04-02 16:03:51  [ main:4127 ] - [ INFO ]  Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-04-02 16:03:51  [ main:4127 ] - [ INFO ]  Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-04-02 16:03:51  [ main:4173 ] - [ INFO ]  Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-04-02 16:03:51  [ main:4470 ] - [ WARN ]  No URLs will be polled as dynamic configuration sources.
+2018-04-02 16:03:51  [ main:4471 ] - [ INFO ]  To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2018-04-02 16:03:51  [ main:4476 ] - [ WARN ]  No URLs will be polled as dynamic configuration sources.
+2018-04-02 16:03:51  [ main:4476 ] - [ INFO ]  To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2018-04-02 16:03:51  [ main:4535 ] - [ INFO ]  Registering beans for JMX exposure on startup
+2018-04-02 16:03:51  [ main:4543 ] - [ INFO ]  Bean with name 'refreshScope' has been autodetected for JMX exposure
+2018-04-02 16:03:51  [ main:4543 ] - [ INFO ]  Bean with name 'environmentManager' has been autodetected for JMX exposure
+2018-04-02 16:03:51  [ main:4544 ] - [ INFO ]  Bean with name 'configurationPropertiesRebinder' has been autodetected for JMX exposure
+2018-04-02 16:03:51  [ main:4548 ] - [ INFO ]  Located managed bean 'environmentManager': registering with JMX server as MBean [org.springframework.cloud.context.environment:name=environmentManager,type=EnvironmentManager]
+2018-04-02 16:03:51  [ main:4558 ] - [ INFO ]  Located managed bean 'refreshScope': registering with JMX server as MBean [org.springframework.cloud.context.scope.refresh:name=refreshScope,type=RefreshScope]
+2018-04-02 16:03:51  [ main:4568 ] - [ INFO ]  Located managed bean 'configurationPropertiesRebinder': registering with JMX server as MBean [org.springframework.cloud.context.properties:name=configurationPropertiesRebinder,context=291f18,type=ConfigurationPropertiesRebinder]
+2018-04-02 16:03:51  [ main:4682 ] - [ INFO ]  Starting beans in phase 0
+2018-04-02 16:03:51  [ main:4688 ] - [ INFO ]  Setting initial instance status as: STARTING
+2018-04-02 16:03:51  [ main:4963 ] - [ INFO ]  Using JSON encoding codec LegacyJacksonJson
+2018-04-02 16:03:51  [ main:4963 ] - [ INFO ]  Using JSON decoding codec LegacyJacksonJson
+2018-04-02 16:03:51  [ main:5048 ] - [ INFO ]  Using XML encoding codec XStreamXml
+2018-04-02 16:03:51  [ main:5048 ] - [ INFO ]  Using XML decoding codec XStreamXml
+2018-04-02 16:03:52  [ main:5198 ] - [ INFO ]  Resolving eureka endpoints via configuration
+2018-04-02 16:03:52  [ main:5256 ] - [ INFO ]  Disable delta property : false
+2018-04-02 16:03:52  [ main:5256 ] - [ INFO ]  Single vip registry refresh property : null
+2018-04-02 16:03:52  [ main:5257 ] - [ INFO ]  Force full registry fetch : false
+2018-04-02 16:03:52  [ main:5257 ] - [ INFO ]  Application is null : false
+2018-04-02 16:03:52  [ main:5257 ] - [ INFO ]  Registered Applications size is zero : true
+2018-04-02 16:03:52  [ main:5259 ] - [ INFO ]  Application version is -1: true
+2018-04-02 16:03:52  [ main:5259 ] - [ INFO ]  Getting all instance registry info from the eureka server
+2018-04-02 16:03:52  [ main:5457 ] - [ INFO ]  The response status is 200
+2018-04-02 16:03:52  [ main:5459 ] - [ INFO ]  Starting heartbeat executor: renew interval is: 30
+2018-04-02 16:03:52  [ main:5462 ] - [ INFO ]  InstanceInfoReplicator onDemand update allowed rate per min is 4
+2018-04-02 16:03:52  [ main:5467 ] - [ INFO ]  Discovery Client initialized at timestamp 1522656232409 with initial instances count: 0
+2018-04-02 16:03:52  [ main:5502 ] - [ INFO ]  Registering application user-service with eureka with status UP
+2018-04-02 16:03:52  [ main:5503 ] - [ INFO ]  Saw local status change event StatusChangeEvent [timestamp=1522656232445, current=UP, previous=STARTING]
+2018-04-02 16:03:52  [ main:5515 ] - [ INFO ]  Context refreshed
+2018-04-02 16:03:52  [ main:5530 ] - [ INFO ]  Found 1 custom documentation plugin(s)
+2018-04-02 16:03:52  [ DiscoveryClient-InstanceInfoReplicator-0:5536 ] - [ INFO ]  DiscoveryClient_USER-SERVICE/hc-3020-i3-PC:user-service:8080: registering service...
+2018-04-02 16:03:52  [ main:5540 ] - [ INFO ]  Scanning for api listing references
+2018-04-02 16:03:52  [ main:5650 ] - [ WARN ]  Coercing to be of type string. This may not even be a scalar type in actuality
+2018-04-02 16:03:52  [ main:5672 ] - [ WARN ]  Coercing to be of type string. This may not even be a scalar type in actuality
+2018-04-02 16:03:52  [ main:5681 ] - [ WARN ]  Coercing to be of type string. This may not even be a scalar type in actuality
+2018-04-02 16:03:52  [ DiscoveryClient-InstanceInfoReplicator-0:5686 ] - [ INFO ]  DiscoveryClient_USER-SERVICE/hc-3020-i3-PC:user-service:8080 - registration status: 204
+2018-04-02 16:03:52  [ main:5696 ] - [ WARN ]  Coercing to be of type string. This may not even be a scalar type in actuality
+2018-04-02 16:03:52  [ main:5696 ] - [ WARN ]  Coercing to be of type string. This may not even be a scalar type in actuality
+2018-04-02 16:03:52  [ main:5707 ] - [ WARN ]  Coercing to be of type string. This may not even be a scalar type in actuality
+2018-04-02 16:03:52  [ main:5714 ] - [ WARN ]  Coercing to be of type string. This may not even be a scalar type in actuality
+2018-04-02 16:03:52  [ main:5715 ] - [ WARN ]  Coercing to be of type string. This may not even be a scalar type in actuality
+2018-04-02 16:03:52  [ main:5715 ] - [ WARN ]  Coercing to be of type string. This may not even be a scalar type in actuality
+2018-04-02 16:03:52  [ main:5715 ] - [ WARN ]  Coercing to be of type string. This may not even be a scalar type in actuality
+2018-04-02 16:03:53  [ main:6239 ] - [ INFO ]  Tomcat started on port(s): 8080 (https)
+2018-04-02 16:03:53  [ main:6240 ] - [ INFO ]  Updating port to 8080
+2018-04-02 16:03:53  [ main:6246 ] - [ INFO ]  Started SlazyUserApplication in 6.683 seconds (JVM running for 7.086)
+2018-04-02 16:04:22  [ DiscoveryClient-CacheRefreshExecutor-0:35462 ] - [ INFO ]  Disable delta property : false
+2018-04-02 16:04:22  [ DiscoveryClient-CacheRefreshExecutor-0:35462 ] - [ INFO ]  Single vip registry refresh property : null
+2018-04-02 16:04:22  [ DiscoveryClient-CacheRefreshExecutor-0:35462 ] - [ INFO ]  Force full registry fetch : false
+2018-04-02 16:04:22  [ DiscoveryClient-CacheRefreshExecutor-0:35462 ] - [ INFO ]  Application is null : false
+2018-04-02 16:04:22  [ DiscoveryClient-CacheRefreshExecutor-0:35462 ] - [ INFO ]  Registered Applications size is zero : true
+2018-04-02 16:04:22  [ DiscoveryClient-CacheRefreshExecutor-0:35463 ] - [ INFO ]  Application version is -1: false
+2018-04-02 16:04:22  [ DiscoveryClient-CacheRefreshExecutor-0:35463 ] - [ INFO ]  Getting all instance registry info from the eureka server
+2018-04-02 16:04:22  [ DiscoveryClient-CacheRefreshExecutor-0:35504 ] - [ INFO ]  The response status is 200
+2018-04-02 16:06:21  [ main:0 ] - [ INFO ]  Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@527e5409: startup date [Mon Apr 02 16:06:21 CST 2018]; root of context hierarchy
+2018-04-02 16:06:21  [ background-preinit:193 ] - [ INFO ]  HV000001: Hibernate Validator 5.3.5.Final
+2018-04-02 16:06:21  [ main:312 ] - [ INFO ]  JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2018-04-02 16:06:21  [ main:345 ] - [ INFO ]  Bean 'configurationPropertiesRebinderAutoConfiguration' of type [org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$2f86ccd7] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-04-02 16:06:21  [ main:637 ] - [ INFO ]  No active profile set, falling back to default profiles: default
+2018-04-02 16:06:21  [ main:653 ] - [ INFO ]  Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@291f18: startup date [Mon Apr 02 16:06:21 CST 2018]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@527e5409
+2018-04-02 16:06:22  [ main:1588 ] - [ INFO ]  BeanFactory id=b6f752f1-0c8e-3f87-adaa-ad8ad8bf4e54
+2018-04-02 16:06:22  [ main:1628 ] - [ INFO ]  JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2018-04-02 16:06:22  [ main:1724 ] - [ INFO ]  Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$136cc9da] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-04-02 16:06:22  [ main:1758 ] - [ INFO ]  Bean 'org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration' of type [org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$2f86ccd7] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-04-02 16:06:23  [ main:2100 ] - [ INFO ]  Tomcat initialized with port(s): 8080 (https)
+2018-04-02 16:06:23  [ localhost-startStop-1:2272 ] - [ INFO ]  Root WebApplicationContext: initialization completed in 1619 ms
+2018-04-02 16:06:24  [ localhost-startStop-1:2930 ] - [ INFO ]  Mapping servlet: 'dispatcherServlet' to [/]
+2018-04-02 16:06:24  [ localhost-startStop-1:2934 ] - [ INFO ]  Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-04-02 16:06:24  [ localhost-startStop-1:2935 ] - [ INFO ]  Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-04-02 16:06:24  [ localhost-startStop-1:2935 ] - [ INFO ]  Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-04-02 16:06:24  [ localhost-startStop-1:2936 ] - [ INFO ]  Mapping filter: 'requestContextFilter' to: [/*]
+2018-04-02 16:06:24  [ localhost-startStop-1:2937 ] - [ INFO ]  Mapping filter: 'tokenFilter' to urls: [/activity/*, /user/*, /sms/*]
+2018-04-02 16:06:24  [ main:3381 ] - [ INFO ]  Mapped "{[/activity/addActivity],methods=[POST]}" onto public java.lang.String com.slazy.bss.user.controller.ActivityController.addActivity(java.lang.String) throws java.lang.Exception
+2018-04-02 16:06:24  [ main:3382 ] - [ INFO ]  Mapped "{[/activity/queryActivity],methods=[POST]}" onto public java.lang.String com.slazy.bss.user.controller.ActivityController.queryActivity(java.lang.String) throws java.lang.Exception
+2018-04-02 16:06:24  [ main:3384 ] - [ INFO ]  Mapped "{[/sms/SMSIdentifyingCode],methods=[POST]}" onto public java.lang.String com.slazy.bss.user.controller.SmsController.SMSIdentifyingCode(java.lang.String) throws java.lang.Exception
+2018-04-02 16:06:24  [ main:3385 ] - [ INFO ]  Mapped "{[/sms/SMSCodeGenerator],methods=[POST]}" onto public java.lang.String com.slazy.bss.user.controller.SmsController.SMSCodeGenerator(java.lang.String) throws java.lang.Exception
+2018-04-02 16:06:24  [ main:3385 ] - [ INFO ]  Mapped "{[/api/{id}],methods=[GET]}" onto public java.lang.String com.slazy.bss.user.controller.SwaggerDemoController.getStudent(int)
+2018-04-02 16:06:24  [ main:3491 ] - [ INFO ]  Mapped "{[/user/perfectionUserInfo],methods=[POST]}" onto public java.lang.String com.slazy.bss.user.controller.UserController.perfectionUserInfo(java.lang.String) throws java.lang.Exception
+2018-04-02 16:06:24  [ main:3492 ] - [ INFO ]  Mapped "{[/user/queryUserAddressInfo],methods=[POST]}" onto public java.lang.String com.slazy.bss.user.controller.UserController.queryUserAddressInfo(java.lang.String) throws java.lang.Exception
+2018-04-02 16:06:24  [ main:3492 ] - [ INFO ]  Mapped "{[/user/updateUserAddressInfo],methods=[POST]}" onto public java.lang.String com.slazy.bss.user.controller.UserController.updateUserAddressInfo(java.lang.String) throws java.lang.Exception
+2018-04-02 16:06:24  [ main:3492 ] - [ INFO ]  Mapped "{[/user/insertUserAddressInfo],methods=[POST]}" onto public java.lang.String com.slazy.bss.user.controller.UserController.insertUserAddressInfo(java.lang.String) throws java.lang.Exception
+2018-04-02 16:06:24  [ main:3493 ] - [ INFO ]  Mapped "{[/user/deleteUserAddressInfo],methods=[POST]}" onto public java.lang.String com.slazy.bss.user.controller.UserController.deleteUserAddressInfo(java.lang.String) throws java.lang.Exception
+2018-04-02 16:06:24  [ main:3493 ] - [ INFO ]  Mapped "{[/user/queryUserInfoByMobile],methods=[POST]}" onto public java.lang.String com.slazy.bss.user.controller.UserController.queryUserInfo(java.lang.String) throws java.lang.Exception
+2018-04-02 16:06:24  [ main:3493 ] - [ INFO ]  Mapped "{[/user/queryUserInfoById],methods=[POST]}" onto public java.lang.String com.slazy.bss.user.controller.UserController.getAllUserInfo(java.lang.String) throws java.lang.Exception
+2018-04-02 16:06:24  [ main:3494 ] - [ INFO ]  Mapped "{[/user/queryUI],methods=[GET]}" onto public java.lang.String com.slazy.bss.user.controller.UserController.queryUI(java.lang.String) throws java.lang.Exception
+2018-04-02 16:06:24  [ main:3494 ] - [ INFO ]  Mapped "{[/user/registerUser],methods=[POST]}" onto public java.lang.String com.slazy.bss.user.controller.UserController.registerUser(java.lang.String) throws java.lang.Exception
+2018-04-02 16:06:24  [ main:3494 ] - [ INFO ]  Mapped "{[/user/alterPassword],methods=[POST]}" onto public java.lang.String com.slazy.bss.user.controller.UserController.alterPassword(java.lang.String) throws java.lang.Exception
+2018-04-02 16:06:24  [ main:3494 ] - [ INFO ]  Mapped "{[/user/loginVerify],methods=[POST]}" onto public java.lang.String com.slazy.bss.user.controller.UserController.loginVerify(java.lang.String) throws java.lang.Exception
+2018-04-02 16:06:24  [ main:3495 ] - [ INFO ]  Mapped "{[/user/uploadUserImage],methods=[POST]}" onto public java.lang.String com.slazy.bss.user.controller.UserController.uploadUserImage(java.lang.String,java.lang.String,org.springframework.web.multipart.MultipartFile,java.lang.String) throws java.lang.Exception
+2018-04-02 16:06:24  [ main:3496 ] - [ INFO ]  Mapped "{[/v2/api-docs],methods=[GET],produces=[application/json || application/hal+json]}" onto public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)
+2018-04-02 16:06:24  [ main:3499 ] - [ INFO ]  Mapped "{[/configuration/security]}" onto org.springframework.http.ResponseEntity<springfox.documentation.swagger.web.SecurityConfiguration> springfox.documentation.swagger.web.ApiResourceController.securityConfiguration()
+2018-04-02 16:06:24  [ main:3500 ] - [ INFO ]  Mapped "{[/configuration/ui]}" onto org.springframework.http.ResponseEntity<springfox.documentation.swagger.web.UiConfiguration> springfox.documentation.swagger.web.ApiResourceController.uiConfiguration()
+2018-04-02 16:06:24  [ main:3501 ] - [ INFO ]  Mapped "{[/swagger-resources]}" onto org.springframework.http.ResponseEntity<java.util.List<springfox.documentation.swagger.web.SwaggerResource>> springfox.documentation.swagger.web.ApiResourceController.swaggerResources()
+2018-04-02 16:06:24  [ main:3503 ] - [ INFO ]  Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-04-02 16:06:24  [ main:3504 ] - [ INFO ]  Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-04-02 16:06:25  [ main:3938 ] - [ INFO ]  Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@291f18: startup date [Mon Apr 02 16:06:21 CST 2018]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@527e5409
+2018-04-02 16:06:25  [ main:3988 ] - [ INFO ]  Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-04-02 16:06:25  [ main:3989 ] - [ INFO ]  Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-04-02 16:06:25  [ main:4024 ] - [ INFO ]  Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-04-02 16:06:25  [ main:4321 ] - [ WARN ]  No URLs will be polled as dynamic configuration sources.
+2018-04-02 16:06:25  [ main:4322 ] - [ INFO ]  To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2018-04-02 16:06:25  [ main:4327 ] - [ WARN ]  No URLs will be polled as dynamic configuration sources.
+2018-04-02 16:06:25  [ main:4327 ] - [ INFO ]  To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2018-04-02 16:06:25  [ main:4388 ] - [ INFO ]  Registering beans for JMX exposure on startup
+2018-04-02 16:06:25  [ main:4396 ] - [ INFO ]  Bean with name 'refreshScope' has been autodetected for JMX exposure
+2018-04-02 16:06:25  [ main:4397 ] - [ INFO ]  Bean with name 'environmentManager' has been autodetected for JMX exposure
+2018-04-02 16:06:25  [ main:4398 ] - [ INFO ]  Bean with name 'configurationPropertiesRebinder' has been autodetected for JMX exposure
+2018-04-02 16:06:25  [ main:4401 ] - [ INFO ]  Located managed bean 'environmentManager': registering with JMX server as MBean [org.springframework.cloud.context.environment:name=environmentManager,type=EnvironmentManager]
+2018-04-02 16:06:25  [ main:4412 ] - [ INFO ]  Located managed bean 'refreshScope': registering with JMX server as MBean [org.springframework.cloud.context.scope.refresh:name=refreshScope,type=RefreshScope]
+2018-04-02 16:06:25  [ main:4424 ] - [ INFO ]  Located managed bean 'configurationPropertiesRebinder': registering with JMX server as MBean [org.springframework.cloud.context.properties:name=configurationPropertiesRebinder,context=291f18,type=ConfigurationPropertiesRebinder]
+2018-04-02 16:06:25  [ main:4547 ] - [ INFO ]  Starting beans in phase 0
+2018-04-02 16:06:25  [ main:4555 ] - [ INFO ]  Setting initial instance status as: STARTING
+2018-04-02 16:06:26  [ main:4911 ] - [ INFO ]  Using JSON encoding codec LegacyJacksonJson
+2018-04-02 16:06:26  [ main:4911 ] - [ INFO ]  Using JSON decoding codec LegacyJacksonJson
+2018-04-02 16:06:26  [ main:4996 ] - [ INFO ]  Using XML encoding codec XStreamXml
+2018-04-02 16:06:26  [ main:4996 ] - [ INFO ]  Using XML decoding codec XStreamXml
+2018-04-02 16:06:26  [ main:5152 ] - [ INFO ]  Resolving eureka endpoints via configuration
+2018-04-02 16:06:26  [ main:5207 ] - [ INFO ]  Disable delta property : false
+2018-04-02 16:06:26  [ main:5208 ] - [ INFO ]  Single vip registry refresh property : null
+2018-04-02 16:06:26  [ main:5208 ] - [ INFO ]  Force full registry fetch : false
+2018-04-02 16:06:26  [ main:5208 ] - [ INFO ]  Application is null : false
+2018-04-02 16:06:26  [ main:5208 ] - [ INFO ]  Registered Applications size is zero : true
+2018-04-02 16:06:26  [ main:5208 ] - [ INFO ]  Application version is -1: true
+2018-04-02 16:06:26  [ main:5208 ] - [ INFO ]  Getting all instance registry info from the eureka server
+2018-04-02 16:06:26  [ main:5369 ] - [ INFO ]  The response status is 200
+2018-04-02 16:06:26  [ main:5371 ] - [ INFO ]  Starting heartbeat executor: renew interval is: 30
+2018-04-02 16:06:26  [ main:5374 ] - [ INFO ]  InstanceInfoReplicator onDemand update allowed rate per min is 4
+2018-04-02 16:06:26  [ main:5377 ] - [ INFO ]  Discovery Client initialized at timestamp 1522656386561 with initial instances count: 1
+2018-04-02 16:06:26  [ main:5398 ] - [ INFO ]  Registering application user-service with eureka with status UP
+2018-04-02 16:06:26  [ main:5398 ] - [ INFO ]  Saw local status change event StatusChangeEvent [timestamp=1522656386582, current=UP, previous=STARTING]
+2018-04-02 16:06:26  [ DiscoveryClient-InstanceInfoReplicator-0:5403 ] - [ INFO ]  DiscoveryClient_USER-SERVICE/hc-3020-i3-PC:user-service:8080: registering service...
+2018-04-02 16:06:26  [ main:5411 ] - [ INFO ]  Context refreshed
+2018-04-02 16:06:26  [ main:5431 ] - [ INFO ]  Found 1 custom documentation plugin(s)
+2018-04-02 16:06:26  [ main:5441 ] - [ INFO ]  Scanning for api listing references
+2018-04-02 16:06:26  [ DiscoveryClient-InstanceInfoReplicator-0:5456 ] - [ INFO ]  DiscoveryClient_USER-SERVICE/hc-3020-i3-PC:user-service:8080 - registration status: 204
+2018-04-02 16:06:26  [ main:5523 ] - [ WARN ]  Coercing to be of type string. This may not even be a scalar type in actuality
+2018-04-02 16:06:26  [ main:5536 ] - [ WARN ]  Coercing to be of type string. This may not even be a scalar type in actuality
+2018-04-02 16:06:26  [ main:5552 ] - [ WARN ]  Coercing to be of type string. This may not even be a scalar type in actuality
+2018-04-02 16:06:26  [ main:5566 ] - [ WARN ]  Coercing to be of type string. This may not even be a scalar type in actuality
+2018-04-02 16:06:26  [ main:5567 ] - [ WARN ]  Coercing to be of type string. This may not even be a scalar type in actuality
+2018-04-02 16:06:26  [ main:5575 ] - [ WARN ]  Coercing to be of type string. This may not even be a scalar type in actuality
+2018-04-02 16:06:26  [ main:5579 ] - [ WARN ]  Coercing to be of type string. This may not even be a scalar type in actuality
+2018-04-02 16:06:26  [ main:5580 ] - [ WARN ]  Coercing to be of type string. This may not even be a scalar type in actuality
+2018-04-02 16:06:26  [ main:5580 ] - [ WARN ]  Coercing to be of type string. This may not even be a scalar type in actuality
+2018-04-02 16:06:26  [ main:5580 ] - [ WARN ]  Coercing to be of type string. This may not even be a scalar type in actuality
+2018-04-02 16:06:26  [ main:5765 ] - [ INFO ]  Tomcat started on port(s): 8080 (https)
+2018-04-02 16:06:26  [ main:5766 ] - [ INFO ]  Updating port to 8080
+2018-04-02 16:06:26  [ main:5769 ] - [ INFO ]  Started SlazyUserApplication in 6.181 seconds (JVM running for 6.555)
+2018-04-02 16:06:59  [ main:0 ] - [ INFO ]  Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@527e5409: startup date [Mon Apr 02 16:06:59 CST 2018]; root of context hierarchy
+2018-04-02 16:06:59  [ background-preinit:184 ] - [ INFO ]  HV000001: Hibernate Validator 5.3.5.Final
+2018-04-02 16:06:59  [ main:279 ] - [ INFO ]  JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2018-04-02 16:06:59  [ main:338 ] - [ INFO ]  Bean 'configurationPropertiesRebinderAutoConfiguration' of type [org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$2f86ccd7] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-04-02 16:07:00  [ main:651 ] - [ INFO ]  No active profile set, falling back to default profiles: default
+2018-04-02 16:07:00  [ main:671 ] - [ INFO ]  Refreshing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@291f18: startup date [Mon Apr 02 16:07:00 CST 2018]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@527e5409
+2018-04-02 16:07:01  [ main:1651 ] - [ INFO ]  BeanFactory id=b6f752f1-0c8e-3f87-adaa-ad8ad8bf4e54
+2018-04-02 16:07:01  [ main:1694 ] - [ INFO ]  JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2018-04-02 16:07:01  [ main:1813 ] - [ INFO ]  Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$136cc9da] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-04-02 16:07:01  [ main:1846 ] - [ INFO ]  Bean 'org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration' of type [org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$2f86ccd7] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018-04-02 16:07:01  [ main:2182 ] - [ INFO ]  Tomcat initialized with port(s): 8080 (http)
+2018-04-02 16:07:01  [ localhost-startStop-1:2323 ] - [ INFO ]  Root WebApplicationContext: initialization completed in 1652 ms
+2018-04-02 16:07:02  [ localhost-startStop-1:2986 ] - [ INFO ]  Mapping servlet: 'dispatcherServlet' to [/]
+2018-04-02 16:07:02  [ localhost-startStop-1:2990 ] - [ INFO ]  Mapping filter: 'characterEncodingFilter' to: [/*]
+2018-04-02 16:07:02  [ localhost-startStop-1:2990 ] - [ INFO ]  Mapping filter: 'hiddenHttpMethodFilter' to: [/*]
+2018-04-02 16:07:02  [ localhost-startStop-1:2990 ] - [ INFO ]  Mapping filter: 'httpPutFormContentFilter' to: [/*]
+2018-04-02 16:07:02  [ localhost-startStop-1:2991 ] - [ INFO ]  Mapping filter: 'requestContextFilter' to: [/*]
+2018-04-02 16:07:02  [ localhost-startStop-1:2992 ] - [ INFO ]  Mapping filter: 'tokenFilter' to urls: [/activity/*, /user/*, /sms/*]
+2018-04-02 16:07:02  [ main:3430 ] - [ INFO ]  Mapped "{[/activity/addActivity],methods=[POST]}" onto public java.lang.String com.slazy.bss.user.controller.ActivityController.addActivity(java.lang.String) throws java.lang.Exception
+2018-04-02 16:07:02  [ main:3431 ] - [ INFO ]  Mapped "{[/activity/queryActivity],methods=[POST]}" onto public java.lang.String com.slazy.bss.user.controller.ActivityController.queryActivity(java.lang.String) throws java.lang.Exception
+2018-04-02 16:07:02  [ main:3434 ] - [ INFO ]  Mapped "{[/sms/SMSCodeGenerator],methods=[POST]}" onto public java.lang.String com.slazy.bss.user.controller.SmsController.SMSCodeGenerator(java.lang.String) throws java.lang.Exception
+2018-04-02 16:07:02  [ main:3434 ] - [ INFO ]  Mapped "{[/sms/SMSIdentifyingCode],methods=[POST]}" onto public java.lang.String com.slazy.bss.user.controller.SmsController.SMSIdentifyingCode(java.lang.String) throws java.lang.Exception
+2018-04-02 16:07:02  [ main:3437 ] - [ INFO ]  Mapped "{[/api/{id}],methods=[GET]}" onto public java.lang.String com.slazy.bss.user.controller.SwaggerDemoController.getStudent(int)
+2018-04-02 16:07:02  [ main:3441 ] - [ INFO ]  Mapped "{[/user/queryUserInfoByMobile],methods=[POST]}" onto public java.lang.String com.slazy.bss.user.controller.UserController.queryUserInfo(java.lang.String) throws java.lang.Exception
+2018-04-02 16:07:02  [ main:3442 ] - [ INFO ]  Mapped "{[/user/queryUserInfoById],methods=[POST]}" onto public java.lang.String com.slazy.bss.user.controller.UserController.getAllUserInfo(java.lang.String) throws java.lang.Exception
+2018-04-02 16:07:02  [ main:3442 ] - [ INFO ]  Mapped "{[/user/queryUI],methods=[GET]}" onto public java.lang.String com.slazy.bss.user.controller.UserController.queryUI(java.lang.String) throws java.lang.Exception
+2018-04-02 16:07:02  [ main:3442 ] - [ INFO ]  Mapped "{[/user/registerUser],methods=[POST]}" onto public java.lang.String com.slazy.bss.user.controller.UserController.registerUser(java.lang.String) throws java.lang.Exception
+2018-04-02 16:07:02  [ main:3443 ] - [ INFO ]  Mapped "{[/user/alterPassword],methods=[POST]}" onto public java.lang.String com.slazy.bss.user.controller.UserController.alterPassword(java.lang.String) throws java.lang.Exception
+2018-04-02 16:07:02  [ main:3443 ] - [ INFO ]  Mapped "{[/user/loginVerify],methods=[POST]}" onto public java.lang.String com.slazy.bss.user.controller.UserController.loginVerify(java.lang.String) throws java.lang.Exception
+2018-04-02 16:07:02  [ main:3444 ] - [ INFO ]  Mapped "{[/user/uploadUserImage],methods=[POST]}" onto public java.lang.String com.slazy.bss.user.controller.UserController.uploadUserImage(java.lang.String,java.lang.String,org.springframework.web.multipart.MultipartFile,java.lang.String) throws java.lang.Exception
+2018-04-02 16:07:02  [ main:3444 ] - [ INFO ]  Mapped "{[/user/perfectionUserInfo],methods=[POST]}" onto public java.lang.String com.slazy.bss.user.controller.UserController.perfectionUserInfo(java.lang.String) throws java.lang.Exception
+2018-04-02 16:07:02  [ main:3444 ] - [ INFO ]  Mapped "{[/user/queryUserAddressInfo],methods=[POST]}" onto public java.lang.String com.slazy.bss.user.controller.UserController.queryUserAddressInfo(java.lang.String) throws java.lang.Exception
+2018-04-02 16:07:02  [ main:3445 ] - [ INFO ]  Mapped "{[/user/updateUserAddressInfo],methods=[POST]}" onto public java.lang.String com.slazy.bss.user.controller.UserController.updateUserAddressInfo(java.lang.String) throws java.lang.Exception
+2018-04-02 16:07:02  [ main:3445 ] - [ INFO ]  Mapped "{[/user/insertUserAddressInfo],methods=[POST]}" onto public java.lang.String com.slazy.bss.user.controller.UserController.insertUserAddressInfo(java.lang.String) throws java.lang.Exception
+2018-04-02 16:07:02  [ main:3445 ] - [ INFO ]  Mapped "{[/user/deleteUserAddressInfo],methods=[POST]}" onto public java.lang.String com.slazy.bss.user.controller.UserController.deleteUserAddressInfo(java.lang.String) throws java.lang.Exception
+2018-04-02 16:07:03  [ main:3590 ] - [ INFO ]  Mapped "{[/v2/api-docs],methods=[GET],produces=[application/json || application/hal+json]}" onto public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)
+2018-04-02 16:07:03  [ main:3592 ] - [ INFO ]  Mapped "{[/configuration/ui]}" onto org.springframework.http.ResponseEntity<springfox.documentation.swagger.web.UiConfiguration> springfox.documentation.swagger.web.ApiResourceController.uiConfiguration()
+2018-04-02 16:07:03  [ main:3593 ] - [ INFO ]  Mapped "{[/swagger-resources]}" onto org.springframework.http.ResponseEntity<java.util.List<springfox.documentation.swagger.web.SwaggerResource>> springfox.documentation.swagger.web.ApiResourceController.swaggerResources()
+2018-04-02 16:07:03  [ main:3594 ] - [ INFO ]  Mapped "{[/configuration/security]}" onto org.springframework.http.ResponseEntity<springfox.documentation.swagger.web.SecurityConfiguration> springfox.documentation.swagger.web.ApiResourceController.securityConfiguration()
+2018-04-02 16:07:03  [ main:3597 ] - [ INFO ]  Mapped "{[/error]}" onto public org.springframework.http.ResponseEntity<java.util.Map<java.lang.String, java.lang.Object>> org.springframework.boot.autoconfigure.web.BasicErrorController.error(javax.servlet.http.HttpServletRequest)
+2018-04-02 16:07:03  [ main:3599 ] - [ INFO ]  Mapped "{[/error],produces=[text/html]}" onto public org.springframework.web.servlet.ModelAndView org.springframework.boot.autoconfigure.web.BasicErrorController.errorHtml(javax.servlet.http.HttpServletRequest,javax.servlet.http.HttpServletResponse)
+2018-04-02 16:07:03  [ main:4069 ] - [ INFO ]  Looking for @ControllerAdvice: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@291f18: startup date [Mon Apr 02 16:07:00 CST 2018]; parent: org.springframework.context.annotation.AnnotationConfigApplicationContext@527e5409
+2018-04-02 16:07:03  [ main:4123 ] - [ INFO ]  Mapped URL path [/webjars/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-04-02 16:07:03  [ main:4123 ] - [ INFO ]  Mapped URL path [/**] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-04-02 16:07:03  [ main:4159 ] - [ INFO ]  Mapped URL path [/**/favicon.ico] onto handler of type [class org.springframework.web.servlet.resource.ResourceHttpRequestHandler]
+2018-04-02 16:07:03  [ main:4483 ] - [ WARN ]  No URLs will be polled as dynamic configuration sources.
+2018-04-02 16:07:03  [ main:4483 ] - [ INFO ]  To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2018-04-02 16:07:03  [ main:4489 ] - [ WARN ]  No URLs will be polled as dynamic configuration sources.
+2018-04-02 16:07:03  [ main:4490 ] - [ INFO ]  To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2018-04-02 16:07:04  [ main:4547 ] - [ INFO ]  Registering beans for JMX exposure on startup
+2018-04-02 16:07:04  [ main:4556 ] - [ INFO ]  Bean with name 'refreshScope' has been autodetected for JMX exposure
+2018-04-02 16:07:04  [ main:4557 ] - [ INFO ]  Bean with name 'environmentManager' has been autodetected for JMX exposure
+2018-04-02 16:07:04  [ main:4558 ] - [ INFO ]  Bean with name 'configurationPropertiesRebinder' has been autodetected for JMX exposure
+2018-04-02 16:07:04  [ main:4560 ] - [ INFO ]  Located managed bean 'environmentManager': registering with JMX server as MBean [org.springframework.cloud.context.environment:name=environmentManager,type=EnvironmentManager]
+2018-04-02 16:07:04  [ main:4571 ] - [ INFO ]  Located managed bean 'refreshScope': registering with JMX server as MBean [org.springframework.cloud.context.scope.refresh:name=refreshScope,type=RefreshScope]
+2018-04-02 16:07:04  [ main:4581 ] - [ INFO ]  Located managed bean 'configurationPropertiesRebinder': registering with JMX server as MBean [org.springframework.cloud.context.properties:name=configurationPropertiesRebinder,context=291f18,type=ConfigurationPropertiesRebinder]
+2018-04-02 16:07:04  [ main:4727 ] - [ INFO ]  Starting beans in phase 0
+2018-04-02 16:07:04  [ main:4735 ] - [ INFO ]  Setting initial instance status as: STARTING
+2018-04-02 16:07:04  [ main:5014 ] - [ INFO ]  Using JSON encoding codec LegacyJacksonJson
+2018-04-02 16:07:04  [ main:5014 ] - [ INFO ]  Using JSON decoding codec LegacyJacksonJson
+2018-04-02 16:07:04  [ main:5095 ] - [ INFO ]  Using XML encoding codec XStreamXml
+2018-04-02 16:07:04  [ main:5096 ] - [ INFO ]  Using XML decoding codec XStreamXml
+2018-04-02 16:07:04  [ main:5246 ] - [ INFO ]  Resolving eureka endpoints via configuration
+2018-04-02 16:07:04  [ main:5303 ] - [ INFO ]  Disable delta property : false
+2018-04-02 16:07:04  [ main:5303 ] - [ INFO ]  Single vip registry refresh property : null
+2018-04-02 16:07:04  [ main:5304 ] - [ INFO ]  Force full registry fetch : false
+2018-04-02 16:07:04  [ main:5304 ] - [ INFO ]  Application is null : false
+2018-04-02 16:07:04  [ main:5304 ] - [ INFO ]  Registered Applications size is zero : true
+2018-04-02 16:07:04  [ main:5308 ] - [ INFO ]  Application version is -1: true
+2018-04-02 16:07:04  [ main:5308 ] - [ INFO ]  Getting all instance registry info from the eureka server
+2018-04-02 16:07:04  [ main:5471 ] - [ INFO ]  The response status is 200
+2018-04-02 16:07:04  [ main:5475 ] - [ INFO ]  Starting heartbeat executor: renew interval is: 30
+2018-04-02 16:07:04  [ main:5478 ] - [ INFO ]  InstanceInfoReplicator onDemand update allowed rate per min is 4
+2018-04-02 16:07:04  [ main:5481 ] - [ INFO ]  Discovery Client initialized at timestamp 1522656424969 with initial instances count: 1
+2018-04-02 16:07:04  [ main:5501 ] - [ INFO ]  Registering application user-service with eureka with status UP
+2018-04-02 16:07:04  [ main:5502 ] - [ INFO ]  Saw local status change event StatusChangeEvent [timestamp=1522656424989, current=UP, previous=STARTING]
+2018-04-02 16:07:04  [ DiscoveryClient-InstanceInfoReplicator-0:5503 ] - [ INFO ]  DiscoveryClient_USER-SERVICE/hc-3020-i3-PC:user-service:8080: registering service...
+2018-04-02 16:07:05  [ main:5517 ] - [ INFO ]  Context refreshed
+2018-04-02 16:07:05  [ main:5534 ] - [ INFO ]  Found 1 custom documentation plugin(s)
+2018-04-02 16:07:05  [ main:5544 ] - [ INFO ]  Scanning for api listing references
+2018-04-02 16:07:05  [ DiscoveryClient-InstanceInfoReplicator-0:5546 ] - [ INFO ]  DiscoveryClient_USER-SERVICE/hc-3020-i3-PC:user-service:8080 - registration status: 204
+2018-04-02 16:07:05  [ main:5631 ] - [ WARN ]  Coercing to be of type string. This may not even be a scalar type in actuality
+2018-04-02 16:07:05  [ main:5643 ] - [ WARN ]  Coercing to be of type string. This may not even be a scalar type in actuality
+2018-04-02 16:07:05  [ main:5650 ] - [ WARN ]  Coercing to be of type string. This may not even be a scalar type in actuality
+2018-04-02 16:07:05  [ main:5660 ] - [ WARN ]  Coercing to be of type string. This may not even be a scalar type in actuality
+2018-04-02 16:07:05  [ main:5660 ] - [ WARN ]  Coercing to be of type string. This may not even be a scalar type in actuality
+2018-04-02 16:07:05  [ main:5668 ] - [ WARN ]  Coercing to be of type string. This may not even be a scalar type in actuality
+2018-04-02 16:07:05  [ main:5671 ] - [ WARN ]  Coercing to be of type string. This may not even be a scalar type in actuality
+2018-04-02 16:07:05  [ main:5672 ] - [ WARN ]  Coercing to be of type string. This may not even be a scalar type in actuality
+2018-04-02 16:07:05  [ main:5672 ] - [ WARN ]  Coercing to be of type string. This may not even be a scalar type in actuality
+2018-04-02 16:07:05  [ main:5672 ] - [ WARN ]  Coercing to be of type string. This may not even be a scalar type in actuality
+2018-04-02 16:07:05  [ main:5725 ] - [ INFO ]  Tomcat started on port(s): 8080 (http)
+2018-04-02 16:07:05  [ main:5726 ] - [ INFO ]  Updating port to 8080
+2018-04-02 16:07:05  [ main:5729 ] - [ INFO ]  Started SlazyUserApplication in 6.134 seconds (JVM running for 6.524)
+2018-04-02 16:07:07  [ http-nio-8080-exec-1:8031 ] - [ INFO ]  FrameworkServlet 'dispatcherServlet': initialization started
+2018-04-02 16:07:07  [ http-nio-8080-exec-1:8047 ] - [ INFO ]  FrameworkServlet 'dispatcherServlet': initialization completed in 16 ms
+2018-04-02 16:07:07  [ http-nio-8080-exec-1:8057 ] - [ INFO ]  获取参数为
+2018-04-02 16:07:07  [ http-nio-8080-exec-1:8117 ] - [ INFO ]  token验证失败
+2018-04-02 16:07:13  [ http-nio-8080-exec-2:14006 ] - [ INFO ]  获取参数为{"data":{"mobile":"13699138599","userId":"1"},"restCode":"007","token":"13699138599"}
+2018-04-02 16:07:16  [ http-nio-8080-exec-2:17138 ] - [ INFO ]  token验证失败
+2018-04-02 16:08:00  [ http-nio-8080-exec-7:60893 ] - [ INFO ]  获取参数为{"data":{"mobile":"18701197321","userId":"1"},"restCode":"007","token":"MTIzNDU2Nzg5MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTImMTUyMjEyMDMxNTQzNw=="}
+2018-04-02 16:08:00  [ http-nio-8080-exec-7:60986 ] - [ INFO ]  token验证成功
+2018-04-02 16:08:00  [ http-nio-8080-exec-7:61067 ] - [ INFO ]  Refreshing org.springframework.context.annotation.AnnotationConfigApplicationContext@1d6de8f8: startup date [Mon Apr 02 16:08:00 CST 2018]; parent: org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@291f18
+2018-04-02 16:08:00  [ http-nio-8080-exec-7:61108 ] - [ INFO ]  JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+2018-04-02 16:08:00  [ http-nio-8080-exec-7:61222 ] - [ INFO ]  Flipping property: user-service.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+2018-04-02 16:08:00  [ http-nio-8080-exec-7:61247 ] - [ INFO ]  Shutdown hook installed for: NFLoadBalancer-PingTimer-user-service
+2018-04-02 16:08:00  [ http-nio-8080-exec-7:61252 ] - [ INFO ]  Client:user-service instantiated a LoadBalancer:DynamicServerListLoadBalancer:{NFLoadBalancer:name=user-service,current list of Servers=[],Load balancer stats=Zone stats: {},Server stats: []}ServerList:null
+2018-04-02 16:08:00  [ http-nio-8080-exec-7:61256 ] - [ INFO ]  Using serverListUpdater PollingServerListUpdater
+2018-04-02 16:08:00  [ http-nio-8080-exec-7:61268 ] - [ INFO ]  Flipping property: user-service.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+2018-04-02 16:08:00  [ http-nio-8080-exec-7:61269 ] - [ INFO ]  DynamicServerListLoadBalancer for client user-service initialized: DynamicServerListLoadBalancer:{NFLoadBalancer:name=user-service,current list of Servers=[hc-3020-i3-PC:8080],Load balancer stats=Zone stats: {defaultzone=[Zone:defaultzone;	Instance count:1;	Active connections count: 0;	Circuit breaker tripped count: 0;	Active connections per server: 0.0;]
+},Server stats: [[Server:hc-3020-i3-PC:8080;	Zone:defaultZone;	Total Requests:0;	Successive connection failure:0;	Total blackout seconds:0;	Last connection made:Thu Jan 01 08:00:00 CST 1970;	First connection made: Thu Jan 01 08:00:00 CST 1970;	Active Connections:0;	total failure count in last (1000) msecs:0;	average resp time:0.0;	90 percentile resp time:0.0;	95 percentile resp time:0.0;	min resp time:0.0;	max resp time:0.0;	stddev resp time:0.0]
+]}ServerList:org.springframework.cloud.netflix.ribbon.eureka.DomainExtractingServerList@6673373a
+2018-04-02 16:08:00  [ http-nio-8080-exec-9:61310 ] - [ INFO ]  获取参数为{"data":"{\"mobile\":\"18701197321\",\"userId\":\"1\"}","restCode":"007","token":"MTIzNDU2Nzg5MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTImMTUyMjEyMDMxNTQzNw=="}
+2018-04-02 16:08:00  [ http-nio-8080-exec-9:61356 ] - [ INFO ]  token验证成功
+2018-04-02 16:08:01  [ PollingServerListUpdater-0:62259 ] - [ INFO ]  Flipping property: user-service.ribbon.ActiveConnectionsLimit to use NEXT property: niws.loadbalancer.availabilityFilteringRule.activeConnectionsLimit = 2147483647
+2018-04-02 16:08:46  [ http-nio-8080-exec-3:106708 ] - [ INFO ]  获取参数为{"data":{"mobile":"18701197321","userId":"1"},"restCode":"007","token":"MTIzNDU2Nzg5MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTImMTUyMjEyMDMxNTQzNw=="}
+2018-04-02 16:08:46  [ http-nio-8080-exec-3:106795 ] - [ INFO ]  token验证成功
+2018-04-02 16:08:46  [ http-nio-8080-exec-4:106852 ] - [ INFO ]  获取参数为{"data":"{\"mobile\":\"18701197321\",\"userId\":\"1\"}","restCode":"007","token":"MTIzNDU2Nzg5MDEyMzQ1Njc4OTAxMjM0NTY3ODkwMTImMTUyMjEyMDMxNTQzNw=="}
+2018-04-02 16:08:46  [ http-nio-8080-exec-4:106897 ] - [ INFO ]  token验证成功

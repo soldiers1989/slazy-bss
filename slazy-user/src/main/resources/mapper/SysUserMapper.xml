@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.slazy.bss.user.mapper.SysUserMapper">
+  <resultMap id="BaseResultMap" type="com.slazy.bss.user.model.SysUser">
+    <id column="USER_ID" jdbcType="VARCHAR" property="userId" />
+    <result column="USERNAME" jdbcType="VARCHAR" property="username" />
+    <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
+    <result column="MOBILE" jdbcType="VARCHAR" property="mobile" />
+    <result column="EMAIL" jdbcType="VARCHAR" property="email" />
+    <result column="SEX" jdbcType="VARCHAR" property="sex" />
+    <result column="ID_TYPE" jdbcType="VARCHAR" property="idType" />
+    <result column="ID_NUM" jdbcType="VARCHAR" property="idNum" />
+    <result column="BIRTHDAY" jdbcType="VARCHAR" property="birthday" />
+    <result column="APP_KEY" jdbcType="VARCHAR" property="appKey" />
+    <result column="NICK_NAME" jdbcType="VARCHAR" property="nickName" />
+    <result column="REGION_SCHOOL" jdbcType="VARCHAR" property="regionSchool" />
+    <result column="AREA" jdbcType="VARCHAR" property="area" />
+    <result column="ADDRESS" jdbcType="VARCHAR" property="address" />
+    <result column="CREAT_TIME" jdbcType="TIMESTAMP" property="creatTime" />
+    <result column="FINALLY_TIME" jdbcType="TIMESTAMP" property="finallyTime" />
+    <result column="ICON" jdbcType="VARCHAR" property="icon" />
+    <result column="WX_ACCOUNT" jdbcType="VARCHAR" property="wxAccount" />
+    <result column="WB_ACCOUNT" jdbcType="VARCHAR" property="wbAccount" />
+    <result column="ZFB_ACCOUNT" jdbcType="VARCHAR" property="zfbAccount" />
+    <result column="STUDENT_NO" jdbcType="VARCHAR" property="studentNo" />
+    <result column="USER_AUTH" jdbcType="VARCHAR" property="userAuth" />
+    <result column="USER_STATUS" jdbcType="VARCHAR" property="userStatus" />
+    <result column="TOKEN" jdbcType="VARCHAR" property="token" />
+    <result column="TIME_LIMIT" jdbcType="VARCHAR" property="timeLimit" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    USER_ID, USERNAME, PASSWORD, MOBILE, EMAIL, SEX, ID_TYPE, ID_NUM, BIRTHDAY, APP_KEY, 
+    NICK_NAME, REGION_SCHOOL, AREA, ADDRESS, CREAT_TIME, FINALLY_TIME, ICON, WX_ACCOUNT, 
+    WB_ACCOUNT, ZFB_ACCOUNT, STUDENT_NO, USER_AUTH, USER_STATUS, TOKEN, TIME_LIMIT
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_user
+    where USER_ID = #{userId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sys_user
+    where USER_ID = #{userId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.slazy.bss.user.model.SysUser">
+    insert into sys_user (USER_ID, USERNAME, PASSWORD, 
+      MOBILE, EMAIL, SEX, 
+      ID_TYPE, ID_NUM, BIRTHDAY, 
+      APP_KEY, NICK_NAME, REGION_SCHOOL, 
+      AREA, ADDRESS, CREAT_TIME, 
+      FINALLY_TIME, ICON, WX_ACCOUNT, 
+      WB_ACCOUNT, ZFB_ACCOUNT, STUDENT_NO, 
+      USER_AUTH, USER_STATUS, TOKEN, 
+      TIME_LIMIT)
+    values (#{userId,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{mobile,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{idType,jdbcType=VARCHAR}, #{idNum,jdbcType=VARCHAR}, #{birthday,jdbcType=VARCHAR}, 
+      #{appKey,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, #{regionSchool,jdbcType=VARCHAR}, 
+      #{area,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{creatTime,jdbcType=TIMESTAMP}, 
+      #{finallyTime,jdbcType=TIMESTAMP}, #{icon,jdbcType=VARCHAR}, #{wxAccount,jdbcType=VARCHAR}, 
+      #{wbAccount,jdbcType=VARCHAR}, #{zfbAccount,jdbcType=VARCHAR}, #{studentNo,jdbcType=VARCHAR}, 
+      #{userAuth,jdbcType=VARCHAR}, #{userStatus,jdbcType=VARCHAR}, #{token,jdbcType=VARCHAR}, 
+      #{timeLimit,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.slazy.bss.user.model.SysUser">
+    insert into sys_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="username != null">
+        USERNAME,
+      </if>
+      <if test="password != null">
+        PASSWORD,
+      </if>
+      <if test="mobile != null">
+        MOBILE,
+      </if>
+      <if test="email != null">
+        EMAIL,
+      </if>
+      <if test="sex != null">
+        SEX,
+      </if>
+      <if test="idType != null">
+        ID_TYPE,
+      </if>
+      <if test="idNum != null">
+        ID_NUM,
+      </if>
+      <if test="birthday != null">
+        BIRTHDAY,
+      </if>
+      <if test="appKey != null">
+        APP_KEY,
+      </if>
+      <if test="nickName != null">
+        NICK_NAME,
+      </if>
+      <if test="regionSchool != null">
+        REGION_SCHOOL,
+      </if>
+      <if test="area != null">
+        AREA,
+      </if>
+      <if test="address != null">
+        ADDRESS,
+      </if>
+      <if test="creatTime != null">
+        CREAT_TIME,
+      </if>
+      <if test="finallyTime != null">
+        FINALLY_TIME,
+      </if>
+      <if test="icon != null">
+        ICON,
+      </if>
+      <if test="wxAccount != null">
+        WX_ACCOUNT,
+      </if>
+      <if test="wbAccount != null">
+        WB_ACCOUNT,
+      </if>
+      <if test="zfbAccount != null">
+        ZFB_ACCOUNT,
+      </if>
+      <if test="studentNo != null">
+        STUDENT_NO,
+      </if>
+      <if test="userAuth != null">
+        USER_AUTH,
+      </if>
+      <if test="userStatus != null">
+        USER_STATUS,
+      </if>
+      <if test="token != null">
+        TOKEN,
+      </if>
+      <if test="timeLimit != null">
+        TIME_LIMIT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="idType != null">
+        #{idType,jdbcType=VARCHAR},
+      </if>
+      <if test="idNum != null">
+        #{idNum,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="appKey != null">
+        #{appKey,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="regionSchool != null">
+        #{regionSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="creatTime != null">
+        #{creatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finallyTime != null">
+        #{finallyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="wxAccount != null">
+        #{wxAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="wbAccount != null">
+        #{wbAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="zfbAccount != null">
+        #{zfbAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="studentNo != null">
+        #{studentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="userAuth != null">
+        #{userAuth,jdbcType=VARCHAR},
+      </if>
+      <if test="userStatus != null">
+        #{userStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null">
+        #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="timeLimit != null">
+        #{timeLimit,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.slazy.bss.user.model.SysUser">
+    update sys_user
+    <set>
+      <if test="username != null">
+        USERNAME = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        PASSWORD = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        MOBILE = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        SEX = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="idType != null">
+        ID_TYPE = #{idType,jdbcType=VARCHAR},
+      </if>
+      <if test="idNum != null">
+        ID_NUM = #{idNum,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        BIRTHDAY = #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="appKey != null">
+        APP_KEY = #{appKey,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+        NICK_NAME = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="regionSchool != null">
+        REGION_SCHOOL = #{regionSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        AREA = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="creatTime != null">
+        CREAT_TIME = #{creatTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="finallyTime != null">
+        FINALLY_TIME = #{finallyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="icon != null">
+        ICON = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="wxAccount != null">
+        WX_ACCOUNT = #{wxAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="wbAccount != null">
+        WB_ACCOUNT = #{wbAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="zfbAccount != null">
+        ZFB_ACCOUNT = #{zfbAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="studentNo != null">
+        STUDENT_NO = #{studentNo,jdbcType=VARCHAR},
+      </if>
+      <if test="userAuth != null">
+        USER_AUTH = #{userAuth,jdbcType=VARCHAR},
+      </if>
+      <if test="userStatus != null">
+        USER_STATUS = #{userStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null">
+        TOKEN = #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="timeLimit != null">
+        TIME_LIMIT = #{timeLimit,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where USER_ID = #{userId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.slazy.bss.user.model.SysUser">
+    update sys_user
+    set USERNAME = #{username,jdbcType=VARCHAR},
+      PASSWORD = #{password,jdbcType=VARCHAR},
+      MOBILE = #{mobile,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      SEX = #{sex,jdbcType=VARCHAR},
+      ID_TYPE = #{idType,jdbcType=VARCHAR},
+      ID_NUM = #{idNum,jdbcType=VARCHAR},
+      BIRTHDAY = #{birthday,jdbcType=VARCHAR},
+      APP_KEY = #{appKey,jdbcType=VARCHAR},
+      NICK_NAME = #{nickName,jdbcType=VARCHAR},
+      REGION_SCHOOL = #{regionSchool,jdbcType=VARCHAR},
+      AREA = #{area,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      CREAT_TIME = #{creatTime,jdbcType=TIMESTAMP},
+      FINALLY_TIME = #{finallyTime,jdbcType=TIMESTAMP},
+      ICON = #{icon,jdbcType=VARCHAR},
+      WX_ACCOUNT = #{wxAccount,jdbcType=VARCHAR},
+      WB_ACCOUNT = #{wbAccount,jdbcType=VARCHAR},
+      ZFB_ACCOUNT = #{zfbAccount,jdbcType=VARCHAR},
+      STUDENT_NO = #{studentNo,jdbcType=VARCHAR},
+      USER_AUTH = #{userAuth,jdbcType=VARCHAR},
+      USER_STATUS = #{userStatus,jdbcType=VARCHAR},
+      TOKEN = #{token,jdbcType=VARCHAR},
+      TIME_LIMIT = #{timeLimit,jdbcType=VARCHAR}
+    where USER_ID = #{userId,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="updateUserInfoById" parameterType="com.slazy.bss.user.model.SysUser">
+    update sys_user
+    set 
+      EMAIL = #{email,jdbcType=VARCHAR},
+      SEX = #{sex,jdbcType=VARCHAR},
+      BIRTHDAY = #{birthday,jdbcType=VARCHAR},
+      NICK_NAME = #{nickName,jdbcType=VARCHAR},
+      REGION_SCHOOL = #{regionSchool,jdbcType=VARCHAR},
+      AREA = #{area,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      ICON = #{icon,jdbcType=VARCHAR} 
+    where USER_ID = #{userId,jdbcType=VARCHAR}
+  </update>
+  
+   <select id="selectByMobile" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_user
+    where MOBILE = #{mobile,jdbcType=VARCHAR}
+  </select>
+  
+</mapper>

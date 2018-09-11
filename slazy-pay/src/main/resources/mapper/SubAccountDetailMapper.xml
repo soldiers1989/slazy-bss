@@ -1,0 +1,858 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.slazy.bss.slazypay.dao.SubAccountDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.slazy.bss.slazypay.model.SubAccountDetail" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="MODIFY_TIME" property="modifyTime" jdbcType="TIMESTAMP" />
+    <result column="sortIdx" property="sortidx" jdbcType="BIGINT" />
+    <result column="biz_system" property="bizSystem" jdbcType="VARCHAR" />
+    <result column="unit" property="unit" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="biz_Id" property="bizId" jdbcType="VARCHAR" />
+    <result column="project_Code" property="projectCode" jdbcType="VARCHAR" />
+    <result column="payee_Acc_No" property="payeeAccNo" jdbcType="VARCHAR" />
+    <result column="payee_Acc_Name" property="payeeAccName" jdbcType="VARCHAR" />
+    <result column="begin_amount" property="beginAmount" jdbcType="DECIMAL" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="end_amount" property="endAmount" jdbcType="DECIMAL" />
+    <result column="drawee_Acc_No" property="draweeAccNo" jdbcType="VARCHAR" />
+    <result column="drawee_Acc_Name" property="draweeAccName" jdbcType="VARCHAR" />
+    <result column="lend_Id" property="lendId" jdbcType="VARCHAR" />
+    <result column="account_dir" property="accountDir" jdbcType="VARCHAR" />
+    <result column="rival_lend_Id" property="rivalLendId" jdbcType="VARCHAR" />
+    <result column="rival_sub_type" property="rivalSubType" jdbcType="VARCHAR" />
+    <result column="biz_type" property="bizType" jdbcType="VARCHAR" />
+    <result column="batch_Id" property="batchId" jdbcType="VARCHAR" />
+    <result column="message_Id" property="messageId" jdbcType="VARCHAR" />
+    <result column="capital_Type" property="capitalType" jdbcType="VARCHAR" />
+    <result column="capital_Name" property="capitalName" jdbcType="VARCHAR" />
+    <result column="sub_account_id" property="subAccountId" jdbcType="BIGINT" />
+    <result column="sub_type" property="subType" jdbcType="VARCHAR" />
+    <result column="trade_time" property="tradeTime" jdbcType="TIMESTAMP" />
+    <result column="lend_Doc_No" property="lendDocNo" jdbcType="VARCHAR" />
+    <result column="borrow_Doc_No" property="borrowDocNo" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.slazy.bss.slazypay.model.SubAccountDetail" extends="BaseResultMap" >
+    <result column="sub_type" property="subType" jdbcType="VARBINARY" />
+  </resultMap>
+  <resultMap id="AccountBalanceResultMap" type="com.slazy.bss.slazypay.vo.res.QueryAccountBalanceVo" >
+    <result column="accountNo" property="accountNo" jdbcType="VARCHAR" />
+    <result column="userName" property="userName" jdbcType="VARCHAR" />
+    <result column="customerIdType" property="customerIdType" jdbcType="VARCHAR" />
+    <result column="balance" property="balance" jdbcType="DECIMAL" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, CREATE_TIME, MODIFY_TIME, sortIdx, biz_system, unit, remark, biz_Id, project_Code, 
+    payee_Acc_No, payee_Acc_Name, begin_amount, amount, end_amount, drawee_Acc_No, drawee_Acc_Name, 
+    lend_Id, account_dir, rival_lend_Id, rival_sub_type, biz_type, batch_Id, message_Id, 
+    capital_Type, capital_Name, sub_account_id,sub_type,trade_time,lend_Doc_No,borrow_Doc_No
+  </sql>
+  <sql id="Blob_Column_List" >
+    sub_type
+  </sql>
+  <sql id="batch_Column_List" >
+    biz_Id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from acc_sub_account_detail
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+  <select id="selectTradeByBizIdAndBizType"  resultType="java.lang.Integer" parameterType="Map" >
+    select 
+    count(*)
+    from acc_sub_account_detail
+    where biz_Id = #{bizId,jdbcType=VARCHAR}
+    <if test="bizType!=null and bizType!=''">	
+     and biz_type = #{bizType,jdbcType=VARCHAR}
+    </if>
+     <!-- and biz_system = #{bizSystem,jdbcType=VARCHAR} -->
+  </select>
+  
+    <select id="selectTradeByBatchIdAndBizType" resultMap="BaseResultMap" parameterType="Map" >
+    select 
+    <include refid="batch_Column_List" />
+    from acc_sub_account_detail
+    where batch_Id = #{batchId,jdbcType=VARCHAR}
+     <if test="bizType!=null and bizType!=''">	
+     	and biz_type = #{bizType,jdbcType=VARCHAR}
+    </if>
+     and biz_system = #{bizSystem,jdbcType=VARCHAR}
+     GROUP BY biz_Id
+  </select>
+  
+    <select id="selectDetailByBatchIdAndBizId" resultMap="BaseResultMap" parameterType="Map" >
+    select 
+    <include refid="Base_Column_List" />
+    from acc_sub_account_detail
+    where 1=1 
+      	<if test="batchId!=null and batchId!=''">	
+   		and batch_Id = #{batchId,jdbcType=VARCHAR}
+   		 </if>
+     	<if test="bizId!=null and bizId!=''">	
+     	and biz_Id = #{bizId,jdbcType=VARCHAR}
+    	</if>
+     and biz_system = #{bizSystem,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectDetailByPayNoAndDraNo" resultMap="BaseResultMap" parameterType="Map" >
+    select 
+        id
+    from acc_sub_account_detail
+    where biz_system = #{bizSystem,jdbcType=VARCHAR}
+      	<if test="payeeAccNo!=null and payeeAccNo!=''">	
+   		and payee_Acc_No = #{payeeAccNo,jdbcType=VARCHAR}
+   		 </if>
+     	<if test="draweeAccNo!=null and draweeAccNo!=''">	
+     	and drawee_Acc_No = #{draweeAccNo,jdbcType=VARCHAR}
+    	</if>
+  </select>
+  <update id="batchUpdateName" parameterType="java.util.List">
+        update acc_sub_account_detail
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="payee_Acc_Name =case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                     <if test="item.payeeAccName !=null and item.payeeAccName != ''">
+                         when id=#{item.id} then #{item.payeeAccName,jdbcType=VARCHAR}
+                     </if>
+                     <if test="item.payeeAccName == null or item.payeeAccName == ''">
+                         when id=#{item.id} then acc_sub_account_detail.payee_Acc_Name
+                     </if>
+                 </foreach>
+            </trim>
+            <trim prefix="drawee_Acc_Name =case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                     <if test="item.draweeAccName !=null and item.draweeAccName != ''">
+                         when id=#{item.id} then #{item.draweeAccName}
+                     </if>
+                     <if test="item.draweeAccName == null or item.draweeAccName == ''">
+                         when id=#{item.id} then acc_sub_account_detail.drawee_Acc_Name
+                     </if>
+                 </foreach>
+            </trim>
+        </trim>
+        where id in
+        <foreach collection="list" index="index" item="item" separator="," open="(" close=")">
+            #{item.id,jdbcType=BIGINT}
+        </foreach>
+    </update>
+  <select id="selectCompanyDetail"  resultMap="BaseResultMap" parameterType="Map" >
+   	select 
+	
+	d.id as id,
+	d.CREATE_TIME as createTime, 
+	d.MODIFY_TIME as modifyTime, 
+	d.remark as remark, 
+	d.biz_Id as bizId,
+    d.payee_Acc_No as payeeAccNo,
+    d.payee_Acc_Name as payeeAccName, 
+    d.begin_amount as beginAmount,
+    d.amount as amount, 
+    d.end_amount as endAmount, 
+    d.drawee_Acc_No as draweeAccNo, 
+    d.drawee_Acc_Name as draweeAccName, 
+    d.lend_Id as lendId, 
+    d.account_dir as accountDir, 
+    d.rival_lend_Id as rivalLendId, 
+    d.rival_sub_type as rivalSubType, 
+    d.biz_type as bizType, 
+    d.batch_Id as batchId,
+    d.capital_Type as capitalType, 
+    d.capital_Name as capitalName
+
+    from acc_sub_account_detail d
+	where 
+		d.payee_Acc_No= #{vo.accountNo,jdbcType=VARCHAR}
+	<if test="vo.bizType!=null and vo.bizType!=''">	
+		AND d.biz_type = #{vo.bizType,jdbcType=VARCHAR}
+	</if>
+	
+	<if test="vo.bizId!=null and vo.bizId!=''">	
+		AND d.biz_Id = #{vo.bizId,jdbcType=VARCHAR}
+	</if>
+	
+	<if test="vo.batchId!=null and vo.batchId!=''">	
+		AND d.batch_Id = #{vo.batchId,jdbcType=VARCHAR}
+	</if>
+	
+	<if test="vo.beginTime!=null and vo.beginTime!=''">
+   	 	<![CDATA[   and DATE_FORMAT(d.CREATE_TIME, '%Y-%m-%d')>=  DATE_FORMAT(#{vo.beginTime}, '%Y-%m-%d')   ]]>
+	</if>
+	
+	<if test="vo.endTime!=null and vo.endTime!=''">
+    	<![CDATA[  and DATE_FORMAT(d.CREATE_TIME, '%Y-%m-%d') <= DATE_FORMAT(#{vo.endTime}, '%Y-%m-%d')    ]]>
+	</if>
+	
+	ORDER BY d.id desc
+	<if test="page!=null and page!=''">	
+	limit  #{page.first}, #{page.pageSize}
+	</if>
+  </select>
+  
+    <select id="selectCompanyDetailCount"  resultType="java.lang.Integer" parameterType="com.slazy.bss.slazypay.vo.req.CompanyAccountReqVo" >
+   	select 
+		count(*)
+    from acc_sub_account_detail d
+	where 
+		d.payee_Acc_No= #{accountNo,jdbcType=VARCHAR}
+	<if test="bizType!=null and bizType!=''">	
+		AND d.biz_type = #{bizType,jdbcType=VARCHAR}
+	</if>
+	
+	<if test="bizId!=null and bizId!=''">	
+		AND d.biz_Id = #{bizId,jdbcType=VARCHAR}
+	</if>
+	
+	<if test="batchId!=null and batchId!=''">	
+		AND d.batch_Id = #{batchId,jdbcType=VARCHAR}
+	</if>
+	
+	<if test="beginTime!=null and beginTime!=''">
+   	 	<![CDATA[   and DATE_FORMAT(d.CREATE_TIME, '%Y-%m-%d')>=  DATE_FORMAT(#{beginTime}, '%Y-%m-%d')   ]]>
+	</if>
+	
+	<if test="endTime!=null and endTime!=''">
+    	<![CDATA[  and DATE_FORMAT(d.CREATE_TIME, '%Y-%m-%d') <= DATE_FORMAT(#{endTime}, '%Y-%m-%d')    ]]>
+	</if>
+  </select>
+  
+  <select id="selectMainAccountSubDetail"  resultMap="BaseResultMap" parameterType="Map" >
+   	select 
+   	id as id,
+	CREATE_TIME as createTime, 
+	remark as remark,
+	biz_system as bizSystem, 
+	biz_Id as bizId,
+	biz_type as bizType, 
+    batch_Id as batchId,
+    capital_Type as capitalType, 
+    capital_Name as capitalName,
+    account_dir as accountDir, 
+    payee_Acc_No as payeeAccNo,
+    payee_Acc_Name as payeeAccName, 
+    sub_type as subType,
+    lend_Id as lendId, 
+    begin_amount as beginAmount,
+    amount as amount, 
+    end_amount as endAmount, 
+    drawee_Acc_No as draweeAccNo, 
+    drawee_Acc_Name as draweeAccName, 
+    rival_lend_Id as rivalLendId, 
+    rival_sub_type as rivalSubType, 
+    trade_time as tradeTime,
+    borrow_Doc_No as borrowDocNo,
+    lend_Doc_No as lendDocNo,
+    project_code as projectCode
+    
+    from acc_sub_account_detail
+	where 1=1
+	  <if test="vo.beginTime!=null and vo.beginTime!=''">
+		  <![CDATA[   and CREATE_TIME >=  DATE_FORMAT(#{vo.beginTime}, '%Y-%m-%d %H:%i:%s')   ]]>
+	  </if>
+
+	  <if test="vo.endTime!=null and vo.endTime!=''">
+		  <![CDATA[  and CREATE_TIME <= DATE_FORMAT(#{vo.endTime}, '%Y-%m-%d %H:%i:%s')    ]]>
+	  </if>
+	<if test="vo.batchId!=null and vo.batchId!=''">	
+		AND batch_Id = #{vo.batchId,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.bizId!=null and vo.bizId!=''">	
+		AND biz_Id = #{vo.bizId,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.bizSystem!=null and vo.bizSystem!=''">		
+	    AND biz_system = 	#{vo.bizSystem,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.projectCode!=null and vo.projectCode!=''">	
+		AND project_code = #{vo.projectCode,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.bizType!=null and vo.bizType!=''">	
+		AND biz_type = #{vo.bizType,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.accountDir!=null and vo.accountDir!=''">	
+		AND account_dir = #{vo.accountDir,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.payeeAccNo!=null and vo.payeeAccNo!=''">		
+	    AND payee_Acc_No = 	#{vo.payeeAccNo,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.payeeAccName!=null and vo.payeeAccName!=''">		
+	    AND payee_Acc_Name = 	#{vo.payeeAccName,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.subType!=null and vo.subType!=''">	
+		AND sub_type = #{vo.subType,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.lendId!=null and vo.lendId!=''">	
+		AND lend_Id = #{vo.lendId,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.capitalType!=null and vo.capitalType!=''">	
+		AND capital_Type = #{vo.capitalType,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.capitalName!=null and vo.capitalName!=''">	
+		AND capital_Name = #{vo.capitalName,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.draweeAccNo!=null and vo.draweeAccNo!=''">	
+		AND drawee_Acc_No = #{vo.draweeAccNo,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.draweeAccName!=null and vo.draweeAccName!=''">	
+		AND drawee_Acc_Name = #{vo.draweeAccName,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.rivalSubType!=null and vo.rivalSubType!=''">	
+		AND rival_sub_type = #{vo.rivalSubType,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.rivalLendId!=null and vo.rivalLendId!=''">	
+		AND rival_lend_Id = #{vo.rivalLendId,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.lendDocNo!=null and vo.lendDocNo!=''">	
+		AND lend_doc_no = #{vo.lendDocNo,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.borrowDocNo!=null and vo.borrowDocNo!=''">	
+		AND borrow_doc_no = #{vo.borrowDocNo,jdbcType=VARCHAR} 
+	</if>
+	
+
+	
+	<if test="vo.tradeBeginTime!=null and vo.tradeBeginTime!=''">
+   	 	<![CDATA[   and DATE_FORMAT(TRADE_TIME, '%Y-%m-%d')>=  DATE_FORMAT(#{vo.tradeBeginTime}, '%Y-%m-%d')   ]]>
+	</if>
+	
+	<if test="vo.tradeEndTime!=null and vo.tradeEndTime!=''">
+    	<![CDATA[  and DATE_FORMAT(TRADE_TIME, '%Y-%m-%d') <= DATE_FORMAT(#{vo.tradeEndTime}, '%Y-%m-%d')    ]]>
+	</if>
+	
+	ORDER BY id desc
+	<if test="page!=null and page!=''">	
+	limit  #{page.first}, #{page.pageSize}
+	</if>
+  </select>
+  
+  <select id="selectMainAccountSubDetailCount"  resultType="java.lang.Integer" parameterType="Map" >
+   	select 
+	count(*)
+    from acc_sub_account_detail
+	where 1=1
+	  <if test="vo.beginTime!=null and vo.beginTime!=''">
+		  <![CDATA[   and CREATE_TIME >=  DATE_FORMAT(#{vo.beginTime}, '%Y-%m-%d %H:%i:%s')   ]]>
+	  </if>
+
+	  <if test="vo.endTime!=null and vo.endTime!=''">
+		  <![CDATA[  and CREATE_TIME <= DATE_FORMAT(#{vo.endTime}, '%Y-%m-%d %H:%i:%s')    ]]>
+	  </if>
+	<if test="vo.batchId!=null and vo.batchId!=''">	
+		AND batch_Id = #{vo.batchId,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.bizId!=null and vo.bizId!=''">	
+		AND biz_Id = #{vo.bizId,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.bizSystem!=null and vo.bizSystem!=''">		
+	    AND biz_system = 	#{vo.bizSystem,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.projectCode!=null and vo.projectCode!=''">	
+		AND project_code = #{vo.projectCode,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.bizType!=null and vo.bizType!=''">	
+		AND biz_type = #{vo.bizType,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.accountDir!=null and vo.accountDir!=''">	
+		AND account_dir = #{vo.accountDir,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.payeeAccNo!=null and vo.payeeAccNo!=''">		
+	    AND payee_Acc_No = 	#{vo.payeeAccNo,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.payeeAccName!=null and vo.payeeAccName!=''">		
+	    AND payee_Acc_Name = 	#{vo.payeeAccName,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.subType!=null and vo.subType!=''">	
+		AND sub_type = #{vo.subType,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.lendId!=null and vo.lendId!=''">	
+		AND lend_Id = #{vo.lendId,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.capitalType!=null and vo.capitalType!=''">	
+		AND capital_Type = #{vo.capitalType,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.capitalName!=null and vo.capitalName!=''">	
+		AND capital_Name = #{vo.capitalName,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.draweeAccNo!=null and vo.draweeAccNo!=''">	
+		AND drawee_Acc_No = #{vo.draweeAccNo,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.draweeAccName!=null and vo.draweeAccName!=''">	
+		AND drawee_Acc_Name = #{vo.draweeAccName,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.rivalSubType!=null and vo.rivalSubType!=''">	
+		AND rival_sub_type = #{vo.rivalSubType,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.rivalLendId!=null and vo.rivalLendId!=''">	
+		AND rival_lend_Id = #{vo.rivalLendId,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.lendDocNo!=null and vo.lendDocNo!=''">	
+		AND lend_doc_no = #{vo.lendDocNo,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.borrowDocNo!=null and vo.borrowDocNo!=''">	
+		AND borrow_doc_no = #{vo.borrowDocNo,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.beginTime!=null and vo.beginTime!=''">
+   	 	<![CDATA[   and DATE_FORMAT(CREATE_TIME, '%Y-%m-%d')>=  DATE_FORMAT(#{vo.beginTime}, '%Y-%m-%d')   ]]>
+	</if>
+	
+	<if test="vo.endTime!=null and vo.endTime!=''">
+    	<![CDATA[  and DATE_FORMAT(CREATE_TIME, '%Y-%m-%d') <= DATE_FORMAT(#{vo.endTime}, '%Y-%m-%d')    ]]>
+	</if>
+	
+	<if test="vo.tradeBeginTime!=null and vo.tradeBeginTime!=''">
+   	 	<![CDATA[   and DATE_FORMAT(TRADE_TIME, '%Y-%m-%d')>=  DATE_FORMAT(#{vo.tradeBeginTime}, '%Y-%m-%d')   ]]>
+	</if>
+	
+	<if test="vo.tradeEndTime!=null and vo.tradeEndTime!=''">
+    	<![CDATA[  and DATE_FORMAT(TRADE_TIME, '%Y-%m-%d') <= DATE_FORMAT(#{vo.tradeEndTime}, '%Y-%m-%d')    ]]>
+	</if>
+	
+
+	
+	<if test="vo.tradeBeginTime!=null and vo.tradeBeginTime!=''">
+   	 	<![CDATA[   and DATE_FORMAT(TRADE_TIME, '%Y-%m-%d')>=  DATE_FORMAT(#{vo.tradeBeginTime}, '%Y-%m-%d')   ]]>
+	</if>
+	
+	<if test="vo.tradeEndTime!=null and vo.tradeEndTime!=''">
+    	<![CDATA[  and DATE_FORMAT(TRADE_TIME, '%Y-%m-%d') <= DATE_FORMAT(#{vo.tradeEndTime}, '%Y-%m-%d')    ]]>
+	</if>
+	
+  </select>
+  
+  
+  <select id="selectTradeDetailList"  resultMap="BaseResultMap" parameterType="Map" >
+   	select 
+	<include refid="Base_Column_List" />
+    from acc_sub_account_detail
+	where 
+		biz_Id = 	#{vo.bizId,jdbcType=VARCHAR}
+	
+	<if test="vo.capitalType!=null and vo.capitalType!=''">	
+		AND capital_Type = #{vo.capitalType,jdbcType=VARCHAR}
+	</if>
+	
+	<if test="vo.payeeAccNo!=null and vo.payeeAccNo!=''">	
+		AND payee_Acc_No = #{vo.payeeAccNo,jdbcType=VARCHAR}
+	</if>
+	
+	<if test="vo.capitalName!=null and vo.capitalName!=''">	
+		AND capital_Name = #{vo.capitalName,jdbcType=VARCHAR}
+	</if>
+	
+	<if test="vo.lendId!=null and vo.lendId!=''">	
+		AND lend_Id = #{vo.lendId,jdbcType=VARCHAR}
+	</if>
+	
+	<if test="vo.rivalLendId!=null and vo.rivalLendId!=''">	
+		AND rival_lend_Id = #{vo.rivalLendId,jdbcType=VARCHAR}
+	</if>
+	
+	<if test="vo.draweeAccNo!=null and vo.draweeAccNo!=''">	
+		AND drawee_Acc_No = #{vo.draweeAccNo,jdbcType=VARCHAR}
+	</if>
+	
+	<if test="vo.bizType!=null and vo.bizType!=''">	
+		AND biz_Type = #{vo.bizType,jdbcType=VARCHAR}
+	</if>
+		
+	ORDER BY id desc
+	<if test="page!=null and page!=''">	
+	limit  #{page.first}, #{page.pageSize}
+	</if>
+  </select>
+  
+  
+  <select id="selectTradeDetailListCount"  resultType="java.lang.Integer" parameterType="Map" >
+   	select 
+		count(*)
+    from acc_sub_account_detail
+	where 
+		biz_Id = 	#{vo.bizId,jdbcType=VARCHAR}
+	
+	<if test="vo.capitalType!=null and vo.capitalType!=''">	
+		AND capital_Type = #{vo.capitalType,jdbcType=VARCHAR}
+	</if>
+	
+	<if test="vo.payeeAccNo!=null and vo.payeeAccNo!=''">	
+		AND payee_Acc_No = #{vo.payeeAccNo,jdbcType=VARCHAR}
+	</if>
+	
+	<if test="vo.capitalName!=null and vo.capitalName!=''">	
+		AND capital_Name = #{vo.capitalName,jdbcType=VARCHAR}
+	</if>
+	
+	<if test="vo.lendId!=null and vo.lendId!=''">	
+		AND lend_Id = #{vo.lendId,jdbcType=VARCHAR}
+	</if>
+	
+	<if test="vo.rivalLendId!=null and vo.rivalLendId!=''">	
+		AND rival_lend_Id = #{vo.rivalLendId,jdbcType=VARCHAR}
+	</if>
+	
+	<if test="vo.draweeAccNo!=null and vo.draweeAccNo!=''">	
+		AND drawee_Acc_No = #{vo.draweeAccNo,jdbcType=VARCHAR}
+	</if>
+		
+	<if test="vo.bizType!=null and vo.bizType!=''">	
+		AND biz_Type = #{vo.bizType,jdbcType=VARCHAR}
+	</if>
+		
+  </select>
+  
+  
+  <select id="selectCompanyDetailByIds" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from acc_sub_account_detail
+    where
+    id in 
+    	<foreach item="id" collection="array" open="(" separator="," close=")">  
+			#{id}   
+		</foreach>
+	
+	ORDER BY id desc
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from acc_sub_account_detail
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  
+  <insert id="insert" parameterType="com.slazy.bss.slazypay.model.SubAccountDetail" useGeneratedKeys="true" keyProperty="id" >
+    insert into acc_sub_account_detail (CREATE_TIME, MODIFY_TIME, sortIdx, 
+      biz_system, unit, remark, 
+      biz_Id, project_Code, payee_Acc_No, 
+      payee_Acc_Name, begin_amount, amount, 
+      end_amount, drawee_Acc_No, drawee_Acc_Name, 
+      lend_Id, account_dir, rival_lend_Id, 
+      rival_sub_type, biz_type, batch_Id, 
+      message_Id, capital_Type, capital_Name, 
+      sub_account_id, sub_type,trade_time,borrow_Doc_No,lend_Doc_No)
+    values (#{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP}, #{sortidx,jdbcType=BIGINT}, 
+      #{bizSystem,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{bizId,jdbcType=VARCHAR}, #{projectCode,jdbcType=VARCHAR}, #{payeeAccNo,jdbcType=VARCHAR}, 
+      #{payeeAccName,jdbcType=VARCHAR}, #{beginAmount,jdbcType=DECIMAL}, #{amount,jdbcType=DECIMAL}, 
+      #{endAmount,jdbcType=DECIMAL}, #{draweeAccNo,jdbcType=VARCHAR}, #{draweeAccName,jdbcType=VARCHAR}, 
+      #{lendId,jdbcType=VARCHAR}, #{accountDir,jdbcType=VARCHAR}, #{rivalLendId,jdbcType=VARCHAR}, 
+      #{rivalSubType,jdbcType=VARCHAR}, #{bizType,jdbcType=VARCHAR}, #{batchId,jdbcType=VARCHAR}, 
+      #{messageId,jdbcType=VARCHAR}, #{capitalType,jdbcType=VARCHAR}, #{capitalName,jdbcType=VARCHAR}, 
+      #{subAccountId,jdbcType=BIGINT}, #{subType,jdbcType=VARBINARY}, #{tradeTime,jdbcType=TIMESTAMP},
+      #{borrowDocNo,jdbcType=VARCHAR},#{lendDocNo,jdbcType=VARCHAR})
+  </insert>
+  
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.slazy.bss.slazypay.model.SubAccountDetail" >
+    update acc_sub_account_detail
+    set CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      MODIFY_TIME = #{modifyTime,jdbcType=TIMESTAMP},
+      sortIdx = #{sortidx,jdbcType=BIGINT},
+      biz_system = #{bizSystem,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      biz_Id = #{bizId,jdbcType=VARCHAR},
+      project_Code = #{projectCode,jdbcType=VARCHAR},
+      payee_Acc_No = #{payeeAccNo,jdbcType=VARCHAR},
+      payee_Acc_Name = #{payeeAccName,jdbcType=VARCHAR},
+      begin_amount = #{beginAmount,jdbcType=DECIMAL},
+      amount = #{amount,jdbcType=DECIMAL},
+      end_amount = #{endAmount,jdbcType=DECIMAL},
+      drawee_Acc_No = #{draweeAccNo,jdbcType=VARCHAR},
+      drawee_Acc_Name = #{draweeAccName,jdbcType=VARCHAR},
+      lend_Id = #{lendId,jdbcType=VARCHAR},
+      account_dir = #{accountDir,jdbcType=VARCHAR},
+      rival_lend_Id = #{rivalLendId,jdbcType=VARCHAR},
+      rival_sub_type = #{rivalSubType,jdbcType=VARCHAR},
+      biz_type = #{bizType,jdbcType=VARCHAR},
+      batch_Id = #{batchId,jdbcType=VARCHAR},
+      message_Id = #{messageId,jdbcType=VARCHAR},
+      capital_Type = #{capitalType,jdbcType=VARCHAR},
+      capital_Name = #{capitalName,jdbcType=VARCHAR},
+      sub_account_id = #{subAccountId,jdbcType=BIGINT},
+      sub_type = #{subType,jdbcType=VARBINARY},
+      trade_Time =  #{tradeTime,jdbcType=TIMESTAMP},
+      borrow_Doc_No = #{borrowDocNo,jdbcType=VARCHAR},
+      lend_Doc_No = #{lendDocNo,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.slazy.bss.slazypay.model.SubAccountDetail" >
+    update acc_sub_account_detail
+    set CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      MODIFY_TIME = #{modifyTime,jdbcType=TIMESTAMP},
+      sortIdx = #{sortidx,jdbcType=BIGINT},
+      biz_system = #{bizSystem,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      biz_Id = #{bizId,jdbcType=VARCHAR},
+      project_Code = #{projectCode,jdbcType=VARCHAR},
+      payee_Acc_No = #{payeeAccNo,jdbcType=VARCHAR},
+      payee_Acc_Name = #{payeeAccName,jdbcType=VARCHAR},
+      begin_amount = #{beginAmount,jdbcType=DECIMAL},
+      amount = #{amount,jdbcType=DECIMAL},
+      end_amount = #{endAmount,jdbcType=DECIMAL},
+      drawee_Acc_No = #{draweeAccNo,jdbcType=VARCHAR},
+      drawee_Acc_Name = #{draweeAccName,jdbcType=VARCHAR},
+      lend_Id = #{lendId,jdbcType=VARCHAR},
+      account_dir = #{accountDir,jdbcType=VARCHAR},
+      rival_lend_Id = #{rivalLendId,jdbcType=VARCHAR},
+      rival_sub_type = #{rivalSubType,jdbcType=VARCHAR},
+      biz_type = #{bizType,jdbcType=VARCHAR},
+      batch_Id = #{batchId,jdbcType=VARCHAR},
+      message_Id = #{messageId,jdbcType=VARCHAR},
+      capital_Type = #{capitalType,jdbcType=VARCHAR},
+      capital_Name = #{capitalName,jdbcType=VARCHAR},
+      sub_account_id = #{subAccountId,jdbcType=BIGINT},
+      trade_Time =  #{tradeTime,jdbcType=TIMESTAMP},
+      borrow_Doc_No = #{borrowDocNo,jdbcType=VARCHAR},
+      lend_Doc_No = #{lendDocNo,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    
+  <select id="totalTradeAmount"  resultType="java.math.BigDecimal" parameterType="Map" >
+   	select 
+    sum(amount) as amount
+    from acc_sub_account_detail
+	where 1=1 
+	<if test="vo.batchId!=null and vo.batchId!=''">	
+		AND batch_Id = #{vo.batchId,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.bizId!=null and vo.bizId!=''">	
+		AND biz_Id = #{vo.bizId,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.bizSystem!=null and vo.bizSystem!=''">		
+	    AND biz_system = 	#{vo.bizSystem,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.projectCode!=null and vo.projectCode!=''">	
+		AND project_code = #{vo.projectCode,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.bizType!=null and vo.bizType!=''">	
+		AND biz_type = #{vo.bizType,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.accountDir!=null and vo.accountDir!=''">	
+		AND account_dir = #{vo.accountDir,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.payeeAccNo!=null and vo.payeeAccNo!=''">		
+	    AND payee_Acc_No = 	#{vo.payeeAccNo,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.payeeAccName!=null and vo.payeeAccName!=''">		
+	    AND payee_Acc_Name = 	#{vo.payeeAccName,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.subType!=null and vo.subType!=''">	
+		AND sub_type = #{vo.subType,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.lendId!=null and vo.lendId!=''">	
+		AND lend_Id = #{vo.lendId,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.capitalType!=null and vo.capitalType!=''">	
+		AND capital_Type = #{vo.capitalType,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.capitalName!=null and vo.capitalName!=''">	
+		AND capital_Name = #{vo.capitalName,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.draweeAccNo!=null and vo.draweeAccNo!=''">	
+		AND drawee_Acc_No = #{vo.draweeAccNo,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.draweeAccName!=null and vo.draweeAccName!=''">	
+		AND drawee_Acc_Name = #{vo.draweeAccName,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.rivalSubType!=null and vo.rivalSubType!=''">	
+		AND rival_sub_type = #{vo.rivalSubType,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.rivalLendId!=null and vo.rivalLendId!=''">	
+		AND rival_lend_Id = #{vo.rivalLendId,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.lendDocNo!=null and vo.lendDocNo!=''">	
+		AND lend_doc_no = #{vo.lendDocNo,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.borrowDocNo!=null and vo.borrowDocNo!=''">	
+		AND borrow_doc_no = #{vo.borrowDocNo,jdbcType=VARCHAR} 
+	</if>
+	
+	<if test="vo.beginTime!=null and vo.beginTime!=''">
+   	 	<![CDATA[   and DATE_FORMAT(CREATE_TIME, '%Y-%m-%d')>=  DATE_FORMAT(#{vo.beginTime}, '%Y-%m-%d')   ]]>
+	</if>
+	
+	<if test="vo.endTime!=null and vo.endTime!=''">
+    	<![CDATA[  and DATE_FORMAT(CREATE_TIME, '%Y-%m-%d') <= DATE_FORMAT(#{vo.endTime}, '%Y-%m-%d')    ]]>
+	</if>
+	
+	<if test="vo.tradeBeginTime!=null and vo.tradeBeginTime!=''">
+   	 	<![CDATA[   and DATE_FORMAT(TRADE_TIME, '%Y-%m-%d')>=  DATE_FORMAT(#{vo.tradeBeginTime}, '%Y-%m-%d')   ]]>
+	</if>
+	
+	<if test="vo.tradeEndTime!=null and vo.tradeEndTime!=''">
+    	<![CDATA[  and DATE_FORMAT(TRADE_TIME, '%Y-%m-%d') <= DATE_FORMAT(#{vo.tradeEndTime}, '%Y-%m-%d')    ]]>
+	</if>
+	
+	ORDER BY id desc
+	<if test="page!=null and page!=''">	
+	limit  #{page.first}, #{page.pageSize}
+	</if>
+  </select>
+  
+  
+  <select id="findAllCashBalance"  resultMap="BaseResultMap" parameterType="Map" >
+  SELECT
+		SUM(tmp.end_amount) AS endAmount,tmp.payee_Acc_No
+	FROM
+		(
+		SELECT
+			  dtl.lend_id,dtl.sub_type,dtl.end_amount, dtl.biz_type,dtl.payee_Acc_No as payee_Acc_No
+		FROM
+			(
+				SELECT
+					if(dtla.lend_id is null,'',dtla.lend_id ) as lend_id,dtla.end_amount as end_amount,dtla.sub_type as sub_type,
+				    dtla.biz_type as biz_type,dtla.payee_Acc_No as payee_Acc_No
+				FROM
+					acc_sub_account_detail dtla	
+				WHERE
+    				<![CDATA[DATE_FORMAT(dtla.CREATE_TIME, '%Y-%m-%d %H:%i:%s') <= DATE_FORMAT(#{endTime}, '%Y-%m-%d %H:%i:%s')    ]]>
+				ORDER BY
+					dtla.id DESC  limit 1000000000000
+			) dtl 
+ 	 WHERE
+		 <![CDATA[dtl.sub_type = 0]]>
+		GROUP BY
+		  dtl.payee_Acc_No,
+		  dtl.sub_type,
+	      dtl.lend_id
+	) tmp  GROUP BY tmp.payee_Acc_No;
+  </select>
+  <select id="findAllFreezeBalance"  resultMap="BaseResultMap" parameterType="Map" >
+  SELECT
+		SUM(tmp.end_amount) AS endAmount,tmp.payee_Acc_No
+	FROM
+		(
+		SELECT
+			  dtl.lend_id,dtl.sub_type,dtl.end_amount, dtl.biz_type,dtl.payee_Acc_No as payee_Acc_No
+		FROM
+			(
+				SELECT
+					if(dtla.lend_id is null,'',dtla.lend_id ) as lend_id,dtla.end_amount as end_amount,dtla.sub_type as sub_type,
+				    dtla.biz_type as biz_type,dtla.payee_Acc_No as payee_Acc_No
+				FROM
+					acc_sub_account_detail dtla	
+				WHERE
+    				<![CDATA[DATE_FORMAT(dtla.CREATE_TIME, '%Y-%m-%d %H:%i:%s') <= DATE_FORMAT(#{endTime}, '%Y-%m-%d %H:%i:%s')    ]]>
+				ORDER BY
+					dtla.id DESC  limit 1000000000000
+			) dtl 
+ 	 WHERE
+		 <![CDATA[dtl.sub_type <> 5]]> and <![CDATA[dtl.sub_type <> 0]]>
+		GROUP BY
+		  dtl.payee_Acc_No,
+		  dtl.sub_type,
+	      dtl.lend_id
+	) tmp  GROUP BY tmp.payee_Acc_No;
+  </select>
+  
+    <insert id="batchInsert" parameterType="java.util.List">
+  <selectKey resultType ="java.math.BigInteger" keyProperty= "id" order= "AFTER">  
+        SELECT LAST_INSERT_ID()  
+    </selectKey >  
+    insert into acc_sub_account_detail(
+	    CREATE_TIME, MODIFY_TIME, sortIdx, biz_system, unit, remark, biz_Id, project_Code, 
+	    payee_Acc_No, payee_Acc_Name, begin_amount, amount, end_amount, drawee_Acc_No, drawee_Acc_Name, 
+	    sub_type,lend_Id, account_dir, rival_lend_Id, rival_sub_type, biz_type, batch_Id, message_Id, 
+	    capital_Type, capital_Name, sub_account_id,trade_time,lend_Doc_No,borrow_Doc_No
+    )
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+        (
+      #{item.createTime,jdbcType=TIMESTAMP}, #{item.modifyTime,jdbcType=TIMESTAMP}, #{item.sortidx,jdbcType=BIGINT}, 
+      #{item.bizSystem,jdbcType=VARCHAR}, #{item.unit,jdbcType=VARCHAR}, #{item.remark,jdbcType=VARCHAR}, 
+      #{item.bizId,jdbcType=VARCHAR}, #{item.projectCode,jdbcType=VARCHAR}, #{item.payeeAccNo,jdbcType=VARCHAR},
+      #{item.payeeAccName,jdbcType=VARCHAR}, #{item.beginAmount,jdbcType=DECIMAL}, #{item.amount,jdbcType=DECIMAL}, 
+      #{item.endAmount,jdbcType=DECIMAL},#{item.draweeAccNo,jdbcType=VARCHAR},#{item.draweeAccName,jdbcType=VARCHAR},
+      #{item.subType,jdbcType=VARCHAR}, #{item.lendId,jdbcType=VARCHAR}, #{item.accountDir,jdbcType=VARCHAR},
+      #{item.rivalLendId,jdbcType=VARCHAR}, #{item.rivalSubType,jdbcType=VARCHAR}, #{item.bizType,jdbcType=VARCHAR}, 
+      #{item.batchId,jdbcType=VARCHAR},#{item.messageId,jdbcType=VARCHAR},#{item.capitalType,jdbcType=VARCHAR},
+      #{item.capitalName,jdbcType=VARCHAR}, #{item.subAccountId,jdbcType=BIGINT}, #{item.tradeTime,jdbcType=TIMESTAMP},
+      #{item.lendDocNo,jdbcType=VARCHAR}, #{item.borrowDocNo,jdbcType=VARCHAR}
+        )
+    </foreach>
+</insert>
+
+	<select id="selectCountByBizTypeAndAccountNo"  resultType="java.lang.Integer" parameterType="Map" >
+		select
+		count(1)
+		from acc_sub_account_detail
+		where 1=1
+		<if test="accountNo!=null and accountNo!=''">
+			AND payee_Acc_No = #{accountNo,jdbcType=VARCHAR}
+		</if>
+		<if test="bizType!=null and bizType!=''">
+			and biz_type in
+			<foreach item="type" collection="bizType" open="(" separator="," close=")">
+				#{type}
+			</foreach>
+		</if>
+	</select>
+	<select id="findAllVariableAccNo" resultMap="AccountBalanceResultMap" parameterType="Map" >
+    select distinct payee_Acc_No as accountNo,main.customer_id_type AS customerIdType 
+    FROM acc_sub_account_detail detail,acc_main_account main
+	where main.account_No = detail.payee_Acc_No 
+		and main.customer_type in('0','2')
+		<if test="bizSystem!=null and bizSystem!=''">	
+			and main.biz_system = #{bizSystem,jdbcType=VARCHAR} 
+	    </if>
+		<if test="endTime!=null and endTime!=''">
+  		    <![CDATA[  and DATE_FORMAT(main.CREATE_TIME, '%Y-%m-%d %H:%i:%s') <= DATE_FORMAT(#{endTime}, '%Y-%m-%d %H:%i:%s')    ]]>
+	    </if>
+	</select>
+</mapper>

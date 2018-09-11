@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.slazy.bss.order.mapper.OrderEstimateMapper">
+  <resultMap id="BaseResultMap" type="com.slazy.bss.order.model.OrderEstimate">
+    <id column="ESTIMATE_ID" jdbcType="VARCHAR" property="estimateId" />
+    <result column="ESTIMATE_LEVEL" jdbcType="VARCHAR" property="estimateLevel" />
+    <result column="ESTIMATE_MESSAGE" jdbcType="VARCHAR" property="estimateMessage" />
+    <result column="UL_PICTURE" jdbcType="VARCHAR" property="ulPicture" />
+    <result column="UL_VIDEO" jdbcType="VARCHAR" property="ulVideo" />
+    <result column="AMOUNT" jdbcType="VARCHAR" property="amount" />
+    <result column="NOTICE_FRIEND" jdbcType="VARCHAR" property="noticeFriend" />
+    <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+    <result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+    <result column="USER_MOBILE" jdbcType="VARCHAR" property="userMobile" />
+    <result column="ORDER_ID" jdbcType="VARCHAR" property="orderId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ESTIMATE_ID, ESTIMATE_LEVEL, ESTIMATE_MESSAGE, UL_PICTURE, UL_VIDEO, AMOUNT, NOTICE_FRIEND, 
+    USER_ID, USER_NAME, USER_MOBILE, ORDER_ID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order_estimate
+    where ESTIMATE_ID = #{estimateId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from order_estimate
+    where ESTIMATE_ID = #{estimateId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.slazy.bss.order.model.OrderEstimate">
+    insert into order_estimate (ESTIMATE_ID, ESTIMATE_LEVEL, ESTIMATE_MESSAGE, 
+      UL_PICTURE, UL_VIDEO, AMOUNT, 
+      NOTICE_FRIEND, USER_ID, USER_NAME, 
+      USER_MOBILE, ORDER_ID)
+    values (#{estimateId,jdbcType=VARCHAR}, #{estimateLevel,jdbcType=VARCHAR}, #{estimateMessage,jdbcType=VARCHAR}, 
+      #{ulPicture,jdbcType=VARCHAR}, #{ulVideo,jdbcType=VARCHAR}, #{amount,jdbcType=VARCHAR}, 
+      #{noticeFriend,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{userMobile,jdbcType=VARCHAR}, #{orderId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.slazy.bss.order.model.OrderEstimate">
+    insert into order_estimate
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="estimateId != null">
+        ESTIMATE_ID,
+      </if>
+      <if test="estimateLevel != null">
+        ESTIMATE_LEVEL,
+      </if>
+      <if test="estimateMessage != null">
+        ESTIMATE_MESSAGE,
+      </if>
+      <if test="ulPicture != null">
+        UL_PICTURE,
+      </if>
+      <if test="ulVideo != null">
+        UL_VIDEO,
+      </if>
+      <if test="amount != null">
+        AMOUNT,
+      </if>
+      <if test="noticeFriend != null">
+        NOTICE_FRIEND,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="userName != null">
+        USER_NAME,
+      </if>
+      <if test="userMobile != null">
+        USER_MOBILE,
+      </if>
+      <if test="orderId != null">
+        ORDER_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="estimateId != null">
+        #{estimateId,jdbcType=VARCHAR},
+      </if>
+      <if test="estimateLevel != null">
+        #{estimateLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="estimateMessage != null">
+        #{estimateMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="ulPicture != null">
+        #{ulPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="ulVideo != null">
+        #{ulVideo,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=VARCHAR},
+      </if>
+      <if test="noticeFriend != null">
+        #{noticeFriend,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userMobile != null">
+        #{userMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.slazy.bss.order.model.OrderEstimate">
+    update order_estimate
+    <set>
+      <if test="estimateLevel != null">
+        ESTIMATE_LEVEL = #{estimateLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="estimateMessage != null">
+        ESTIMATE_MESSAGE = #{estimateMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="ulPicture != null">
+        UL_PICTURE = #{ulPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="ulVideo != null">
+        UL_VIDEO = #{ulVideo,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        AMOUNT = #{amount,jdbcType=VARCHAR},
+      </if>
+      <if test="noticeFriend != null">
+        NOTICE_FRIEND = #{noticeFriend,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userMobile != null">
+        USER_MOBILE = #{userMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null">
+        ORDER_ID = #{orderId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ESTIMATE_ID = #{estimateId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.slazy.bss.order.model.OrderEstimate">
+    update order_estimate
+    set ESTIMATE_LEVEL = #{estimateLevel,jdbcType=VARCHAR},
+      ESTIMATE_MESSAGE = #{estimateMessage,jdbcType=VARCHAR},
+      UL_PICTURE = #{ulPicture,jdbcType=VARCHAR},
+      UL_VIDEO = #{ulVideo,jdbcType=VARCHAR},
+      AMOUNT = #{amount,jdbcType=VARCHAR},
+      NOTICE_FRIEND = #{noticeFriend,jdbcType=VARCHAR},
+      USER_ID = #{userId,jdbcType=VARCHAR},
+      USER_NAME = #{userName,jdbcType=VARCHAR},
+      USER_MOBILE = #{userMobile,jdbcType=VARCHAR},
+      ORDER_ID = #{orderId,jdbcType=VARCHAR}
+    where ESTIMATE_ID = #{estimateId,jdbcType=VARCHAR}
+  </update>
+</mapper>

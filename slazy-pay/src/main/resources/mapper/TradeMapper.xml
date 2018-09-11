@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.slazy.bss.slazypay.dao.TradeMapper" >
+  <resultMap id="BaseResultMap" type="com.slazy.bss.slazypay.model.Trade" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="MODIFY_TIME" property="modifyTime" jdbcType="TIMESTAMP" />
+    <result column="sortIdx" property="sortidx" jdbcType="BIGINT" />
+    <result column="VERSION" property="version" jdbcType="INTEGER" />
+    <result column="biz_system" property="bizSystem" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="batch_Id" property="batchId" jdbcType="VARCHAR" />
+    <result column="biz_Id" property="bizId" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="biz_type" property="bizType" jdbcType="VARCHAR" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="trade_time" property="tradeTime" jdbcType="TIMESTAMP" />
+    <result column="lend_Doc_No" property="lendDocNo" jdbcType="VARCHAR" />
+    <result column="borrow_Doc_No" property="borrowDocNo" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, CREATE_TIME, MODIFY_TIME, sortIdx, VERSION, biz_system, remark, batch_Id, biz_Id, 
+    status, biz_type, amount, trade_time,lend_Doc_No,borrow_Doc_No
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from acc_trade
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+  <select id="selectTradeByBizId" resultMap="BaseResultMap" parameterType="Map" >
+    select 
+    <include refid="Base_Column_List" />
+    from acc_trade
+    where biz_Id = #{bizId,jdbcType=VARCHAR}
+    <!-- and biz_system = #{bizSystem,jdbcType=VARCHAR} -->
+    ORDER BY id DESC
+  </select>
+  
+  <select id="selectTradeByBizIdAndBizType" resultMap="BaseResultMap" parameterType="Map" >
+    SELECT
+	STATUS AS STATUS,
+	biz_Id AS bizId
+	FROM acc_trade
+	WHERE
+	biz_Id = #{bizId,jdbcType=VARCHAR}
+	AND biz_system = #{bizSystem,jdbcType=VARCHAR}
+	AND biz_type = #{bizType,jdbcType=VARCHAR}
+	ORDER BY id DESC
+  </select>
+  
+  
+  <select id="selectTradeByBatchIdAndBizType" resultMap="BaseResultMap" parameterType="Map" >
+    SELECT
+	STATUS AS STATUS,
+	biz_Id AS bizId
+	FROM acc_trade
+	WHERE
+	batch_Id = #{batchId,jdbcType=VARCHAR}
+	AND biz_system = #{bizSystem,jdbcType=VARCHAR}
+	AND biz_type = #{bizType,jdbcType=VARCHAR}
+	ORDER BY id DESC
+  </select>
+  
+  <select id="selectTradeList" resultMap="BaseResultMap" parameterType="Map" >
+    select 
+    <include refid="Base_Column_List" />
+    from acc_trade
+    where 1=1
+      <if test="vo.beginTime!=null and vo.beginTime!=''">
+          <![CDATA[   and CREATE_TIME >=  DATE_FORMAT(#{vo.beginTime}, '%Y-%m-%d %H:%i:%s')   ]]>
+      </if>
+
+      <if test="vo.endTime!=null and vo.endTime!=''">
+          <![CDATA[  and CREATE_TIME <= DATE_FORMAT(#{vo.endTime}, '%Y-%m-%d %H:%i:%s')    ]]>
+      </if>
+    <if test="vo.batchId!=null and vo.batchId!=''">	
+		AND batch_Id = #{vo.batchId}
+	</if>
+	
+	<if test="vo.bizId!=null and vo.bizId!=''">	
+		AND biz_Id = #{vo.bizId}
+	</if>
+	
+	<if test="vo.bizType!=null and vo.bizType!=''">	
+		<choose>
+	        <when test='vo.bizType=="0"'>
+	            AND biz_Type in ('47','48','49')
+	        </when>
+	        <otherwise>
+	            AND biz_Type = #{vo.bizType}
+	        </otherwise>
+    	</choose>
+	</if>
+	
+	<if test="vo.bizSystem!=null and vo.bizSystem!=''">	
+		AND biz_System = #{vo.bizSystem}
+	</if>
+
+	<if test="vo.tradeBeginTime!=null and vo.tradeBeginTime!=''">
+   	 	<![CDATA[   and DATE_FORMAT(TRADE_TIME, '%Y-%m-%d')>=  DATE_FORMAT(#{vo.tradeBeginTime}, '%Y-%m-%d')   ]]>
+	</if>
+	
+	<if test="vo.tradeEndTime!=null and vo.tradeEndTime!=''">
+    	<![CDATA[  and DATE_FORMAT(TRADE_TIME, '%Y-%m-%d') <= DATE_FORMAT(#{vo.tradeEndTime}, '%Y-%m-%d')    ]]>
+	</if>
+	
+    ORDER BY id desc
+	<if test="page!=null and page!=''">	
+	limit  #{page.first}, #{page.pageSize}
+	</if>
+  </select>
+  
+  <select id="selectTradeListCount" resultType="java.lang.Integer" parameterType="Map" >
+    select 
+    	count(*)
+    from acc_trade
+    where 1=1
+      <if test="vo.beginTime!=null and vo.beginTime!=''">
+          <![CDATA[   and CREATE_TIME >=  DATE_FORMAT(#{vo.beginTime}, '%Y-%m-%d %H:%i:%s')   ]]>
+      </if>
+
+      <if test="vo.endTime!=null and vo.endTime!=''">
+          <![CDATA[  and CREATE_TIME <= DATE_FORMAT(#{vo.endTime}, '%Y-%m-%d %H:%i:%s')    ]]>
+      </if>
+    <if test="vo.batchId!=null and vo.batchId!=''">	
+		AND batch_Id = #{vo.batchId}
+	</if>
+	
+	<if test="vo.bizId!=null and vo.bizId!=''">	
+		AND biz_Id = #{vo.bizId}
+	</if>
+	
+	<if test="vo.bizType!=null and vo.bizType!=''">	
+		<choose>
+	        <when test='vo.bizType=="0"'>
+	            AND biz_Type in ('47','48','49')
+	        </when>
+	        <otherwise>
+	            AND biz_Type = #{vo.bizType}
+	        </otherwise>
+    	</choose>
+	</if>
+	
+	<if test="vo.bizSystem!=null and vo.bizSystem!=''">	
+		AND biz_System = #{vo.bizSystem}
+	</if>
+
+
+	
+	<if test="vo.tradeBeginTime!=null and vo.tradeBeginTime!=''">
+   	 	<![CDATA[   and DATE_FORMAT(TRADE_TIME, '%Y-%m-%d')>=  DATE_FORMAT(#{vo.tradeBeginTime}, '%Y-%m-%d')   ]]>
+	</if>
+	
+	<if test="vo.tradeEndTime!=null and vo.tradeEndTime!=''">
+    	<![CDATA[  and DATE_FORMAT(TRADE_TIME, '%Y-%m-%d') <= DATE_FORMAT(#{vo.tradeEndTime}, '%Y-%m-%d')    ]]>
+	</if>
+	
+  </select>
+  
+  <select id="selectTradeByIds" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from acc_trade
+    where
+    id in 
+    	<foreach item="id" collection="array" open="(" separator="," close=")">  
+			#{id}   
+		</foreach>
+	
+	ORDER BY id desc
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from acc_trade
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.slazy.bss.slazypay.model.Trade" useGeneratedKeys="true" keyProperty="id" >
+    insert into acc_trade (CREATE_TIME, MODIFY_TIME, sortIdx, 
+      VERSION, biz_system, remark, 
+      batch_Id, biz_Id, status, 
+      biz_type, amount, trade_time,lend_Doc_No,borrow_Doc_No
+      )
+    values (#{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP}, #{sortidx,jdbcType=BIGINT}, 
+      #{version,jdbcType=INTEGER}, #{bizSystem,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{batchId,jdbcType=VARCHAR}, #{bizId,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{bizType,jdbcType=VARCHAR}, #{amount,jdbcType=DECIMAL}, #{tradeTime,jdbcType=TIMESTAMP},
+      #{borrowDocNo,jdbcType=VARCHAR},#{lendDocNo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.slazy.bss.slazypay.model.Trade" useGeneratedKeys="true" keyProperty="id" >
+    insert into acc_trade
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="modifyTime != null" >
+        MODIFY_TIME,
+      </if>
+      <if test="sortidx != null" >
+        sortIdx,
+      </if>
+      <if test="version != null" >
+        VERSION,
+      </if>
+      <if test="bizSystem != null" >
+        biz_system,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="batchId != null" >
+        batch_Id,
+      </if>
+      <if test="bizId != null" >
+        biz_Id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="bizType != null" >
+        biz_type,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="tradeTime != null" >
+        trade_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sortidx != null" >
+        #{sortidx,jdbcType=BIGINT},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="bizSystem != null" >
+        #{bizSystem,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="batchId != null" >
+        #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="bizId != null" >
+        #{bizId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="bizType != null" >
+        #{bizType,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="tradeTime != null" >
+        #{tradeTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.slazy.bss.slazypay.model.Trade" >
+    update acc_trade
+    <set >
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null" >
+        MODIFY_TIME = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sortidx != null" >
+        sortIdx = #{sortidx,jdbcType=BIGINT},
+      </if>
+      <if test="version != null" >
+        VERSION = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="bizSystem != null" >
+        biz_system = #{bizSystem,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="batchId != null" >
+        batch_Id = #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="bizId != null" >
+        biz_Id = #{bizId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="bizType != null" >
+        biz_type = #{bizType,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="tradeTime != null" >
+        trade_time = #{tradeTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.slazy.bss.slazypay.model.Trade" >
+    update acc_trade
+    set CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      MODIFY_TIME = #{modifyTime,jdbcType=TIMESTAMP},
+      sortIdx = #{sortidx,jdbcType=BIGINT},
+      VERSION = #{version,jdbcType=INTEGER},
+      biz_system = #{bizSystem,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      batch_Id = #{batchId,jdbcType=VARCHAR},
+      biz_Id = #{bizId,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      biz_type = #{bizType,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=DECIMAL},
+      trade_time = #{tradeTime,jdbcType=TIMESTAMP},
+      borrow_Doc_No = #{borrowDocNo,jdbcType=VARCHAR},
+      lend_Doc_No = #{lendDocNo,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+   <select id="findStatisticsCount" resultType="java.lang.Long" parameterType="Map" >
+    select 
+     count(*)
+    from acc_trade
+    where 1=1 AND status='1'
+	
+	<if test="bizTypes!=null and bizTypes!=''">	
+		AND biz_Type in  
+	    <foreach item="item" index="index" collection="bizTypes" open="(" separator="," close=")">  
+	     #{item}  
+	    </foreach>  
+	</if>
+	
+	<if test="bizSystem!=null and bizSystem!=''">	
+		AND biz_System = #{bizSystem}
+	</if>
+	
+	<if test="bDate!=null and bDate!=''">
+   	 	<![CDATA[  and DATE_FORMAT(CREATE_TIME, '%Y-%m-%d %H:%i:%s') >=  DATE_FORMAT(#{bDate}, '%Y-%m-%d %H:%i:%s')   ]]>
+	</if>
+	
+	<if test="eDate!=null and eDate!=''">
+    	<![CDATA[  and DATE_FORMAT(CREATE_TIME, '%Y-%m-%d %H:%i:%s') <= DATE_FORMAT(#{eDate}, '%Y-%m-%d %H:%i:%s')    ]]>
+	</if>
+  </select>
+</mapper>

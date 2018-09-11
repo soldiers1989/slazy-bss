@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.slazy.bss.slazypay.dao.TradeDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.slazy.bss.slazypay.model.TradeDetail" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="MODIFY_TIME" property="modifyTime" jdbcType="TIMESTAMP" />
+    <result column="sortIdx" property="sortidx" jdbcType="BIGINT" />
+    <result column="VERSION" property="version" jdbcType="INTEGER" />
+    <result column="biz_system" property="bizSystem" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="biz_id" property="bizId" jdbcType="VARCHAR" />
+    <result column="account_No" property="accountNo" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="sub_type" property="subType" jdbcType="VARCHAR" />
+    <result column="capital_Type" property="capitalType" jdbcType="VARCHAR" />
+    <result column="capital_Name" property="capitalName" jdbcType="VARCHAR" />
+    <result column="lend_Id" property="lendId" jdbcType="VARCHAR" />
+    <result column="account_dir" property="accountDir" jdbcType="VARCHAR" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="rival_account_No" property="rivalAccountNo" jdbcType="VARCHAR" />
+    <result column="rival_name" property="rivalName" jdbcType="VARCHAR" />
+    <result column="rival_sub_type" property="rivalSubType" jdbcType="VARCHAR" />
+    <result column="rival_lendld" property="rivalLendld" jdbcType="VARCHAR" />
+    <result column="trade_id" property="tradeId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, CREATE_TIME, MODIFY_TIME, sortIdx, VERSION, biz_system, remark, biz_id, account_No, 
+    name, sub_type, capital_Type, capital_Name, lend_Id, account_dir, amount, rival_account_No, 
+    rival_name, rival_sub_type, rival_lendld, trade_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from acc_trade_detail
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from acc_trade_detail
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.slazy.bss.slazypay.model.TradeDetail" useGeneratedKeys="true" keyProperty="id" >
+    insert into acc_trade_detail (CREATE_TIME, MODIFY_TIME, sortIdx, 
+      VERSION, biz_system, remark, 
+      biz_id, account_No, name, 
+      sub_type, capital_Type, capital_Name, 
+      lend_Id, account_dir, amount, 
+      rival_account_No, rival_name, rival_sub_type, 
+      rival_lendld, trade_id)
+    values (#{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP}, #{sortidx,jdbcType=BIGINT}, 
+      #{version,jdbcType=INTEGER}, #{bizSystem,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{bizId,jdbcType=VARCHAR}, #{accountNo,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{subType,jdbcType=VARCHAR}, #{capitalType,jdbcType=VARCHAR}, #{capitalName,jdbcType=VARCHAR}, 
+      #{lendId,jdbcType=VARCHAR}, #{accountDir,jdbcType=VARCHAR}, #{amount,jdbcType=DECIMAL}, 
+      #{rivalAccountNo,jdbcType=VARCHAR}, #{rivalName,jdbcType=VARCHAR}, #{rivalSubType,jdbcType=VARCHAR}, 
+      #{rivalLendld,jdbcType=VARCHAR}, #{tradeId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.slazy.bss.slazypay.model.TradeDetail" useGeneratedKeys="true" keyProperty="id" >
+    insert into acc_trade_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="modifyTime != null" >
+        MODIFY_TIME,
+      </if>
+      <if test="sortidx != null" >
+        sortIdx,
+      </if>
+      <if test="version != null" >
+        VERSION,
+      </if>
+      <if test="bizSystem != null" >
+        biz_system,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="bizId != null" >
+        biz_id,
+      </if>
+      <if test="accountNo != null" >
+        account_No,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="subType != null" >
+        sub_type,
+      </if>
+      <if test="capitalType != null" >
+        capital_Type,
+      </if>
+      <if test="capitalName != null" >
+        capital_Name,
+      </if>
+      <if test="lendId != null" >
+        lend_Id,
+      </if>
+      <if test="accountDir != null" >
+        account_dir,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="rivalAccountNo != null" >
+        rival_account_No,
+      </if>
+      <if test="rivalName != null" >
+        rival_name,
+      </if>
+      <if test="rivalSubType != null" >
+        rival_sub_type,
+      </if>
+      <if test="rivalLendld != null" >
+        rival_lendld,
+      </if>
+      <if test="tradeId != null" >
+        trade_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sortidx != null" >
+        #{sortidx,jdbcType=BIGINT},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="bizSystem != null" >
+        #{bizSystem,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="bizId != null" >
+        #{bizId,jdbcType=VARCHAR},
+      </if>
+      <if test="accountNo != null" >
+        #{accountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="subType != null" >
+        #{subType,jdbcType=VARCHAR},
+      </if>
+      <if test="capitalType != null" >
+        #{capitalType,jdbcType=VARCHAR},
+      </if>
+      <if test="capitalName != null" >
+        #{capitalName,jdbcType=VARCHAR},
+      </if>
+      <if test="lendId != null" >
+        #{lendId,jdbcType=VARCHAR},
+      </if>
+      <if test="accountDir != null" >
+        #{accountDir,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="rivalAccountNo != null" >
+        #{rivalAccountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="rivalName != null" >
+        #{rivalName,jdbcType=VARCHAR},
+      </if>
+      <if test="rivalSubType != null" >
+        #{rivalSubType,jdbcType=VARCHAR},
+      </if>
+      <if test="rivalLendld != null" >
+        #{rivalLendld,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeId != null" >
+        #{tradeId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.slazy.bss.slazypay.model.TradeDetail" >
+    update acc_trade_detail
+    <set >
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null" >
+        MODIFY_TIME = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sortidx != null" >
+        sortIdx = #{sortidx,jdbcType=BIGINT},
+      </if>
+      <if test="version != null" >
+        VERSION = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="bizSystem != null" >
+        biz_system = #{bizSystem,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="bizId != null" >
+        biz_id = #{bizId,jdbcType=VARCHAR},
+      </if>
+      <if test="accountNo != null" >
+        account_No = #{accountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="subType != null" >
+        sub_type = #{subType,jdbcType=VARCHAR},
+      </if>
+      <if test="capitalType != null" >
+        capital_Type = #{capitalType,jdbcType=VARCHAR},
+      </if>
+      <if test="capitalName != null" >
+        capital_Name = #{capitalName,jdbcType=VARCHAR},
+      </if>
+      <if test="lendId != null" >
+        lend_Id = #{lendId,jdbcType=VARCHAR},
+      </if>
+      <if test="accountDir != null" >
+        account_dir = #{accountDir,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="rivalAccountNo != null" >
+        rival_account_No = #{rivalAccountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="rivalName != null" >
+        rival_name = #{rivalName,jdbcType=VARCHAR},
+      </if>
+      <if test="rivalSubType != null" >
+        rival_sub_type = #{rivalSubType,jdbcType=VARCHAR},
+      </if>
+      <if test="rivalLendld != null" >
+        rival_lendld = #{rivalLendld,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeId != null" >
+        trade_id = #{tradeId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.slazy.bss.slazypay.model.TradeDetail" >
+    update acc_trade_detail
+    set CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      MODIFY_TIME = #{modifyTime,jdbcType=TIMESTAMP},
+      sortIdx = #{sortidx,jdbcType=BIGINT},
+      VERSION = #{version,jdbcType=INTEGER},
+      biz_system = #{bizSystem,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      biz_id = #{bizId,jdbcType=VARCHAR},
+      account_No = #{accountNo,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      sub_type = #{subType,jdbcType=VARCHAR},
+      capital_Type = #{capitalType,jdbcType=VARCHAR},
+      capital_Name = #{capitalName,jdbcType=VARCHAR},
+      lend_Id = #{lendId,jdbcType=VARCHAR},
+      account_dir = #{accountDir,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=DECIMAL},
+      rival_account_No = #{rivalAccountNo,jdbcType=VARCHAR},
+      rival_name = #{rivalName,jdbcType=VARCHAR},
+      rival_sub_type = #{rivalSubType,jdbcType=VARCHAR},
+      rival_lendld = #{rivalLendld,jdbcType=VARCHAR},
+      trade_id = #{tradeId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

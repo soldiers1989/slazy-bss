@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.slazy.bss.user.mapper.SmsRecordMapper">
+  <resultMap id="BaseResultMap" type="com.slazy.bss.user.model.SmsRecord">
+    <id column="RECORD_ID" jdbcType="VARCHAR" property="recordId" />
+    <result column="MOBILE" jdbcType="VARCHAR" property="mobile" />
+    <result column="MESSAGE" jdbcType="VARCHAR" property="message" />
+    <result column="SMS_TYPE" jdbcType="VARCHAR" property="smsType" />
+    <result column="TEMPLATE_NO" jdbcType="VARCHAR" property="templateNo" />
+    <result column="SEND_TIME" jdbcType="TIMESTAMP" property="sendTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    RECORD_ID, MOBILE, MESSAGE, SMS_TYPE, TEMPLATE_NO, SEND_TIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sms_record
+    where RECORD_ID = #{recordId,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectByMobileOnly" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sms_record
+    where MOBILE = #{mobile,jdbcType=VARCHAR} ORDER BY SEND_TIME desc limit 1
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sms_record
+    where RECORD_ID = #{recordId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.slazy.bss.user.model.SmsRecord">
+    insert into sms_record (RECORD_ID, MOBILE, MESSAGE, 
+      SMS_TYPE, TEMPLATE_NO, SEND_TIME
+      )
+    values (#{recordId,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{message,jdbcType=VARCHAR}, 
+      #{smsType,jdbcType=VARCHAR}, #{templateNo,jdbcType=VARCHAR}, #{sendTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.slazy.bss.user.model.SmsRecord">
+    insert into sms_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="recordId != null">
+        RECORD_ID,
+      </if>
+      <if test="mobile != null">
+        MOBILE,
+      </if>
+      <if test="message != null">
+        MESSAGE,
+      </if>
+      <if test="smsType != null">
+        SMS_TYPE,
+      </if>
+      <if test="templateNo != null">
+        TEMPLATE_NO,
+      </if>
+      <if test="sendTime != null">
+        SEND_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="recordId != null">
+        #{recordId,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="message != null">
+        #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="smsType != null">
+        #{smsType,jdbcType=VARCHAR},
+      </if>
+      <if test="templateNo != null">
+        #{templateNo,jdbcType=VARCHAR},
+      </if>
+      <if test="sendTime != null">
+        #{sendTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.slazy.bss.user.model.SmsRecord">
+    update sms_record
+    <set>
+      <if test="mobile != null">
+        MOBILE = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="message != null">
+        MESSAGE = #{message,jdbcType=VARCHAR},
+      </if>
+      <if test="smsType != null">
+        SMS_TYPE = #{smsType,jdbcType=VARCHAR},
+      </if>
+      <if test="templateNo != null">
+        TEMPLATE_NO = #{templateNo,jdbcType=VARCHAR},
+      </if>
+      <if test="sendTime != null">
+        SEND_TIME = #{sendTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where RECORD_ID = #{recordId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.slazy.bss.user.model.SmsRecord">
+    update sms_record
+    set MOBILE = #{mobile,jdbcType=VARCHAR},
+      MESSAGE = #{message,jdbcType=VARCHAR},
+      SMS_TYPE = #{smsType,jdbcType=VARCHAR},
+      TEMPLATE_NO = #{templateNo,jdbcType=VARCHAR},
+      SEND_TIME = #{sendTime,jdbcType=TIMESTAMP}
+    where RECORD_ID = #{recordId,jdbcType=VARCHAR}
+  </update>
+</mapper>

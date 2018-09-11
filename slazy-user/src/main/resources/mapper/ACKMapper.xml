@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.slazy.bss.user.mapper.ACKMapper">
+  <resultMap id="BaseResultMap" type="com.slazy.bss.user.model.ACK">
+    <id column="AUTH_ID" jdbcType="VARCHAR" property="authId" />
+    <result column="TERMINAL_NAME" jdbcType="VARCHAR" property="terminalName" />
+    <result column="AUTH_KEY" jdbcType="VARCHAR" property="authKey" />
+    <result column="AUTO_STATUS" jdbcType="VARCHAR" property="autoStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    AUTH_ID, TERMINAL_NAME, AUTH_KEY, AUTO_STATUS
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ack
+    where AUTH_ID = #{authId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from ack
+    where AUTH_ID = #{authId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.slazy.bss.user.model.ACK">
+    insert into ack (AUTH_ID, TERMINAL_NAME, AUTH_KEY, 
+      AUTO_STATUS)
+    values (#{authId,jdbcType=VARCHAR}, #{terminalName,jdbcType=VARCHAR}, #{authKey,jdbcType=VARCHAR}, 
+      #{autoStatus,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.slazy.bss.user.model.ACK">
+    insert into ack
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="authId != null">
+        AUTH_ID,
+      </if>
+      <if test="terminalName != null">
+        TERMINAL_NAME,
+      </if>
+      <if test="authKey != null">
+        AUTH_KEY,
+      </if>
+      <if test="autoStatus != null">
+        AUTO_STATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="authId != null">
+        #{authId,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalName != null">
+        #{terminalName,jdbcType=VARCHAR},
+      </if>
+      <if test="authKey != null">
+        #{authKey,jdbcType=VARCHAR},
+      </if>
+      <if test="autoStatus != null">
+        #{autoStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.slazy.bss.user.model.ACK">
+    update ack
+    <set>
+      <if test="terminalName != null">
+        TERMINAL_NAME = #{terminalName,jdbcType=VARCHAR},
+      </if>
+      <if test="authKey != null">
+        AUTH_KEY = #{authKey,jdbcType=VARCHAR},
+      </if>
+      <if test="autoStatus != null">
+        AUTO_STATUS = #{autoStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where AUTH_ID = #{authId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.slazy.bss.user.model.ACK">
+    update ack
+    set TERMINAL_NAME = #{terminalName,jdbcType=VARCHAR},
+      AUTH_KEY = #{authKey,jdbcType=VARCHAR},
+      AUTO_STATUS = #{autoStatus,jdbcType=VARCHAR}
+    where AUTH_ID = #{authId,jdbcType=VARCHAR}
+  </update>
+</mapper>

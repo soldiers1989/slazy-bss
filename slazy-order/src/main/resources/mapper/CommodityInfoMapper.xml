@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.slazy.bss.order.mapper.CommodityInfoMapper">
+  <resultMap id="BaseResultMap" type="com.slazy.bss.order.model.CommodityInfo">
+    <id column="COMMODITY__ID" jdbcType="VARCHAR" property="commodityId" />
+    <result column="ORDER_ID" jdbcType="VARCHAR" property="orderId" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="CREATE_OP_ID" jdbcType="VARCHAR" property="createOpId" />
+    <result column="DONE_DATE" jdbcType="TIMESTAMP" property="doneDate" />
+    <result column="OP_ID" jdbcType="VARCHAR" property="opId" />
+    <result column="COMMODITY_TYPE" jdbcType="VARCHAR" property="commodityType" />
+    <result column="COMMODITY_NAME" jdbcType="VARCHAR" property="commodityName" />
+    <result column="COMMODITY_LOCUS" jdbcType="VARCHAR" property="commodityLocus" />
+    <result column="EXPRESS_NAME" jdbcType="VARCHAR" property="expressName" />
+    <result column="COMMODITY_DES" jdbcType="VARCHAR" property="commodityDes" />
+    <result column="COMMODITY_SIZE" jdbcType="VARCHAR" property="commoditySize" />
+    <result column="ARRIVAL_TIME" jdbcType="TIMESTAMP" property="arrivalTime" />
+    <result column="LEAVE_TIME" jdbcType="TIMESTAMP" property="leaveTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    COMMODITY__ID, ORDER_ID, STATUS, CREATE_DATE, CREATE_OP_ID, DONE_DATE, OP_ID, COMMODITY_TYPE, 
+    COMMODITY_NAME, COMMODITY_LOCUS, EXPRESS_NAME, COMMODITY_DES, COMMODITY_SIZE, ARRIVAL_TIME, 
+    LEAVE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from commodity_info
+    where COMMODITY__ID = #{commodityId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from commodity_info
+    where COMMODITY__ID = #{commodityId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.slazy.bss.order.model.CommodityInfo">
+    insert into commodity_info (COMMODITY__ID, ORDER_ID, STATUS, 
+      CREATE_DATE, CREATE_OP_ID, DONE_DATE, 
+      OP_ID, COMMODITY_TYPE, COMMODITY_NAME, 
+      COMMODITY_LOCUS, EXPRESS_NAME, COMMODITY_DES, 
+      COMMODITY_SIZE, ARRIVAL_TIME, LEAVE_TIME
+      )
+    values (#{commodityId,jdbcType=VARCHAR}, #{orderId,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{createOpId,jdbcType=VARCHAR}, #{doneDate,jdbcType=TIMESTAMP}, 
+      #{opId,jdbcType=VARCHAR}, #{commodityType,jdbcType=VARCHAR}, #{commodityName,jdbcType=VARCHAR}, 
+      #{commodityLocus,jdbcType=VARCHAR}, #{expressName,jdbcType=VARCHAR}, #{commodityDes,jdbcType=VARCHAR}, 
+      #{commoditySize,jdbcType=VARCHAR}, #{arrivalTime,jdbcType=TIMESTAMP}, #{leaveTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.slazy.bss.order.model.CommodityInfo">
+    insert into commodity_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="commodityId != null">
+        COMMODITY__ID,
+      </if>
+      <if test="orderId != null">
+        ORDER_ID,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="createOpId != null">
+        CREATE_OP_ID,
+      </if>
+      <if test="doneDate != null">
+        DONE_DATE,
+      </if>
+      <if test="opId != null">
+        OP_ID,
+      </if>
+      <if test="commodityType != null">
+        COMMODITY_TYPE,
+      </if>
+      <if test="commodityName != null">
+        COMMODITY_NAME,
+      </if>
+      <if test="commodityLocus != null">
+        COMMODITY_LOCUS,
+      </if>
+      <if test="expressName != null">
+        EXPRESS_NAME,
+      </if>
+      <if test="commodityDes != null">
+        COMMODITY_DES,
+      </if>
+      <if test="commoditySize != null">
+        COMMODITY_SIZE,
+      </if>
+      <if test="arrivalTime != null">
+        ARRIVAL_TIME,
+      </if>
+      <if test="leaveTime != null">
+        LEAVE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="commodityId != null">
+        #{commodityId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createOpId != null">
+        #{createOpId,jdbcType=VARCHAR},
+      </if>
+      <if test="doneDate != null">
+        #{doneDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="opId != null">
+        #{opId,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityType != null">
+        #{commodityType,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityName != null">
+        #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityLocus != null">
+        #{commodityLocus,jdbcType=VARCHAR},
+      </if>
+      <if test="expressName != null">
+        #{expressName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityDes != null">
+        #{commodityDes,jdbcType=VARCHAR},
+      </if>
+      <if test="commoditySize != null">
+        #{commoditySize,jdbcType=VARCHAR},
+      </if>
+      <if test="arrivalTime != null">
+        #{arrivalTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="leaveTime != null">
+        #{leaveTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.slazy.bss.order.model.CommodityInfo">
+    update commodity_info
+    <set>
+      <if test="orderId != null">
+        ORDER_ID = #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createOpId != null">
+        CREATE_OP_ID = #{createOpId,jdbcType=VARCHAR},
+      </if>
+      <if test="doneDate != null">
+        DONE_DATE = #{doneDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="opId != null">
+        OP_ID = #{opId,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityType != null">
+        COMMODITY_TYPE = #{commodityType,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityName != null">
+        COMMODITY_NAME = #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityLocus != null">
+        COMMODITY_LOCUS = #{commodityLocus,jdbcType=VARCHAR},
+      </if>
+      <if test="expressName != null">
+        EXPRESS_NAME = #{expressName,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityDes != null">
+        COMMODITY_DES = #{commodityDes,jdbcType=VARCHAR},
+      </if>
+      <if test="commoditySize != null">
+        COMMODITY_SIZE = #{commoditySize,jdbcType=VARCHAR},
+      </if>
+      <if test="arrivalTime != null">
+        ARRIVAL_TIME = #{arrivalTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="leaveTime != null">
+        LEAVE_TIME = #{leaveTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where COMMODITY__ID = #{commodityId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.slazy.bss.order.model.CommodityInfo">
+    update commodity_info
+    set ORDER_ID = #{orderId,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      CREATE_OP_ID = #{createOpId,jdbcType=VARCHAR},
+      DONE_DATE = #{doneDate,jdbcType=TIMESTAMP},
+      OP_ID = #{opId,jdbcType=VARCHAR},
+      COMMODITY_TYPE = #{commodityType,jdbcType=VARCHAR},
+      COMMODITY_NAME = #{commodityName,jdbcType=VARCHAR},
+      COMMODITY_LOCUS = #{commodityLocus,jdbcType=VARCHAR},
+      EXPRESS_NAME = #{expressName,jdbcType=VARCHAR},
+      COMMODITY_DES = #{commodityDes,jdbcType=VARCHAR},
+      COMMODITY_SIZE = #{commoditySize,jdbcType=VARCHAR},
+      ARRIVAL_TIME = #{arrivalTime,jdbcType=TIMESTAMP},
+      LEAVE_TIME = #{leaveTime,jdbcType=TIMESTAMP}
+    where COMMODITY__ID = #{commodityId,jdbcType=VARCHAR}
+  </update>
+</mapper>

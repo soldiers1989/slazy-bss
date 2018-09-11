@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.slazy.bss.order.mapper.OrderInfoMapper">
+  <resultMap id="BaseResultMap" type="com.slazy.bss.order.model.OrderInfo">
+    <id column="ORDER_ID" jdbcType="VARCHAR" property="orderId" />
+    <result column="RECEIVER_ID" jdbcType="VARCHAR" property="receiverId" />
+    <result column="RECEIVER_NAME" jdbcType="VARCHAR" property="receiverName" />
+    <result column="RECEIVER_PHONE" jdbcType="VARCHAR" property="receiverPhone" />
+    <result column="RECEIVER_ADDRESS" jdbcType="VARCHAR" property="receiverAddress" />
+    <result column="RECEIVER_STARTIME" jdbcType="TIMESTAMP" property="receiverStartime" />
+    <result column="RECEIVER_ENDTIME" jdbcType="TIMESTAMP" property="receiverEndtime" />
+    <result column="PAY_NO" jdbcType="VARCHAR" property="payNo" />
+    <result column="PAY_TYPE" jdbcType="VARCHAR" property="payType" />
+    <result column="AMOUNT" jdbcType="VARCHAR" property="amount" />
+    <result column="PAY_STATUS" jdbcType="VARCHAR" property="payStatus" />
+    <result column="COMMODITY_ID" jdbcType="VARCHAR" property="commodityId" />
+    <result column="COMMODITY_NUM" jdbcType="VARCHAR" property="commodityNum" />
+    <result column="VERIFICATION_CODE" jdbcType="VARCHAR" property="verificationCode" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="DELIVERY_ID" jdbcType="VARCHAR" property="deliveryId" />
+    <result column="DELIVERY_NAME" jdbcType="VARCHAR" property="deliveryName" />
+    <result column="DELIVERY_MOBILE" jdbcType="VARCHAR" property="deliveryMobile" />
+    <result column="DELIVERY_ADDRESS" jdbcType="VARCHAR" property="deliveryAddress" />
+    <result column="DELIVERY_STARTIME" jdbcType="TIMESTAMP" property="deliveryStartime" />
+    <result column="DELIVERY_ENDTIME" jdbcType="TIMESTAMP" property="deliveryEndtime" />
+    <result column="ORDER_STATUS" jdbcType="VARCHAR" property="orderStatus" />
+    <result column="CREATE_DATE" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="CREATE_OP_ID" jdbcType="VARCHAR" property="createOpId" />
+    <result column="OP_ID" jdbcType="VARCHAR" property="opId" />
+    <result column="OPT_DATE" jdbcType="TIMESTAMP" property="optDate" />
+    <result column="PAY_STARTIME" jdbcType="TIMESTAMP" property="payStartime" />
+    <result column="PAY_ENDTIME" jdbcType="TIMESTAMP" property="payEndtime" />
+    <result column="EXPRESS_MESSAGE" jdbcType="VARCHAR" property="expressMessage" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ORDER_ID, RECEIVER_ID, RECEIVER_NAME, RECEIVER_PHONE, RECEIVER_ADDRESS, RECEIVER_STARTIME, 
+    RECEIVER_ENDTIME, PAY_NO, PAY_TYPE, AMOUNT, PAY_STATUS, COMMODITY_ID, COMMODITY_NUM, 
+    VERIFICATION_CODE, REMARK, DELIVERY_ID, DELIVERY_NAME, DELIVERY_MOBILE, DELIVERY_ADDRESS, 
+    DELIVERY_STARTIME, DELIVERY_ENDTIME, ORDER_STATUS, CREATE_DATE, CREATE_OP_ID, OP_ID, 
+    OPT_DATE, PAY_STARTIME, PAY_ENDTIME, EXPRESS_MESSAGE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order_info
+    where ORDER_ID = #{orderId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from order_info
+    where ORDER_ID = #{orderId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.slazy.bss.order.model.OrderInfo">
+    insert into order_info (ORDER_ID, RECEIVER_ID, RECEIVER_NAME, 
+      RECEIVER_PHONE, RECEIVER_ADDRESS, RECEIVER_STARTIME, 
+      RECEIVER_ENDTIME, PAY_NO, PAY_TYPE, 
+      AMOUNT, PAY_STATUS, COMMODITY_ID, 
+      COMMODITY_NUM, VERIFICATION_CODE, REMARK, 
+      DELIVERY_ID, DELIVERY_NAME, DELIVERY_MOBILE, 
+      DELIVERY_ADDRESS, DELIVERY_STARTIME, DELIVERY_ENDTIME, 
+      ORDER_STATUS, CREATE_DATE, CREATE_OP_ID, 
+      OP_ID, OPT_DATE, PAY_STARTIME, 
+      PAY_ENDTIME, EXPRESS_MESSAGE)
+    values (#{orderId,jdbcType=VARCHAR}, #{receiverId,jdbcType=VARCHAR}, #{receiverName,jdbcType=VARCHAR}, 
+      #{receiverPhone,jdbcType=VARCHAR}, #{receiverAddress,jdbcType=VARCHAR}, #{receiverStartime,jdbcType=TIMESTAMP}, 
+      #{receiverEndtime,jdbcType=TIMESTAMP}, #{payNo,jdbcType=VARCHAR}, #{payType,jdbcType=VARCHAR}, 
+      #{amount,jdbcType=VARCHAR}, #{payStatus,jdbcType=VARCHAR}, #{commodityId,jdbcType=VARCHAR}, 
+      #{commodityNum,jdbcType=VARCHAR}, #{verificationCode,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{deliveryId,jdbcType=VARCHAR}, #{deliveryName,jdbcType=VARCHAR}, #{deliveryMobile,jdbcType=VARCHAR}, 
+      #{deliveryAddress,jdbcType=VARCHAR}, #{deliveryStartime,jdbcType=TIMESTAMP}, #{deliveryEndtime,jdbcType=TIMESTAMP}, 
+      #{orderStatus,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{createOpId,jdbcType=VARCHAR}, 
+      #{opId,jdbcType=VARCHAR}, #{optDate,jdbcType=TIMESTAMP}, #{payStartime,jdbcType=TIMESTAMP}, 
+      #{payEndtime,jdbcType=TIMESTAMP}, #{expressMessage,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.slazy.bss.order.model.OrderInfo">
+    insert into order_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        ORDER_ID,
+      </if>
+      <if test="receiverId != null">
+        RECEIVER_ID,
+      </if>
+      <if test="receiverName != null">
+        RECEIVER_NAME,
+      </if>
+      <if test="receiverPhone != null">
+        RECEIVER_PHONE,
+      </if>
+      <if test="receiverAddress != null">
+        RECEIVER_ADDRESS,
+      </if>
+      <if test="receiverStartime != null">
+        RECEIVER_STARTIME,
+      </if>
+      <if test="receiverEndtime != null">
+        RECEIVER_ENDTIME,
+      </if>
+      <if test="payNo != null">
+        PAY_NO,
+      </if>
+      <if test="payType != null">
+        PAY_TYPE,
+      </if>
+      <if test="amount != null">
+        AMOUNT,
+      </if>
+      <if test="payStatus != null">
+        PAY_STATUS,
+      </if>
+      <if test="commodityId != null">
+        COMMODITY_ID,
+      </if>
+      <if test="commodityNum != null">
+        COMMODITY_NUM,
+      </if>
+      <if test="verificationCode != null">
+        VERIFICATION_CODE,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="deliveryId != null">
+        DELIVERY_ID,
+      </if>
+      <if test="deliveryName != null">
+        DELIVERY_NAME,
+      </if>
+      <if test="deliveryMobile != null">
+        DELIVERY_MOBILE,
+      </if>
+      <if test="deliveryAddress != null">
+        DELIVERY_ADDRESS,
+      </if>
+      <if test="deliveryStartime != null">
+        DELIVERY_STARTIME,
+      </if>
+      <if test="deliveryEndtime != null">
+        DELIVERY_ENDTIME,
+      </if>
+      <if test="orderStatus != null">
+        ORDER_STATUS,
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE,
+      </if>
+      <if test="createOpId != null">
+        CREATE_OP_ID,
+      </if>
+      <if test="opId != null">
+        OP_ID,
+      </if>
+      <if test="optDate != null">
+        OPT_DATE,
+      </if>
+      <if test="payStartime != null">
+        PAY_STARTIME,
+      </if>
+      <if test="payEndtime != null">
+        PAY_ENDTIME,
+      </if>
+      <if test="expressMessage != null">
+        EXPRESS_MESSAGE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverId != null">
+        #{receiverId,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverName != null">
+        #{receiverName,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverPhone != null">
+        #{receiverPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverAddress != null">
+        #{receiverAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverStartime != null">
+        #{receiverStartime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="receiverEndtime != null">
+        #{receiverEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payNo != null">
+        #{payNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payType != null">
+        #{payType,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=VARCHAR},
+      </if>
+      <if test="payStatus != null">
+        #{payStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityId != null">
+        #{commodityId,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityNum != null">
+        #{commodityNum,jdbcType=VARCHAR},
+      </if>
+      <if test="verificationCode != null">
+        #{verificationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryId != null">
+        #{deliveryId,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryName != null">
+        #{deliveryName,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryMobile != null">
+        #{deliveryMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryAddress != null">
+        #{deliveryAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryStartime != null">
+        #{deliveryStartime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deliveryEndtime != null">
+        #{deliveryEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderStatus != null">
+        #{orderStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createOpId != null">
+        #{createOpId,jdbcType=VARCHAR},
+      </if>
+      <if test="opId != null">
+        #{opId,jdbcType=VARCHAR},
+      </if>
+      <if test="optDate != null">
+        #{optDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payStartime != null">
+        #{payStartime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payEndtime != null">
+        #{payEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expressMessage != null">
+        #{expressMessage,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.slazy.bss.order.model.OrderInfo">
+    update order_info
+    <set>
+      <if test="receiverId != null">
+        RECEIVER_ID = #{receiverId,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverName != null">
+        RECEIVER_NAME = #{receiverName,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverPhone != null">
+        RECEIVER_PHONE = #{receiverPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverAddress != null">
+        RECEIVER_ADDRESS = #{receiverAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="receiverStartime != null">
+        RECEIVER_STARTIME = #{receiverStartime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="receiverEndtime != null">
+        RECEIVER_ENDTIME = #{receiverEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payNo != null">
+        PAY_NO = #{payNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payType != null">
+        PAY_TYPE = #{payType,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        AMOUNT = #{amount,jdbcType=VARCHAR},
+      </if>
+      <if test="payStatus != null">
+        PAY_STATUS = #{payStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityId != null">
+        COMMODITY_ID = #{commodityId,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityNum != null">
+        COMMODITY_NUM = #{commodityNum,jdbcType=VARCHAR},
+      </if>
+      <if test="verificationCode != null">
+        VERIFICATION_CODE = #{verificationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryId != null">
+        DELIVERY_ID = #{deliveryId,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryName != null">
+        DELIVERY_NAME = #{deliveryName,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryMobile != null">
+        DELIVERY_MOBILE = #{deliveryMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryAddress != null">
+        DELIVERY_ADDRESS = #{deliveryAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryStartime != null">
+        DELIVERY_STARTIME = #{deliveryStartime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deliveryEndtime != null">
+        DELIVERY_ENDTIME = #{deliveryEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderStatus != null">
+        ORDER_STATUS = #{orderStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null">
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createOpId != null">
+        CREATE_OP_ID = #{createOpId,jdbcType=VARCHAR},
+      </if>
+      <if test="opId != null">
+        OP_ID = #{opId,jdbcType=VARCHAR},
+      </if>
+      <if test="optDate != null">
+        OPT_DATE = #{optDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payStartime != null">
+        PAY_STARTIME = #{payStartime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payEndtime != null">
+        PAY_ENDTIME = #{payEndtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expressMessage != null">
+        EXPRESS_MESSAGE = #{expressMessage,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ORDER_ID = #{orderId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.slazy.bss.order.model.OrderInfo">
+    update order_info
+    set RECEIVER_ID = #{receiverId,jdbcType=VARCHAR},
+      RECEIVER_NAME = #{receiverName,jdbcType=VARCHAR},
+      RECEIVER_PHONE = #{receiverPhone,jdbcType=VARCHAR},
+      RECEIVER_ADDRESS = #{receiverAddress,jdbcType=VARCHAR},
+      RECEIVER_STARTIME = #{receiverStartime,jdbcType=TIMESTAMP},
+      RECEIVER_ENDTIME = #{receiverEndtime,jdbcType=TIMESTAMP},
+      PAY_NO = #{payNo,jdbcType=VARCHAR},
+      PAY_TYPE = #{payType,jdbcType=VARCHAR},
+      AMOUNT = #{amount,jdbcType=VARCHAR},
+      PAY_STATUS = #{payStatus,jdbcType=VARCHAR},
+      COMMODITY_ID = #{commodityId,jdbcType=VARCHAR},
+      COMMODITY_NUM = #{commodityNum,jdbcType=VARCHAR},
+      VERIFICATION_CODE = #{verificationCode,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      DELIVERY_ID = #{deliveryId,jdbcType=VARCHAR},
+      DELIVERY_NAME = #{deliveryName,jdbcType=VARCHAR},
+      DELIVERY_MOBILE = #{deliveryMobile,jdbcType=VARCHAR},
+      DELIVERY_ADDRESS = #{deliveryAddress,jdbcType=VARCHAR},
+      DELIVERY_STARTIME = #{deliveryStartime,jdbcType=TIMESTAMP},
+      DELIVERY_ENDTIME = #{deliveryEndtime,jdbcType=TIMESTAMP},
+      ORDER_STATUS = #{orderStatus,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      CREATE_OP_ID = #{createOpId,jdbcType=VARCHAR},
+      OP_ID = #{opId,jdbcType=VARCHAR},
+      OPT_DATE = #{optDate,jdbcType=TIMESTAMP},
+      PAY_STARTIME = #{payStartime,jdbcType=TIMESTAMP},
+      PAY_ENDTIME = #{payEndtime,jdbcType=TIMESTAMP},
+      EXPRESS_MESSAGE = #{expressMessage,jdbcType=VARCHAR}
+    where ORDER_ID = #{orderId,jdbcType=VARCHAR}
+  </update>
+</mapper>

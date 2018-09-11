@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.slazy.bss.order.mapper.CouponUsersMapper">
+  <resultMap id="BaseResultMap" type="com.slazy.bss.order.model.CouponUsers">
+    <id column="COUPON_USER_ID" jdbcType="VARCHAR" property="couponUserId" />
+    <result column="COUPON_ID" jdbcType="VARCHAR" property="couponId" />
+    <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+    <result column="RECEIVE_TIME" jdbcType="TIMESTAMP" property="receiveTime" />
+    <result column="COUPON_STATUS" jdbcType="VARCHAR" property="couponStatus" />
+    <result column="FLAG" jdbcType="VARCHAR" property="flag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    COUPON_USER_ID, COUPON_ID, USER_ID, RECEIVE_TIME, COUPON_STATUS, FLAG
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from coupon_users
+    where COUPON_USER_ID = #{couponUserId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from coupon_users
+    where COUPON_USER_ID = #{couponUserId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.slazy.bss.order.model.CouponUsers">
+    insert into coupon_users (COUPON_USER_ID, COUPON_ID, USER_ID, 
+      RECEIVE_TIME, COUPON_STATUS, FLAG
+      )
+    values (#{couponUserId,jdbcType=VARCHAR}, #{couponId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
+      #{receiveTime,jdbcType=TIMESTAMP}, #{couponStatus,jdbcType=VARCHAR}, #{flag,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.slazy.bss.order.model.CouponUsers">
+    insert into coupon_users
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="couponUserId != null">
+        COUPON_USER_ID,
+      </if>
+      <if test="couponId != null">
+        COUPON_ID,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="receiveTime != null">
+        RECEIVE_TIME,
+      </if>
+      <if test="couponStatus != null">
+        COUPON_STATUS,
+      </if>
+      <if test="flag != null">
+        FLAG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="couponUserId != null">
+        #{couponUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="couponId != null">
+        #{couponId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveTime != null">
+        #{receiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="couponStatus != null">
+        #{couponStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.slazy.bss.order.model.CouponUsers">
+    update coupon_users
+    <set>
+      <if test="couponId != null">
+        COUPON_ID = #{couponId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveTime != null">
+        RECEIVE_TIME = #{receiveTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="couponStatus != null">
+        COUPON_STATUS = #{couponStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null">
+        FLAG = #{flag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where COUPON_USER_ID = #{couponUserId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.slazy.bss.order.model.CouponUsers">
+    update coupon_users
+    set COUPON_ID = #{couponId,jdbcType=VARCHAR},
+      USER_ID = #{userId,jdbcType=VARCHAR},
+      RECEIVE_TIME = #{receiveTime,jdbcType=TIMESTAMP},
+      COUPON_STATUS = #{couponStatus,jdbcType=VARCHAR},
+      FLAG = #{flag,jdbcType=VARCHAR}
+    where COUPON_USER_ID = #{couponUserId,jdbcType=VARCHAR}
+  </update>
+</mapper>

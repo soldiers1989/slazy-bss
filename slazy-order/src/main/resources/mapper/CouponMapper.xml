@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.slazy.bss.order.mapper.CouponMapper">
+  <resultMap id="BaseResultMap" type="com.slazy.bss.order.model.Coupon">
+    <id column="COUPON_ID" jdbcType="VARCHAR" property="couponId" />
+    <result column="COUPON_NAME" jdbcType="VARCHAR" property="couponName" />
+    <result column="COUPON_TYPE" jdbcType="VARCHAR" property="couponType" />
+    <result column="COUPON_MONEY" jdbcType="VARCHAR" property="couponMoney" />
+    <result column="SPEND_MONEY" jdbcType="VARCHAR" property="spendMoney" />
+    <result column="COUPON_DES" jdbcType="VARCHAR" property="couponDes" />
+    <result column="SEND_NUM" jdbcType="VARCHAR" property="sendNum" />
+    <result column="RECEIVE_NUM" jdbcType="VARCHAR" property="receiveNum" />
+    <result column="SEND_START_TIME" jdbcType="TIMESTAMP" property="sendStartTime" />
+    <result column="SEND_END_TIME" jdbcType="TIMESTAMP" property="sendEndTime" />
+    <result column="VALID_START_TIME" jdbcType="TIMESTAMP" property="validStartTime" />
+    <result column="VALID_END_TIME" jdbcType="TIMESTAMP" property="validEndTime" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="FLAG" jdbcType="VARCHAR" property="flag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    COUPON_ID, COUPON_NAME, COUPON_TYPE, COUPON_MONEY, SPEND_MONEY, COUPON_DES, SEND_NUM, 
+    RECEIVE_NUM, SEND_START_TIME, SEND_END_TIME, VALID_START_TIME, VALID_END_TIME, CREATE_TIME, 
+    FLAG
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from coupon
+    where COUPON_ID = #{couponId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from coupon
+    where COUPON_ID = #{couponId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.slazy.bss.order.model.Coupon">
+    insert into coupon (COUPON_ID, COUPON_NAME, COUPON_TYPE, 
+      COUPON_MONEY, SPEND_MONEY, COUPON_DES, 
+      SEND_NUM, RECEIVE_NUM, SEND_START_TIME, 
+      SEND_END_TIME, VALID_START_TIME, VALID_END_TIME, 
+      CREATE_TIME, FLAG)
+    values (#{couponId,jdbcType=VARCHAR}, #{couponName,jdbcType=VARCHAR}, #{couponType,jdbcType=VARCHAR}, 
+      #{couponMoney,jdbcType=VARCHAR}, #{spendMoney,jdbcType=VARCHAR}, #{couponDes,jdbcType=VARCHAR}, 
+      #{sendNum,jdbcType=VARCHAR}, #{receiveNum,jdbcType=VARCHAR}, #{sendStartTime,jdbcType=TIMESTAMP}, 
+      #{sendEndTime,jdbcType=TIMESTAMP}, #{validStartTime,jdbcType=TIMESTAMP}, #{validEndTime,jdbcType=TIMESTAMP}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{flag,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.slazy.bss.order.model.Coupon">
+    insert into coupon
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="couponId != null">
+        COUPON_ID,
+      </if>
+      <if test="couponName != null">
+        COUPON_NAME,
+      </if>
+      <if test="couponType != null">
+        COUPON_TYPE,
+      </if>
+      <if test="couponMoney != null">
+        COUPON_MONEY,
+      </if>
+      <if test="spendMoney != null">
+        SPEND_MONEY,
+      </if>
+      <if test="couponDes != null">
+        COUPON_DES,
+      </if>
+      <if test="sendNum != null">
+        SEND_NUM,
+      </if>
+      <if test="receiveNum != null">
+        RECEIVE_NUM,
+      </if>
+      <if test="sendStartTime != null">
+        SEND_START_TIME,
+      </if>
+      <if test="sendEndTime != null">
+        SEND_END_TIME,
+      </if>
+      <if test="validStartTime != null">
+        VALID_START_TIME,
+      </if>
+      <if test="validEndTime != null">
+        VALID_END_TIME,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="flag != null">
+        FLAG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="couponId != null">
+        #{couponId,jdbcType=VARCHAR},
+      </if>
+      <if test="couponName != null">
+        #{couponName,jdbcType=VARCHAR},
+      </if>
+      <if test="couponType != null">
+        #{couponType,jdbcType=VARCHAR},
+      </if>
+      <if test="couponMoney != null">
+        #{couponMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="spendMoney != null">
+        #{spendMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="couponDes != null">
+        #{couponDes,jdbcType=VARCHAR},
+      </if>
+      <if test="sendNum != null">
+        #{sendNum,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveNum != null">
+        #{receiveNum,jdbcType=VARCHAR},
+      </if>
+      <if test="sendStartTime != null">
+        #{sendStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sendEndTime != null">
+        #{sendEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="validStartTime != null">
+        #{validStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="validEndTime != null">
+        #{validEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flag != null">
+        #{flag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.slazy.bss.order.model.Coupon">
+    update coupon
+    <set>
+      <if test="couponName != null">
+        COUPON_NAME = #{couponName,jdbcType=VARCHAR},
+      </if>
+      <if test="couponType != null">
+        COUPON_TYPE = #{couponType,jdbcType=VARCHAR},
+      </if>
+      <if test="couponMoney != null">
+        COUPON_MONEY = #{couponMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="spendMoney != null">
+        SPEND_MONEY = #{spendMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="couponDes != null">
+        COUPON_DES = #{couponDes,jdbcType=VARCHAR},
+      </if>
+      <if test="sendNum != null">
+        SEND_NUM = #{sendNum,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveNum != null">
+        RECEIVE_NUM = #{receiveNum,jdbcType=VARCHAR},
+      </if>
+      <if test="sendStartTime != null">
+        SEND_START_TIME = #{sendStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sendEndTime != null">
+        SEND_END_TIME = #{sendEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="validStartTime != null">
+        VALID_START_TIME = #{validStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="validEndTime != null">
+        VALID_END_TIME = #{validEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flag != null">
+        FLAG = #{flag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where COUPON_ID = #{couponId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.slazy.bss.order.model.Coupon">
+    update coupon
+    set COUPON_NAME = #{couponName,jdbcType=VARCHAR},
+      COUPON_TYPE = #{couponType,jdbcType=VARCHAR},
+      COUPON_MONEY = #{couponMoney,jdbcType=VARCHAR},
+      SPEND_MONEY = #{spendMoney,jdbcType=VARCHAR},
+      COUPON_DES = #{couponDes,jdbcType=VARCHAR},
+      SEND_NUM = #{sendNum,jdbcType=VARCHAR},
+      RECEIVE_NUM = #{receiveNum,jdbcType=VARCHAR},
+      SEND_START_TIME = #{sendStartTime,jdbcType=TIMESTAMP},
+      SEND_END_TIME = #{sendEndTime,jdbcType=TIMESTAMP},
+      VALID_START_TIME = #{validStartTime,jdbcType=TIMESTAMP},
+      VALID_END_TIME = #{validEndTime,jdbcType=TIMESTAMP},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      FLAG = #{flag,jdbcType=VARCHAR}
+    where COUPON_ID = #{couponId,jdbcType=VARCHAR}
+  </update>
+</mapper>

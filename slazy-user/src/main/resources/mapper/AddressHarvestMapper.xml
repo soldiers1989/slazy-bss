@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.slazy.bss.user.mapper.AddressHarvestMapper">
+  <resultMap id="BaseResultMap" type="com.slazy.bss.user.model.AddressHarvest">
+    <id column="ADDRESS_ID" jdbcType="VARCHAR" property="addressId" />
+    <result column="HARVEST_PERSION" jdbcType="VARCHAR" property="harvestPersion" />
+    <result column="AREA" jdbcType="VARCHAR" property="area" />
+    <result column="ADDRESS_DETAIL" jdbcType="VARCHAR" property="addressDetail" />
+    <result column="MOBILE" jdbcType="VARCHAR" property="mobile" />
+    <result column="TELEPHONE" jdbcType="VARCHAR" property="telephone" />
+    <result column="EMAIL" jdbcType="VARCHAR" property="email" />
+    <result column="ADDRESS_ALIAS" jdbcType="VARCHAR" property="addressAlias" />
+    <result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+    <result column="ADDRESS_TYPE" jdbcType="VARCHAR" property="addressType" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ADDRESS_ID, HARVEST_PERSION, AREA, ADDRESS_DETAIL, MOBILE, TELEPHONE, EMAIL, ADDRESS_ALIAS, 
+    USER_ID, STATUS
+  </sql>
+  <select id="queryAddressInfoByMap" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from address_harvest
+    <where>
+    1=1
+    <if test="addressId != null and addressId != ''">
+        and ADDRESS_ID = #{addressId,jdbcType=VARCHAR}
+      </if>
+      <if test="harvestPersion != null and harvestPersion != ''">
+        and HARVEST_PERSION = #{harvestPersion,jdbcType=VARCHAR}
+      </if>
+      <if test="area != null and area != ''">
+        and AREA = #{area,jdbcType=VARCHAR}
+      </if>
+      <if test="addressDetail != null and addressDetail != ''">
+        and ADDRESS_DETAIL = #{addressDetail,jdbcType=VARCHAR}
+      </if>
+      <if test="mobile != null and mobile != ''">
+        and MOBILE = #{mobile,jdbcType=VARCHAR}
+      </if>
+      <if test="telephone != null and telephone != ''">
+        and TELEPHONE = #{telephone,jdbcType=VARCHAR}
+      </if>
+      <if test="email != null and email != ''">
+        and EMAIL = #{email,jdbcType=VARCHAR}
+      </if>
+      <if test="addressAlias != null and addressAlias != ''">
+        and ADDRESS_ALIAS = #{addressAlias,jdbcType=VARCHAR}
+      </if>
+      <if test="userId != null and userId != ''">
+        and USER_ID = #{userId,jdbcType=VARCHAR}
+      </if>
+      <if test="status != null and status != ''">
+        and STATUS = #{status,jdbcType=VARCHAR}
+      </if>
+      <if test="addressType != null and addressType != ''">
+        and ADDRESS_TYPE = #{addressType,jdbcType=VARCHAR}
+      </if>
+    
+    </where>
+    
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from address_harvest
+    where ADDRESS_ID = #{addressId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from address_harvest
+    where ADDRESS_ID = #{addressId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.slazy.bss.user.model.AddressHarvest">
+    insert into address_harvest (ADDRESS_ID, HARVEST_PERSION, AREA, 
+      ADDRESS_DETAIL, MOBILE, TELEPHONE, 
+      EMAIL, ADDRESS_ALIAS, USER_ID, 
+      STATUS, ADDRESS_TYPE)
+    values (#{addressId,jdbcType=VARCHAR}, #{harvestPersion,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, 
+      #{addressDetail,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{addressAlias,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{addressType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.slazy.bss.user.model.AddressHarvest">
+    insert into address_harvest
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="addressId != null and addressId != ''">
+        ADDRESS_ID,
+      </if>
+      <if test="harvestPersion != null and harvestPersion != ''">
+        HARVEST_PERSION,
+      </if>
+      <if test="area != null and area != ''">
+        AREA,
+      </if>
+      <if test="addressDetail != null and addressDetail != ''">
+        ADDRESS_DETAIL,
+      </if>
+      <if test="mobile != null and mobile != ''">
+        MOBILE,
+      </if>
+      <if test="telephone != null and telephone != ''">
+        TELEPHONE,
+      </if>
+      <if test="email != null and email != ''">
+        EMAIL,
+      </if>
+      <if test="addressAlias != null and addressAlias != ''">
+        ADDRESS_ALIAS,
+      </if>
+      <if test="userId != null and userId != ''">
+        USER_ID,
+      </if>
+      <if test="status != null and status != ''">
+        STATUS,
+      </if>
+      <if test="addressType != null and addressType != ''">
+        ADDRESS_TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="addressId != null and addressId != ''">
+        #{addressId,jdbcType=VARCHAR},
+      </if>
+      <if test="harvestPersion != null and harvestPersion != ''">
+        #{harvestPersion,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null and area != ''">
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="addressDetail != null and addressDetail != ''">
+        #{addressDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null and mobile != ''">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null and telephone != ''">
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null and email != ''">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="addressAlias != null and addressAlias != ''">
+        #{addressAlias,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null and userId != ''">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null and status != ''">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="addressType != null and addressType != ''">
+        #{addressType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.slazy.bss.user.model.AddressHarvest">
+    update address_harvest
+    <set>
+      <if test="harvestPersion != null and harvestPersion != ''">
+        HARVEST_PERSION = #{harvestPersion,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null and area != ''">
+        AREA = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="addressDetail != null and addressDetail != ''">
+        ADDRESS_DETAIL = #{addressDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null and mobile != ''">
+        MOBILE = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null and telephone != ''">
+        TELEPHONE = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null and email != ''">
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="addressAlias != null and addressAlias != ''">
+        ADDRESS_ALIAS = #{addressAlias,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null and userId != ''">
+        USER_ID = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null and status != ''">
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="addressType != null and addressType != ''">
+        ADDRESS_TYPE = #{addressType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ADDRESS_ID = #{addressId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.slazy.bss.user.model.AddressHarvest">
+    update address_harvest
+    set HARVEST_PERSION = #{harvestPersion,jdbcType=VARCHAR},
+      AREA = #{area,jdbcType=VARCHAR},
+      ADDRESS_DETAIL = #{addressDetail,jdbcType=VARCHAR},
+      MOBILE = #{mobile,jdbcType=VARCHAR},
+      TELEPHONE = #{telephone,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      ADDRESS_ALIAS = #{addressAlias,jdbcType=VARCHAR},
+      USER_ID = #{userId,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=VARCHAR},
+      ADDRESS_TYPE = #{addressType,jdbcType=VARCHAR}
+    where ADDRESS_ID = #{addressId,jdbcType=VARCHAR}
+  </update>
+</mapper>
